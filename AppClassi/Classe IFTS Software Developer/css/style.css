@@ -1,0 +1,251 @@
+[data-theme="light"] /*giorno*/
+{
+    --backgroundBody: #DCDCDC;
+    --opacitaGiorno: 1;
+    --opacitaNotte: 0;
+    --sfondoPreloader: #ffecb5;
+    --backgroundThumbnail: #eaeaea;
+    --bordoThumbnail: #b8b8b8;
+    --coloreTitoloCorso: #212529;
+    --backgroundCardBox: #ffffff;
+    --backgroundEBordoSwitch: #000000;
+    --posizioneCerchioSwtch: left center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(184,184,184,1.0)'/></svg>");
+}
+ 
+ [data-theme="dark"] /*notte*/
+ {
+    --backgroundBody: #071d45;
+    --opacitaGiorno: 0;
+    --opacitaNotte: 1;
+    --sfondoPreloader: #000923;
+    --backgroundThumbnail: #07006b;
+    --bordoThumbnail: #07006b;
+    --coloreTitoloCorso: #dbdbdb;
+    --backgroundCardBox: #000000;
+    --backgroundEBordoSwitch: #ffffff;
+    --posizioneCerchioSwtch: right center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>"); 
+ }
+
+body
+{
+    background-color: var(--backgroundBody);
+    transition: all 0.9s;
+}
+ 
+.fotoProfilo
+{
+    position:relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: 250px;
+    margin-bottom: 10px;
+    transition: all 0.9s;
+}
+.img-thumbnail 
+{
+    padding: 0.25rem;
+    background-color: var(--backgroundThumbnail);
+    border: 1px solid var(--bordoThumbnail);
+    border-radius: 150px;
+    max-width: 200%;
+    height: auto;
+    transition: all 0.9s;
+}
+.containerEsterno
+{
+    position: relative;
+    margin-top: 20px;
+}
+.contenitoreLogoGaldus
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 400px;
+    height: 70px;
+}
+.logoGaldusNotte
+{
+    opacity: var(--opacitaNotte);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    height: 70px;
+    width: 400px;
+    transition: all 0.9s;
+} 
+.logoGaldusGiorno
+{
+    opacity: var(--opacitaGiorno);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    height: 70px;
+    width: 400px;
+    transition: all 0.9s;
+} 
+
+.titoloCorso
+{
+    text-align: center;
+    color: var(--coloreTitoloCorso);
+    transition: all 0.9s;
+}
+.contenitoreLuminosita
+{
+    width: 30px;
+    height: 30px;
+}
+.luminositaNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 30px;
+    height: 30px;
+    transition: all 0.9s;
+}
+.luminositaGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 30px;
+    height: 30px;
+    transition: all 0.9s;
+}
+
+.card-box 
+{
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: var(--backgroundCardBox);
+    transition: all 0.9s;
+}
+
+h4 
+{
+    color: var(--backgroundEBordoSwitch);
+    line-height: 22px;
+    font-size: 18px;
+    transition: all 0.9s;
+}
+li
+{
+    color: var(--backgroundEBordoSwitch);
+    transition: all 0.9s;
+}
+
+.BarraDiNavigazione
+{
+    height: 200px;
+}
+
+/*Switch: misure e posizioni*/
+.form-switch 
+{
+    position: relative;
+    top:-100px;
+    right: 80px;
+    display: flex;
+    justify-content: end;
+}
+.form-check 
+{
+    font-size: 20px;
+}
+.form-check-input 
+{
+    height: 2em;
+    width: 4em;
+}
+.form-switch .form-check-input 
+{
+    width: 4em;
+    transition: all 0.9s;
+}
+.form-check-label
+{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+/*Cambio stato switch*/
+.form-switch .form-check-input /*giorno*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--backgroundCardBox); /*colore di sfondo*/
+    border-color: var(--backgroundCardBox); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+.form-switch .form-check-input:checked /*notte*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--backgroundCardBox); /*colore di sfondo*/
+    border-color: var(--backgroundCardBox); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+
+.linkProgetto
+{
+    text-decoration: none;
+    color: white;
+}
+
+/*Preloader*/
+#preloader
+{
+    background: var(--sfondoPreloader) no-repeat center center;
+    background-size: 15%;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes rotateAnimation 
+{
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.contenitoreCaricamento
+{
+    width: 100px;
+    height: 100px;
+    animation: rotateAnimation 3s linear infinite;
+}
+
+.ImmagineCaricamentoNotte
+{
+    width: 100px;
+    height: 100px;
+    opacity: var(--opacitaNotte);    
+}
+
+.ImmagineCaricamentoGiorno
+{
+    width: 100px;
+    height: 100px;
+    opacity: var(--opacitaGiorno);    
+}
+
+@media screen and (max-width: 900px) 
+{
+    .form-switch 
+    {
+        position: relative;
+        top: 0px;
+        right: 0px;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-java.png">
+  <title>Esercizi CodingBat String-1</title>
+</head>
+
+<body>
+  <a href="../../java.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>  
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Esercizi CodingBat String-1</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+          <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+          <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                          
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                           
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+Esercizio 1 - helloName
+Given a string name, e.g. "Bob", return a greeting of the form "Hello Bob!".
+
+public String helloName(String name) {
+  return "Hello " + name + "!";
+}
+
+Esercizio 2 - makeAbba
+Given two strings, a and b, return the result of putting them together in the order abba, e.g. "Hi" and "Bye" 
+returns "HiByeByeHi".
+
+public String makeAbba(String a, String b) {
+  return a + b + b + a;
+}
+
+Esercizio 3 - makeTags
+The web is built with HTML strings like "< i >Yay</ i >" which draws Yay as italic text. In this example, 
+the "i" tag makes < i > and </ i > which surround the word "Yay". Given tag and word strings, 
+create the HTML string with tags around the word, e.g. "< i >Yay</ i >".
+
+public String makeTags(String tag, String word) {
+  return "<" + tag + ">" + word + "</" + tag + ">";
+}
+
+
+Esercizio 4 - makeOutWord
+Given an "out" string length 4, such as "<<>>", and a word, 
+return a new string where the word is in the middle of the out string, e.g. "< < word > >". 
+Note: use str.substring(i, j) to extract the String starting at index i and going up to but not including index j.
+
+public String makeOutWord(String out, String word) {
+  return out.substring(0, 2) + word + out.substring(2, 4);
+}
+
+
+Esercizio 5 - extraEnd
+Given a string, return a new string made of 3 copies of the last 2 chars of the original string. 
+The string length will be at least 2.
+
+public String extraEnd(String str) {
+  return str.substring(str.length() - 2, str.length()) 
+  + str.substring(str.length() - 2, str.length()) 
+  + str.substring(str.length() - 2, str.length());
+}
+
+
+Esercizio 6 - firstTwo
+Given a string, return the string made of its first two chars, so the String "Hello" yields "He". 
+If the string is shorter than length 2, return whatever there is, so "X" yields "X", 
+and the empty string "" yields the empty string "". Note that str.length() returns the length of a string.
+
+public String firstTwo(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2)
+  {
+     stringa = str.substring(0, 2);
+  }
+  else if (str.length() == 1)
+  {
+    stringa = str.substring(0, 1);
+  }
+  else if (str.length() == 0)
+  {
+    stringa = "";
+  }
+  return stringa;
+}
+
+Esercizio 7 - firstHalf
+Given a string of even length, return the first half. So the string "WooHoo" yields "Woo".
+
+public String firstHalf(String str) 
+{
+    return str.substring(0, str.length()/2);
+}
+
+Esercizio 8 - withoutEnd
+Given a string, return a version without the first and last char, so "Hello" yields "ell". 
+The string length will be at least 2.
+
+public String withoutEnd(String str) 
+{
+  return str.substring(1, str.length()-1 );  
+}
+
+Esercizio 9 - comboString
+Given 2 strings, a and b, return a string of the form short+long+short, 
+with the shorter string on the outside and the longer string on the inside. 
+The strings will not be the same length, but they may be empty (length 0).
+
+public String comboString(String a, String b) 
+{
+  String stringa = "";
+  if (a.length() > b.length() )
+  {
+    stringa = b + a + b;
+  }
+  else if (a.length() < b.length() )
+  {
+    stringa = a + b + a;
+  }
+  return stringa;
+}
+
+Esercizio 10 - nonStart
+Given 2 strings, return their concatenation, except omit the first char of each. The strings will be at least length 1.
+
+public String nonStart(String a, String b) 
+{
+  return a.substring(1, a.length() ) +  b.substring(1, b.length() );
+}
+
+Esercizio 11 - left2
+Given a string, return a "rotated left 2" version where the first 2 chars are moved to the end. 
+The string length will be at least 2.
+
+public String left2(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2 )
+  {
+    stringa = str.substring(2, str.length()) + str.substring(0, 2);  
+  }
+  else if (str.length() >= 0 && str.length() < 2)
+  {
+    stringa = str.substring(0, 2);
+  }
+  return stringa;   
+}
+
+
+Esercizio 12 - right2
+Given a string, return a "rotated right 2" version where the last 2 chars are moved to the start. 
+The string length will be at least 2.
+
+public String right2(String str) 
+{
+  String stringa = "";
+  if (str.length() > 2 )
+  {
+    stringa = str.substring(str.length() - 2, str.length() ) + str.substring(0, str.length() -2);
+  } 
+  else if (str.length() >= 0 && str.length() <= 2 )
+  {
+    stringa = str;
+  }
+  return  stringa;
+}
+
+
+Esercizio 13 - theEnd
+Given a string, return a string length 1 from its front, unless front is false, 
+in which case return a string length 1 from its back. The string will be non-empty.
+
+public char theEnd(String str, boolean front) 
+{
+  char carattere = ' ';
+  if (front == true)
+  {
+    carattere = str.charAt(0);
+  }
+  else if (front == false)
+  {
+    carattere = str.charAt(str.length()-1);
+  }
+  return carattere;
+}
+
+Esercizio 14 - withouEnd2
+Given a string, return a version without both the first and last char of the string. 
+The string may be any length, including 0.
+
+public String withouEnd2(String str) 
+{
+   String stringa = "";
+   if (str.length() > 2)
+   {
+     stringa = str.substring(1, str.length() -1);
+   }
+   else if (str.length() >= 0 && str.length() <= 2)
+   {
+     stringa = "";
+   }
+   return stringa;
+}
+
+Esercizio 15 - middleTwo
+Given a string of even length, return a string made of the middle two chars, 
+so the string "string" yields "ri". The string length will be at least 2.
+
+public String middleTwo(String str) 
+{
+  return   str.substring(str.length()/2 -1, str.length()/2 + 1 );
+}
+
+Esercizio 16 - endsLy
+Given a string, return true if it ends in "ly".
+
+public boolean endsLy(String str) 
+{
+  boolean finale = false;
+  String stringa = "";
+  
+  if (str.length() >= 2)
+  {
+    stringa = str.substring(str.length()-2, str.length() );
+      if (stringa.equals("ly"))
+      {
+        finale = true;
+      }
+      else 
+      {
+        finale = false;
+      }    
+  }
+  return finale;
+}
+
+Esercizio 17 - nTwice
+Given a string and an int n, return a string made of the first and last n chars from the string. 
+The string length will be at least n.
+
+public String nTwice(String str, int n) 
+{
+  return str.substring(0,n) + str.substring(str.length() - n , str.length());
+}
+
+Esercizio 18 - twoChar
+Given a string and an index, return a string length 2 starting at the given index. 
+If the index is too big or too small to define a string length 2, use the first 2 chars. 
+The string length will be at least 2.
+
+public String twoChar(String str, int index) 
+{
+  String stringa = "";
+  if (index >= str.length() - 1 || index < 0)
+  {
+    stringa = str.substring(0, 2);
+  }
+  else
+  {
+    stringa = str.substring(index, index + 2);
+  }
+  return stringa;
+    
+}
+
+Esercizio 19 - middleThree
+Given a string of odd length, return the string length 3 from its middle, so "Candy" yields "and". 
+The string length will be at least 3.
+
+public String middleThree(String str) 
+{
+  return str.substring(str.length()/2 -1, str.length()/2 +2 );  
+}
+
+
+Esercizio 20 - hasBad
+Given a string, return true if "bad" appears starting at index 0 or 1 in the string, 
+such as with "badxxx" or "xbadxx" but not "xxbadxx". The string may be any length, including 0. 
+Note: use .equals() to compare 2 strings.
+
+public boolean hasBad(String str) 
+{
+  boolean inizioBad = false;
+  
+  if (str.length() >= 3)
+  {
+    if (str.substring(0, 3).equals("bad"))
+    {
+      inizioBad = true;
+    }    
+  }
+  if (str.length() >= 4)
+  {
+    if (str.substring(1, 4).equals("bad"))
+    {
+      inizioBad = true;
+    }    
+  }
+  
+  return inizioBad;
+}
+
+
+Esercizio 21 - atFirst
+Given a string, return a string length 2 made of its first 2 chars. If the string length is less than 2, 
+use '@' for the missing chars.
+public String atFirst(String str) 
+{
+    String stringa = "";
+    if (str.length() >= 2 )
+    {
+      stringa = str.substring(0, 2);
+    }
+    else if (str.length() == 1 )
+    {
+      stringa = str.substring(0, 1) + "@";
+    }
+    else if (str.length() == 0 )
+    {
+      stringa = "@@";
+    }
+    return stringa;
+}
+
+
+Esercizio 22 - lastChars
+Given 2 strings, a and b, return a new string made of the first char of a and the last char of b, 
+so "yo" and "java" yields "ya". If either string is length 0, use '@' for its missing char.
+
+public String lastChars(String a, String b) 
+{
+  String stringa = "";
+  if (a.length() == 0 && b.length() == 0)
+  {
+    stringa = "@@";
+  }
+  else if (a.length() >= 1 && b.length() == 0)
+  {
+    stringa = a.substring(0, 1) + "@";
+  }
+  else if (a.length() == 0 && b.length() >= 1)
+  {
+    stringa = "@" + b.substring(b.length() - 1, b.length() );
+  }
+  else if (a.length() >=1 && b.length() >= 1)
+  {
+    stringa = a.substring(0, 1) + b.substring(b.length() - 1, b.length() );
+  }
+  return stringa;
+}
+
+Esercizio 23 - conCat
+Given two strings, append them together (known as "concatenation") and return the result. However, 
+if the concatenation creates a double-char, then omit one of the chars, so "abc" and "cat" yields "abcat".
+
+public String conCat(String a, String b) 
+{
+  String stringa = "";
+  if (a.length() == 0)
+  {
+    stringa = b;
+  }
+  if (b.length() == 0)
+  {
+    stringa = a;
+  }
+  if (a.length() == 0 && b.length() == 0)
+  {
+    stringa = "";
+  }
+  else if (a.length() > 0 && b.length() > 0)
+  {
+    if (a.charAt(a.length()-1) == b.charAt(0))
+    {
+      stringa = a.substring(0, a.length()) + b.substring(1,b.length() ) ;
+    }
+    else
+    {
+      stringa = a + b;
+    }     
+  }
+
+  return stringa;
+}
+
+Esercizio 24 - lastTwo
+Given a string of any length, return a new string where the last 2 chars, if present, are swapped, 
+so "coding" yields "codign".
+
+public String lastTwo(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2)
+  {
+    stringa = "" + str.substring(0, str.length() -2 )  + str.charAt(str.length() -1 ) + str.charAt(str.length() -2);
+  }
+  else if (str.length() < 2)
+  {
+    stringa = str;
+  }
+  return stringa;
+}
+
+
+Esercizio 25 - seeColor
+Given a string, if the string begins with "red" or "blue" return that color string, 
+otherwise return the empty string.
+
+public String seeColor(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 3 && str.substring(0, 3).equals("red"))
+  {
+      stringa = "red";
+  }
+  else if (str.length() >= 4 && str.substring(0, 4).equals("blue"))
+  {
+      stringa = "blue";
+  }    
+  else
+  {
+      stringa = "";
+  }
+  return stringa;
+}
+
+
+Esercizio 26 - frontAgain
+Given a string, return true if the first 2 chars in the string also appear at the end of the string, 
+such as with "edited".
+
+public boolean frontAgain(String str) 
+{
+  boolean doppione = false;
+  String stringa = "";
+  if (str.length() >=2)
+  {
+    String primi2 = str.substring(0, 2);
+    String ultimi2 = str.substring(str.length()-2, str.length());
+    if (primi2.equals(ultimi2))
+    {
+      doppione = true;
+    }    
+  }
+  return doppione;
+}
+
+
+Esercizio 27 - minCat
+Given two strings, append them together (known as "concatenation") and return the result. 
+However, if the strings are different lengths, 
+omit chars from the longer string so it is the same length as the shorter string. 
+So "Hello" and "Hi" yield "loHi". The strings may be any length.
+
+public String minCat(String a, String b) 
+{
+  String stringa = "";
+  if (a.length() == b.length())
+  {
+    stringa = a + b;
+  }
+  else if(a.length() > b.length())
+  {
+    stringa = a.substring(a.length() -  b.length() , a.length() ) + b;
+  }
+  else if(a.length() < b.length())
+  {
+    stringa = a + b.substring(b.length() -  a.length() , b.length() );
+  }
+  return stringa;
+}
+
+
+Esercizio 28 - extraFront
+Given a string, return a new string made of 3 copies of the first 2 chars of the original string. 
+The string may be any length. If there are fewer than 2 chars, use whatever is there.
+
+public String extraFront(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2 )
+  {
+    String primi2 = str.substring(0, 2);
+    stringa = primi2 + primi2 + primi2; 
+  }
+  else if (str.length() < 2 )
+  {
+    stringa = str + str + str;
+  }
+  return stringa;
+}
+
+
+Esercizio 29 - without2
+Given a string, if a length 2 substring appears at both its beginning and end, 
+return a string without the substring at the beginning, so "HelloHe" yields "lloHe". 
+The substring may overlap with itself, so "Hi" yields "". Otherwise, return the original string unchanged.
+
+public String without2(String str) 
+{
+  String stringa = "";
+  
+  if (str.length() >= 2 )
+  {
+    String primi2 = str.substring(0, 2);
+    String ultimi2 = str.substring(str.length() - 2 ,str.length() );
+    if (primi2.equals(ultimi2))
+    {
+      stringa = str.substring(2, str.length());
+    }    
+    else
+    {
+      stringa = str;
+    }
+  }
+  else
+  {
+    stringa = str;
+  }
+  return stringa;
+  
+}
+
+
+Esercizio 30 - deFront
+Given a string, return a version without the first 2 chars. 
+Except keep the first char if it is 'a' and keep the second char if it is 'b'. 
+The string may be any length. Harder than it looks.
+
+public String deFront(String str) 
+{    
+  String stringa = "";
+  if (str.charAt(0) == 'a' && str.charAt(1) != 'b' )
+  {
+    stringa = 'a' + str.substring(2, str.length());
+  }
+  else if (str.charAt(0) != 'a' && str.charAt(1) == 'b' )
+  {
+    stringa = 'b' + str.substring(2, str.length());
+  }
+  else if (str.charAt(0) == 'a' && str.charAt(1) == 'b' )
+  {
+    stringa = "ab" + str.substring(2, str.length());
+  }
+  else
+  {
+    stringa = str.substring(2, str.length());
+  }
+  return stringa;
+}
+
+
+Esercizio 31 - startWord
+Given a string and a second "word" string, 
+we'll say that the word matches the string if it appears at the front of the string, 
+except its first char does not need to match exactly. 
+On a match, return the front of the string, or otherwise return the empty string. 
+So, so with the string "hippo" the word "hi" returns "hi" and "xip" returns "hip". 
+The word will be at least length 1.
+
+public String startWord(String str, String word) 
+{
+  String stringa = "";
+  if (str.length() >= 2 )
+  {
+    String strNo1 = str.substring(1, word.length());
+    String wordNo1 = word.substring(1, word.length());
+  
+    if (strNo1.equals(wordNo1))
+    {
+      stringa = str.substring(0, word.length());
+    }
+  }
+  else if (str.length() == 1 && word.length() == 1)
+  {
+      stringa = str;
+  }
+  return stringa;
+}
+
+Esercizio 32 - withoutX
+Given a string, if the first or last chars are 'x', return the string without those 'x' chars, 
+and otherwise return the string unchanged.
+
+public String withoutX(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2 )
+  {
+    char carattere1 = str.charAt(0);
+    char carattereN = str.charAt(str.length() - 1);
+  
+    if (carattere1 == 'x' && carattereN == 'x' )
+    {
+      stringa = str.substring(1, str.length() - 1);
+    }
+    else if (carattere1 == 'x' && carattereN != 'x' )
+    {
+      stringa = str.substring(1, str.length());
+    }
+    else if (carattere1 != 'x' && carattereN == 'x' )
+    {
+      stringa = str.substring(0, str.length() -1);
+    }
+    else
+    {
+      stringa = str;
+    }    
+  }
+
+  return stringa;
+}
+
+
+Esercizio 33 - withoutX2
+Given a string, if one or both of the first 2 chars is 'x', return the string without those 'x' chars, 
+and otherwise return the string unchanged. This is a little harder than it looks.
+
+public String withoutX2(String str) 
+{
+  String stringa = "";
+  if (str.length() >= 2)
+  {
+    char Char1 = str.charAt(0);
+    char Char2 = str.charAt(1);    
+    
+    if (Char1 == 'x' && Char2 == 'x')
+    {
+      stringa = str.substring(2, str.length());
+    }
+    else if (Char1 != 'x' && Char2 == 'x')
+    {
+      stringa = Char1 + str.substring(2, str.length());
+    }
+    else  if (Char1 == 'x' && Char2 != 'x')
+    {
+      stringa = str.substring(1, str.length());
+    }
+    else
+    {
+      stringa = str;
+    }    
+  }
+
+  return stringa;
+}
+	    </pre>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

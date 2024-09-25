@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="stylesheet" href="schemaClassi.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-java.png">
+  <title>Gestione Istituto</title>
+</head>
+
+<body>
+  <a href="../../java.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>    
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Collegamento Java e MYSQL</h1>
+
+  <div class="testo" style="text-align: center;width: 300px;">
+  <a href="progettoCollegamentoJavaMYSQL.zip" download>Scarica progetto Java in file Zip</a>
+  </div>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+          <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+          <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                       
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                          
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+Passaggi per importare il progetto Java in Eclipse
+
+1) scaricare il file zip
+2) estrarre la cartella del file zip
+3) su Eclipse cliccare su File in alto a sinistra
+4) cliccare su Open Projects from File System... 
+5) sulla finestra che appare cliccare su Directory...
+6) cercare la cartella estratta in precedenza
+7) cliccare su Finish
+8) ora il progetto Java e' importato in Eclipse
+
+In MYSQL: 
+1) creare il database studentiDB
+2) usare il database studentiDB
+3) crreare la tabella studenti
+
+Script in MYSQL:
+create database studentiDB;
+use studentiDB;
+create table studenti(
+id int not null auto_increment primary key,
+name varchar(50),
+studentid varchar(50),
+cource varchar(50)
+);
+
+Parti importanti in: jdbc:mysql://localhost:3306/studentiDB","root","Password!"
+- localhost: e' l'indirizzo IP
+- 3306: e' il numero della porta d'ingresso
+- studentiDB: e' il database di riferimento
+- root: e' l'username dell'utente
+- Password!: e' la password dell'utente
+
+Query: select
+insert = con1.prepareStatement("SELECT * FROM studenti");
+- studenti: e' la tabella che sta dentro il database studentiDB.
+
+Query: insert
+insert = con1.prepareStatement("insert into studenti(name,studentid,cource)values(?,?,?)");
+- studenti: e' la tabella che sta dentro il database studentiDB
+- name, studentid, cource: sono le colonne della tabella studenti. Id non c'e' perche' autoIncrementante.
+
+Query: select
+insert = con1.prepareStatement("delete from studenti where id = ?");
+- studenti: e' la tabella che sta dentro il database studentiDB. Condizione where per selezionare la riga da cancellare.
+
+Query: select
+insert = con1.prepareStatement("update studenti set name= ?,studentid= ?,cource= ? where id= ?");
+- studenti: e' la tabella che sta dentro il database studentiDB
+- name, studentid, cource: sono le colonne della tabella studenti. Condizione where per selezionare la riga da cambiare.
+
+Per eseguire il file Java
+1) cliccare sulla freccia del progetto Java
+2) cliccare su Cource/src
+3) cliccare su cource
+4) cliccare 2 volte sul file Java
+5) cliccare su Run in alto a sinistra per eseguire il file Java
+	    </pre>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

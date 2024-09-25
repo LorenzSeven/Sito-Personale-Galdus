@@ -1,0 +1,98 @@
+[data-theme="light"] /*giorno*/
+{
+    --coloreTesto:#000000;
+    --contenitoreSfondo: #ffffff;
+    --coloreBordo: #000000;
+}
+[data-theme="dark"] /*notte*/
+{
+    --coloreTesto:#ffffff;
+    --contenitoreSfondo: #000000;
+    --coloreBordo: #ffffff;
+}
+
+/*
+.tabellaContatti
+{
+    margin: 0 auto;
+}
+.colonne
+{
+    padding: 5px;
+}
+.titoloContatti
+{
+    text-align: center;
+    margin-top: 50px;
+}
+.contenitoreContatti
+{
+    margin: 0 auto;
+    width: 500px;
+    height: auto;
+    padding: 5px;
+
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+    
+    background-color: var(--contenitoreSfondo);
+    transition: all 1s;
+}
+.titoloModulo
+{
+    text-align: center;
+    margin-top: 50px;
+}
+.contenitoreModulo
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 450px;
+    height: 300px;
+
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    background-color: var(--contenitoreSfondo);
+    transition: all 1s;
+}
+.testoContatti
+{
+    text-align: center;
+}
+.messaggio
+{
+    resize: none;
+    height: auto;
+}
+.pulsanteInvia
+{
+    margin-top: 5px;
+    width: 388px;
+    height: 30px;
+}
+.MessaggioInviato
+{
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    width: 300px;
+    height: auto;
+    text-align: center;
+
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    color: var(--coloreTesto);
+    background-color: var(--contenitoreSfondo);
+    transition: all 1s;
+}
+*/

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-python.png">
+  <title>Esercizi Indovina Stampa</title>
+</head>
+
+<body>
+  <a href="../../python.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+        <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+            <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+            <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>   
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Esercizi Indovina Stampa</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+            <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+            <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                             
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+            <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+            <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                          
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+print('Eserczio 1')
+print('hello world')
+#stampa: hello world
+
+print('Eserczio 2')
+x = 55 / 11
+print(x)
+#stampa: 5.0
+
+print('Eserczio 3')
+x = 50 * 2 + (60 - 20) / 4
+print(x)
+#stampa: 110.0
+
+print('Eserczio 4')
+# This is a comment
+answer = 42 # the answer
+# Now back to the puzzle
+text = "# Is this a comment?"
+print(text)
+#stampa: Is this a comment?
+
+print('Eserczio 5')
+x = 'silent'
+print(x[2] + x[1] + x[0] + x[5] + x[3] + x[4])
+#stampa: listen
+
+print('Eserczio 6')
+squares = [1, 4, 9, 16, 25]
+print(squares[0])
+#stampa: 1
+
+print('Eserczio 7')
+word = "galaxy"
+print(len(word[1:])) #word[1:] = alaxy, len(word[1:]) = 5
+#stampa: 5
+
+print('Eserczio 8')
+x = 50 // 11 #divisione senza parte decimale e apprassima al numero intero piu' vicino, 
+#(floor: arrotondamento per difetto, floor = pavimento)
+#(ceil: arrotondamento per eccesso)
+print(x)
+#stampa: 4
+
+print('Eserczio 9')
+print(3 * 'un' + 'ium') #ripete per 3 volte quella stringa
+#stampa: unununium
+
+print('Eserczio 10')
+x = 'py' 'thon'
+print(x)
+#stampa: python
+
+print('Eserczio 11')
+print(sum(range(0, 7))) #somma da i numeri che vanno da 0 a 6, 7 escluso
+#stampa: 21
+
+print('Eserczio 12')
+cubes = [1, 8, 27]
+cubes.append(4 ** 3)
+print(cubes)
+#stampa: [1, 8, 27, 64]
+
+print('Eserczio 13')
+word = "galaxy"
+print(word[4:50]) #prendi la stringa dalla posizione 4 fino alla fine, 50 non esiste
+#stampa: xy
+
+print('Eserczio 14')
+x = 51 % 3  
+print(x) #da' il resto della divisione
+#stampa: 0
+
+print('Eserczio 15')
+def if_confusion(x, y):
+    if x > y:
+        if x - 5 > 0:
+            x = y
+            return "A" if y == y + y else "B"
+        elif x + y > 0:
+            while x > y: x -= 1
+            while y > x: y -= 1
+            if x == y:
+                return "E"
+    else:
+        if x - 2 > y - 4:
+            x_old = x
+            x = y * y
+            y = 2 * x_old
+            if (x - 4) ** 2 > (y - 7) ** 2:
+                return "C"
+            return "D"
+        return "H"
+print(if_confusion(3, 7))
+#stampa: H
+
+print('Eserczio 16')
+x = 'cool'
+print(x[-1] + x[-2] + x[-4] + x[-3]) #se c'e' il - davanti al numero lui va a predere al contrario
+#stampa: loco
+
+print('Eserczio 17')
+words = ['cat', 'mouse']
+for word in words:
+    print(len(word))
+#stampa: 
+#3
+#5
+    
+print('Eserczio 18')
+def func(x):
+    return x + 1
+
+f = func  #f e' la stessa funzione di func
+print(f(2) + func(2))   
+#stampa: 3 + 3
+#stampa: 6
+
+print('Eserczio 19')
+word = "galaxy"
+print(word[:-2] + word[-2:])
+#stampa: gala    xy
+
+print('Eserczio 20')
+def func(a, *args):  #*args sta per n elementi di una lista
+    print(a)
+    for arg in args:
+        print(arg)
+func("A", "B", "C")
+#stampa: 
+#A 
+#B 
+#C
+
+print('Eserczio 21')
+def ping(i):
+    if i > 0:
+        return pong(i - 1)
+    return "0"
+def pong(i):
+    if i > 0:
+        return ping(i - 1)
+    return "1"
+print(ping(29))
+#stampa: 1
+
+print('Eserczio 22')
+word = "bender" #parte da e incluso e finisce in e escluso
+print(word[1:4])
+#stampa: end
+
+print('Eserczio 23')
+customers = ['Marie', 'Anne', 'Donald']
+customers[2:4] = ['Barack', 'Olivia', 'Sophia']
+print(customers)
+#stampa: ['Marie', 'Anne', 'Barack', 'Olivia', 'Sophia']
+"""
+print('Eserczio 24')
+def ask(prompt, retries=4, output='Error'): #se l'input non e' y ne' n allora mi stampa Error
+    for _ in range(retries):
+        response = input(prompt).lower() #mette la risposta in minuscolo
+        if response in ['y', 'yes']:
+            return True
+        if response in ['n', 'no']:
+            return False
+        print(output)
+
+print(ask('Want to know the answer?', 5))
+#stampa: true se inserisco y
+#stampa: false se inserisco n
+
+print('Eserczio 24b')
+def ciao(saluto, nome = "carlo"):
+    print(saluto + ' ' + nome)
+ciao("ciao", "luca")
+#stampa: ciao luca
+"""
+print('Eserczio 25')
+letters = ['a', 'b', 'c', 'd']
+print(len(letters[1:-1])) #parte da 1 e finisce al penultimo elemento
+#stampa: 2
+
+print('Eserczio 26')
+a = ['a', 'b']
+n = [1, 2]
+x = [a, n]
+print(x[1])
+#stampa: [1, 2]
+
+print('Eserczio 27')
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+letters[1:] = [] #dall'inizio alla fine all'inizio svuoti tutto
+print(letters)
+#stampa: ['a']
+
+print('Eserczio 28')
+# Fibonacci series:
+a, b = 0, 1
+while b < 5:
+    print(b)
+    a, b = b, a + b
+#stampa: 0, 1, 1, 2
+
+print('Eserczio 29')
+for num in range(2, 8): #da 2 a 8 escluso
+    if not num % 2: #stampa i dispari
+        continue
+    print(num)
+#stampa i dispari
+
+print('Eserczio 30')
+print(range(5, 10)[-1]) #stampa: [5, 6, 7, 8, 9] con posizione -1 [9]
+print(range(0, 10, 3)[2]) #stampa: [0, 3, 6, 9] con posizione 2 [6]
+print(range(-10, -100, -30)[1]) #stampa: [-10, -40, -70] con posizione 1 [-40]
+#il 10 conta, nella poszione come 0
+
+print('Eserczio 31')
+def matrix_find(matrix, value):
+    if not matrix or not matrix[0]: #se la matrice non esiste o il 1°elemento non c'e' ritorna false
+        return False
+    j = len(matrix) - 1  #len(matrix) = 4
+    for row in matrix:
+        while row[j] > value:
+            j = j - 1
+            if j == -1:
+                return False
+        if row[j] == value:
+            return True
+    return False
+
+matrix = [[3, 4, 4, 6], #indice 0 di matrix
+[6, 8, 11, 12],         #indice 1 di matrix
+[6, 8, 11, 15],         #indice 2 di matrix
+[9, 11, 12, 17]]        #indice 3 di matrix
+print(matrix_find(matrix=matrix, value=11))
+#stampa: true
+
+print('Eserczio 32')
+def maximum_profit(prices):
+    '''Maximum profit of a single buying low and selling high'''
+    profit = 0
+    for i, buy_price in enumerate(prices):
+        sell_price = max(prices[i:])
+        profit = max(profit, sell_price - buy_price)
+    return profit
+# Ethereum daily prices in Dec 2017 ($)
+eth_prices = [455, 460, 465, 451, 414, 415, 441]
+print(maximum_profit(prices=eth_prices))
+#stampa: 27
+
+
+print('Eserczio 33')
+def bubble_sort(lst):
+    '''Implementation of bubble sort algorithm'''
+    for border in range(len(lst)-1, 0, -1):
+        for i in range(border):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i + 1] = lst[i + 1], lst[i]
+    return lst
+list_to_sort = [27, 0, 71, 70, 27, 63, 90]
+print(bubble_sort(lst=list_to_sort))
+#stampa: [0, 27, 27, 63, 70, 71, 90]
+
+print('Eserczio 34')
+def concatenation(*args, sep="/"):
+    return sep.join(args)
+print(concatenation("A", "B", "C", sep=","))
+#stampa: A,B,C
+
+print('Eserczio 35')
+x = 5 * 3.8 - 1
+print(x)
+#stampa: 18.0
+print(11//2)
+
+print('Eserczio 36')
+def bsearch(l, value):          #1°passaggio            2°passaggio             3°passaggio  
+    lo, hi = 0, len(l)-1        #lo = 0, hi = 6         #lo = 4, hi = 6         #lo = 6, hi = 6 
+    while lo <= hi:             # 0 <= 6? si            # 4 <= 6? si            # 6 <= 6? si, perche' 6 = 6
+        mid = (lo + hi) // 2    #mid = (0 + 6)//2 = 3   #mid = (4 + 6)//2 = 5   #mid = (6 + 6)//2 = 6
+        if l[mid] < value:      #l[mid] = 3 < 6? si     #l[mid] = 5 < 6? si     #l[mid] = 6 < 6? no
+            lo = mid + 1        #lo = 3 + 1 = 4         #lo = 5 + 1 = 6
+        elif value < l[mid]:    #6 < 3? no              #6 < 5? no
+            hi = mid - 1
+        else:                  
+            return mid                                                          #return 6 
+    return -1
+l = [0, 1, 2, 3, 4, 5, 6]  #lunghezza l = 7
+x = 6
+print(bsearch(l,x))
+#stampa: 6
+
+
+print('Eserczio 37')
+words = ['cat', 'mouse', 'dog']
+for word in words[:]:
+    if len(word) > 3:
+            words.insert(0, word)
+print(words[0])
+#stampa: mouse
+
+print('Eserczio 38')
+def make_incrementor(n):
+    return lambda x: x + n #funzione: x(n): x + n
+f = make_incrementor(42) #make_incrementor(42): x + 42
+print(f(0)) #stampa 42   #f(0): 0 + 42
+print(f(1)) #stampa 43   #f(1): 1 + 42
+
+print('Eserczio 39')
+print("""
+A
+B
+C
+""" == "\nA\nB\nC\n")
+#stampa: true 
+
+print('Eserczio 40')
+print('P"yt\'h"on')
+#stampa: P"yt'h"on
+
+print('Eserczio 41')
+def fibo(n):
+    """Return list containing Fibonacci series up to n. """
+    result = []
+    a, b = 0, 1
+    while a < n:
+        result.append(a)
+        a, b = b, a + b
+    return result
+fib100 = fibo(100)
+print(fib100[-1] == fib100[-2] + fib100[-3])
+#stampa: True
+
+print('Eserczio 42')
+def qsort1(L):
+    if L:
+        return qsort1([x for x in L[1:] 
+            if x < L[0]]) + L[:1] + qsort1([x for x in L[1:] if x >= L[0]])
+    return []
+
+def qsort2(L):
+    if L:
+        return L[:1] + qsort2([x for x in L[1:]
+            if x < L[0]]) + qsort2([x for x in L[1:] if x >= L[0]])
+    return []
+print(qsort1([0, 33, 22]))
+print(qsort2([0, 33, 22]))
+#stampa: 
+#[0, 22, 33]
+#[0, 33, 22]
+
+print('Eserczio 43')
+def func(val1=3, val2=4, val3=6):
+    return val1 + val2 + val3
+values = {"val1":9, "val3":-1}
+print(func(**values))
+#stampa: 12
+
+"""
+print('Eserczio 44')
+print("Answer")
+while True:
+    pass
+print("42")
+#stampa: Answer
+"""
+
+print('Eserczio 45')
+def has_path(graph, v_start, v_end, path_len=0):
+    '''Graph has path from v_start to v_end'''
+    # Traverse each vertex only once
+    if path_len >= len(graph):
+        return False
+    # Direct path from v_start to v_end?
+    if graph[v_start][v_end]:
+        return True
+    # Indirect path via neighbor v_nbor?
+    for v_nbor, edge in enumerate(graph[v_start]):
+        if edge: # between v_start and v_nbor
+            if has_path(graph, v_nbor, v_end, path_len + 1):
+                return True
+    return False
+
+# The graph represented as adjancy matrix
+G = [[1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0],
+    [0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 0],
+    [1, 0, 0, 1, 1]]
+print(has_path(graph=G, v_start=3, v_end=0))
+#stampa: false
+
+print('Eserczio 46')
+pairs = [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
+# lexicographical sorting (ascending)
+pairs.sort(key=lambda pair: pair[1])
+print(pairs[0][1])
+#stampa: four
+
+print('Eserczio 47')
+inst = {"@instagram":232, "@selenagomez":133, "@victoriassecret":59, "@cristiano":120, "@beyonce":111, "@nike":76}
+# popular twitter accounts
+# (millions followers)
+twit = {"@cristiano":69, "@barackobama":100, "@ladygaga":77, "@selenagomez":56, "@realdonaldtrump":48}
+inst_names = set(filter(lambda key: inst[key]>60, inst.keys()))
+twit_names = set(filter(lambda key: twit[key]>60, twit.keys()))
+superstars = inst_names.intersection(twit_names)
+print(list(superstars)[0])
+#stampa: @cristiano
+
+print('Eserczio 48')
+words_list = ["bitcoin", "cryptocurrency", "wallet"]
+crawled_text = '''
+Research produced by the University of Cambridge estimates that in 2017, there are 2.9 to 5.8 million unique
+users using a cryptocurrency wallet, most of them using bitcoin.
+'''
+split_text = crawled_text.split()
+res1 = True in map(lambda word: word in split_text, words_list)
+res2 = any(word in words_list for word in split_text)
+print(res1 == res2)
+#stampa: True
+
+print('Eserczio 49')
+def encrypt(text):
+    encrypted = map(lambda c: chr(ord(c) + 2), text)
+    return ''.join(encrypted)
+
+def decrypt(text):
+    decrypted = map(lambda c: chr(ord(c) - 2), text)
+    return ''.join(decrypted)
+s = "xtherussiansarecomingx"
+print(decrypt(encrypt(encrypt(s))) == encrypt(s))
+#stampa: True
+
+print('Eserczio 50')
+import random
+def guess(a, b):
+    return random.randint(a, b)
+def check(x, y):
+    return y ** 2 == x
+x = 100
+left, right = 0, x
+y = guess(left, right)
+while not check(x, y):
+    y = guess(left, right)
+print(y)
+#stampa: 10
+	    </pre>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

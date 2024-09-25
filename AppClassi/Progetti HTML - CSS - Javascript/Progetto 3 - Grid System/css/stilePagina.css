@@ -1,0 +1,9 @@
+:root
+{
+    --coloreCerchio: rgba(184,184,184,1.0);
+}
+
+circle
+{
+    fill: var(--coloreCerchio);
+}

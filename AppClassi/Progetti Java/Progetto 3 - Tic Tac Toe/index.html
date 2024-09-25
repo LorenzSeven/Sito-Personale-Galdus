@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-java.png">
+  <title>Tic Tac Toe</title>
+</head>
+
+<body>
+  <a href="../../java.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+		<svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+			<image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+			<image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>  
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo">Tic Tac Toe</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                           
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+		<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+			<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+			<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                        
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package giocoTicTacToe;
+
+import java.util.Scanner;
+
+public class TicTacToeCodificatoConMetodo 
+{
+	//Codifica per i caratteri speciali della tabella (cst)
+	static char cst1 = '\u250C'; // angolo sotto destra
+	static char cst2 = '\u2500'; // linea orizzontale
+	static char cst3 = '\u252C'; // spigolo di sotto
+	static char cst4 = '\u2510'; // angolo sinistra sotto
+	static char cst5 = '\u2524'; // spigolo di sinitra
+	static char cst6 = '\u2518'; // angolo sinistra sopra
+	static char cst7 = '\u2534'; // spigolo di sopra
+	static char cst8 = '\u2514'; // angolo sopra destra
+	static char cst9 = '\u251C'; // spigolo di destra
+	static char cst10 = '\u253C'; // croce
+	static char cst11 = '\u2502'; // linea verticale
+	
+	public static final String RESET = "\u001B[0m"; //serve per stoppare il colore e lo stile del testo
+	public static final String GREEN = "\u001B[32m"; //codice per colorare il testo in verde
+	public static final String BOLD = "\u001B[1m"; //codice per stilizzare il testo in grassetto
+	//metodo per colorare e stilizzare il testo
+    public static String personalizzaTesto(String testo, String colore, String stile) 
+    {
+        return colore + stile + testo + RESET;
+    }
+    public static int InserisciInt()
+    {
+    	Scanner input = new Scanner(System.in);
+    	String numeroStringa = input.next();
+    	int numeroIntero = 0;
+    	
+		try //prova a trasformare numero in numero
+		{
+			numeroIntero = Integer.parseInt(numeroStringa);
+		}//se da' l'errore che non e' un numero allora ritorna 0
+		catch (NumberFormatException e) 
+		{
+			numeroIntero = 0;
+		}
+    	return numeroIntero;
+    }
+    
+    public static void stampaTabella(String[] ArrayCampi)
+    {
+		String spazio = "                                             ";
+		System.out.println(spazio + "      Tabella      ");
+		System.out.println(spazio + cst1 + cst2 + cst2 + cst2 + cst2 + cst2 + cst3 + cst2 + cst2 + cst2 + cst2 + cst2 + cst3 + cst2 + cst2 + cst2 + cst2 + cst2 + cst4);
+		System.out.println(spazio + cst11 + "  " + ArrayCampi[0] + "  " + cst11 + "  " + ArrayCampi[1] + "  " + cst11 + "  " + ArrayCampi[2] + "  " + cst11);
+		System.out.println(spazio + cst9 + cst2 + cst2 + cst2 + cst2 + cst2 + cst10 + cst2 + cst2 + cst2 + cst2 + cst2 + cst10 + cst2 + cst2 + cst2 + cst2 + cst2 + cst5);
+		System.out.println(spazio + cst11 + "  " + ArrayCampi[3] + "  " + cst11 + "  " + ArrayCampi[4] + "  " + cst11 + "  " + ArrayCampi[5] + "  " + cst11);
+		System.out.println(spazio + cst9 + cst2 + cst2 + cst2 + cst2 + cst2 + cst10 + cst2 + cst2 + cst2 + cst2 + cst2 + cst10 + cst2 + cst2 + cst2 + cst2 + cst2 + cst5);
+		System.out.println(spazio + cst11 + "  " + ArrayCampi[6] + "  " + cst11 + "  " + ArrayCampi[7] + "  " + cst11 + "  " + ArrayCampi[8] + "  " + cst11);
+		System.out.println(spazio + cst8 + cst2 + cst2 + cst2 + cst2 + cst2 + cst7 + cst2 + cst2 + cst2 + cst2 + cst2 + cst7 + cst2 + cst2 + cst2 + cst2 + cst2 + cst6);
+    }
+    public static int verificaVincitore(String[] ArrayCampi, String giocatore1, String giocatore2)
+    {
+		//verifica del vincitore
+		int vincitore = 0; 
+		for (int i = 0;i < 3;i++)
+		{
+			//verifica delle righe   0 == 1 == 2   3 == 4 == 5   6 == 7 == 8
+			if (ArrayCampi[i*3].equals(ArrayCampi[(i*3)+1]) && ArrayCampi[(i*3)+1].equals(ArrayCampi[(i*3)+2]))
+			{
+				if (ArrayCampi[(i*3)+2].equals("X"))  {vincitore = 1;break;}
+				else if (ArrayCampi[(i*3)+2].equals("O"))  {vincitore = 2;break;}
+			}		
+			//verifica delle colonne   0 == 3 == 6   1 == 4 == 7   2 == 5 == 8
+			if (ArrayCampi[i].equals(ArrayCampi[i+3]) && ArrayCampi[i+3].equals(ArrayCampi[i+6]))
+			{
+				if (ArrayCampi[i+6].equals("X"))  {vincitore = 1;break;}
+				else if (ArrayCampi[i+6].equals("O"))  {vincitore = 2;break;}
+			}	
+		}
+		//verifica della diagonale che parte da sinistra e finisce a destra
+		if (ArrayCampi[0].equals(ArrayCampi[4]) && ArrayCampi[4].equals(ArrayCampi[8]))
+		{
+			if (ArrayCampi[8].equals("X"))  {vincitore = 1;}
+			else if (ArrayCampi[8].equals("O"))  {vincitore = 2;}
+		}	
+		//verifica della diagonale che parte da destra e finisce a sinistra
+		if (ArrayCampi[2].equals(ArrayCampi[4]) && ArrayCampi[4].equals(ArrayCampi[6]))
+		{
+			if (ArrayCampi[6].equals("X"))  {vincitore = 1;}
+			else if (ArrayCampi[6].equals("O"))  {vincitore = 2;}
+		}
+		String spazio = "                                          ";
+		String spazio2 = "                                              ";
+		if (vincitore == 1)  
+		{
+			System.out.println(spazio + "");
+			System.out.println(spazio + "E il vincitore è: " + giocatore1);
+			System.out.println(spazio2 + "Congratulazioni!");
+			System.out.println(spazio + "");
+			stampaTabella(ArrayCampi);
+			return 1;
+		}
+		else if (vincitore == 2)  
+		{
+			System.out.println(spazio + "");
+			System.out.println(spazio + "E il vincitore è: " + giocatore2);
+			System.out.println(spazio2 + "Congratulazioni!");
+			System.out.println(spazio + "");
+			stampaTabella(ArrayCampi);
+			return 1;
+		}
+		return 0;
+    }
+	public static void main(String[] args) 
+	{
+		Scanner input = new Scanner(System.in);
+		String spazio = "                                        ";
+
+		System.out.println("");
+		System.out.println(personalizzaTesto(spazio + "Benvenuti al gioco Tic Tac Toe", GREEN, BOLD));
+		
+		String[] ArrayCampi = new String[9];
+		for(int i=0;i < ArrayCampi.length;i++)
+		{
+			ArrayCampi[i] = i+1 + "";
+		}
+		System.out.println("");
+		stampaTabella(ArrayCampi);
+		
+		System.out.println("");
+		System.out.println("Inserisci il nome del giocatore che userà la X");
+		String giocatore1 = input.next();
+		System.out.println("Inserisci il nome del giocatore che userà la O");
+		String giocatore2 = input.next();
+		
+		boolean stop = false;
+		int campoScelto = 0;
+		int vincita1 = 0;
+		int vincita2 = 0;
+		int indice = 0;
+		
+		while (stop == false)
+		{
+			//turno giocatore 1
+			stampaTabella(ArrayCampi);
+			System.out.println("Turno di: " + giocatore1 + ", inserisci la posizione della X");
+			campoScelto = InserisciInt();
+			//nel caso in cui il giocatore scrive X oppure un testo al posto di un numero
+			while(campoScelto < 1 || campoScelto > 9)
+			{
+				System.out.println("Errore, scegli un numero che vedi nella tabella");
+				campoScelto = InserisciInt();
+			}
+			//nel caso in cui il giocatore scegliesse una casella già riempita
+			boolean stop2 = false;
+			while (stop2 == false)
+			{
+				if (campoScelto >= 1 && campoScelto <= 9)
+				{
+					if (ArrayCampi[campoScelto-1].equals("X") || ArrayCampi[campoScelto-1].equals("O"))
+					{
+						System.out.println("Errore, casella già scelta, riprova");
+					}
+					else  {stop2 = true;break;}
+				}//se prima inserisce un numero da 1 a 9 e poi inserisce un numero fuori dal range 1 - 9 oppure un testo
+				else {System.out.println("Errore, scegli un numero che vedi nella tabella");}
+				campoScelto = InserisciInt();
+			}
+
+			ArrayCampi[campoScelto-1] = "X";
+			indice += 1;
+			vincita1 = verificaVincitore(ArrayCampi, giocatore1, giocatore2);
+			if (vincita1 == 1) {stop = true;break;} //metto un break perchè altrimenti mi esce dal ciclo solo dopo il turno del giocatore 2
+			
+			//in caso di pareggio è il giocatore 1 a terminare l'inserimento 
+			if (indice == 9) 
+			{
+				stampaTabella(ArrayCampi);
+				spazio = "                                             ";
+				System.out.println(spazio + "Pareggio");
+				stop = true;
+				break;
+			}
+			
+			//turno giocatore 2
+			stampaTabella(ArrayCampi);
+			System.out.println("Turno di: " + giocatore2 + ", inserisci la posizione della O");
+			campoScelto = InserisciInt();
+			//nel caso in cui il giocatore scrive X oppure un testo al posto di un numero
+			while(campoScelto < 1 || campoScelto > 9)
+			{
+				System.out.println("Errore, scegli un numero che vedi nella tabella");
+				campoScelto = InserisciInt();
+			}
+			//nel caso in cui il giocatore scegliesse una casella già riempita
+			boolean stop3 = false;
+			while (stop3 == false)
+			{
+				if (campoScelto >= 1 && campoScelto <= 9)
+				{
+					if (ArrayCampi[campoScelto-1].equals("X") || ArrayCampi[campoScelto-1].equals("O"))
+					{
+						System.out.println("Errore, casella già scelta, riprova");
+					}
+					else  {stop3 = true;break;}
+				}//se prima inserisce un numero da 1 a 9 e poi inserisce un numero fuori dal range 1 - 9 oppure un testo
+				else {System.out.println("Errore, scegli un numero che vedi nella tabella");}
+				campoScelto = InserisciInt();
+			}
+			ArrayCampi[campoScelto-1] = "O";
+			indice += 1;
+			vincita2 = verificaVincitore(ArrayCampi, giocatore1, giocatore2);
+			if (vincita2 == 1) {stop = true;break;}				
+		}
+		input.close();
+	}
+}
+
+</pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

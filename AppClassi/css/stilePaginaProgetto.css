@@ -1,0 +1,388 @@
+[data-theme="light"] /*giorno*/
+{
+    --SfondoBody: #ffffff;
+    --coloreTesto: #000000;
+    --sfondoTesto: rgb(227, 227, 227);
+    --bordoTesto: #00eeff;
+    --indice: #000000;
+    --indiceHover: #6e6e6e;
+ 
+    --immagineEsci: url("../img/imgProgetto/exit-giorno.png");
+    --immagineEsciHover: url("../img/imgProgetto/exit-giorno-hover.png");
+    --sfondoPulsanteCopia: #ffffff;
+    --bordoPulsanteCopia: #000000;
+    --sfondoDivCopia: rgb(227, 227, 227);
+    --opacitaGiorno: 1;
+    --opacitaNotte: 0;
+
+    --sfondoExit: #ffffff;
+    --coloreTesto: #000000;    
+    --hoverSfondoExit: #000000;  
+    --hoverColoreTesto: #ffffff;
+
+    --sfondoSwitch: #e7e7e7;
+    --coloreBordoSwicth: #e7e7e7;
+    --posizioneCerchioSwtch: left center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(184,184,184,1.0)'/></svg>");
+}
+[data-theme="dark"] /*notte*/
+{
+    --SfondoBody: #000000;
+    --coloreTesto: #ffffff;
+    --sfondoTesto: rgb(39, 39, 39);
+    --bordoTesto: #00265c;
+    --indice: #ffffff;
+    --indiceHover: #c2c2c2;
+
+    --immagineEsci: url("../img/imgProgetto/exit-notte.png");
+    --immagineEsciHover: url("../img/imgProgetto/exit-notte-hover.png");
+    --sfondoPulsanteCopia: #000000;
+    --bordoPulsanteCopia: #ffffff;
+    --sfondoDivCopia: rgb(39, 39, 39);
+    --opacitaGiorno: 0;
+    --opacitaNotte: 1;
+
+    --sfondoExit: #000000;
+    --coloreTesto: #ffffff;    
+    --hoverSfondoExit: #ffffff;   
+    --hoverColoreTesto: #000000; 
+
+    --sfondoSwitch: rgb(39, 39, 39);
+    --coloreBordoSwicth: rgb(39, 39, 39);
+    --posizioneCerchioSwtch: right center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>"); 
+}
+
+body
+{
+    background-color: var(--SfondoBody);
+    transition: 1s all;
+}
+
+/*Switch: misure e posizioni*/
+.form-check 
+{
+    font-size: 15px;
+}
+.form-check-input 
+{
+    height: 2em;
+    width: 4em;
+}
+.form-switch .form-check-input 
+{
+    width: 4em;
+    transition: 0.8s all;
+}
+.form-check .form-check-input 
+{
+    float:none;
+}
+.form-check-label
+{
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
+.form-check.form-switch.switch
+{
+    position: absolute;
+    right: 20px;
+}
+
+/*Cambio stato switch*/
+.form-switch .form-check-input /*giorno*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--sfondoSwitch); /*colore di sfondo*/
+    border-color: var(--coloreBordoSwicth); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+.form-switch .form-check-input:checked /*notte*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--sfondoSwitch); /*colore di sfondo*/
+    border-color: var(--coloreBordoSwicth); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+.contenitoreLuminosita
+{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: -5px;
+}
+.luminositaNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 30px;
+    height: 30px;
+    transition: all 1s;
+}
+.luminositaGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 30px;
+    height: 30px;
+    transition: all 1s;
+}
+.titolo
+{
+    color: var(--coloreTesto);
+    margin-top: 30px;
+    text-align: center;
+    transition: 1s all;
+}
+.testo
+{
+    margin-top: 50px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1350px;
+    padding: 10px;
+
+    border-style: double;
+    border-width: 2px;
+    border-color: var(--bordoTesto);
+
+    background-color: var(--sfondoTesto);
+    transition: 1s all;
+}
+
+/*Indice Pagina*/
+.contenitoreFrecciaSopra
+{
+    position: fixed;
+    right: 7px; 
+    bottom: 10px;
+
+    width: 35px;
+    height: 35px;
+    scroll-behavior: smooth;
+}
+.frecciaSopraNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 35px;
+    height: 35px;
+    transition: all 1s;
+}
+.frecciaSopraGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 35px;
+    height: 35px;
+    transition: all 1s;
+}
+
+.frecciaSopraLink::before 
+{
+    content: "Torna all'indice"; /* Testo del messaggio */
+    position: fixed; /* Posiziona il messaggio in modo assoluto rispetto alla freccia */
+    bottom: 50px; /* Distanza dal bordo superiore della freccia */
+    right: 0px;
+    background-color: #333; /* Colore di sfondo */
+    color: #fff; /* Colore del testo */
+    padding: 5px 10px; /* Padding */
+    border-radius: 5px; /* Bordo arrotondato */
+    font-size: 14px; /* Dimensione del testo */
+    display: none;
+    transition: opacity 0.3s ease; /* Transizione per un effetto di dissolvenza */
+}
+
+.frecciaSopraLink:hover::before 
+{
+    display: block;
+}
+.frecciaIndici
+{
+    height: 10px;
+    width: 10px;
+}
+.pulsanteIndici
+{
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--coloreTesto);
+    transition: all 1s;
+}
+.contenitoreIndice
+{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 300px;
+    padding: 10px;
+
+    border-style: double;
+    border-width: 2px;
+    border-color: var(--bordoTesto);
+    background-color: var(--sfondoTesto);
+    transition: all 1s;
+}
+.titoloIndice
+{
+    text-align: center;
+    color: var(--coloreTesto);
+    transition: all 1s;
+}
+li::marker 
+{
+    color: var(--coloreTesto);
+    transition: all 1s;
+}
+.tabellaIndiciEsercizi
+{
+    margin-top: 30px;
+}
+.indici
+{
+    text-decoration: none;
+    color: var(--indice);
+    transition: all 1s;
+}
+.indici:hover
+{
+    color: var(--indiceHover);
+    transition: all 0s;
+}
+
+
+.contenitoreFreccia
+{
+    width: 10px;
+    height: 10px;
+}
+.FrecciaMostraNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 10px;
+    height: 10px;
+    transition: all 1s;
+}
+.FrecciaMostraGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 10px;
+    height: 10px;
+    transition: all 1s;
+}
+
+/*Pulsante copia Testo*/
+.testoDaCopiare
+{
+    color: var(--coloreTesto);
+    transition: 1s all;
+}
+.contenitoreCopiaTesto
+{
+    position:relative;
+    top:0px;
+    float: right;
+}
+.pulsanteCopia
+{
+    display: block;
+    background-color: var(--sfondoPulsanteCopia);
+    border-width: 1px;
+    border-style: double;
+    border-color: var(--bordoPulsanteCopia);
+    color:  var(--coloreTesto);
+    transition: 1s all;
+}
+.divTestoCopiato
+{
+    display: none;
+    background-color: var(--sfondoDivCopia);
+    color:  var(--coloreTesto);
+    transition: 1s all;
+}
+/*--------------------------------------------*/
+.contenitoreIcona
+{
+    position: relative;
+    top:-3px;
+    height: 20px;
+    width: 20px;
+}
+.iconaNotte
+{
+    opacity: var(--opacitaNotte);
+    height: 20px;
+    width: 20px;
+    transition: 1s all;    
+}
+.iconaGiorno
+{
+    opacity: var(--opacitaGiorno);
+    height: 20px;
+    width: 20px;
+    transition: 1s all;    
+}
+
+/*Esci dal Progetto*/
+.exit
+{
+    position: absolute;
+    display: inline-block; 
+    text-decoration: none;
+    background-color: var(--SfondoBody);
+    color:  var(--coloreTesto);
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    
+    background-image: var(--immagineEsci);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 13px 17px;
+    
+    transition: 1s all;
+}
+
+/*.exit::before /*può essere anche after, non cambia*/
+/*{
+    content: '         Esci dal Progetto';
+}
+*/
+.exit:hover
+{
+    background-color: var(--sfondoTesto);
+    color:  var(--coloreTesto);
+    padding: 10px;
+    border-radius: 5px;
+    background-image: var(--immagineEsciHover);
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: 7px 17px;
+    transition: 0.5s all;
+    /*content: '   Esci dal Progetto';*/
+}
+/*
+.Esci
+{
+    position: absolute;
+    display: inline-block; 
+    text-decoration: none;
+    color: var(--coloreTesto); 
+    font-size: 20px;
+    padding: 10px;
+    transition: 1s all;
+}
+.ImageEsci 
+{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px; 
+    display: inline-block;
+}
+.Esci:hover
+{
+    background-color: var(--hoverSfondoExit);
+    color: var(--hoverColoreTesto);
+    padding: 10px;
+    border-radius: 5px;
+}
+*/

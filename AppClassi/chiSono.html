@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/stilePagina.css">
+  <link rel="stylesheet" href="css/chiSonoEContatti.css">
+  <link rel="icon" type="image/x-icon" href="img/favicon-galdus-giorno.png">
+  <meta charset="UTF-8">
+  <title>Lorenzo Quatela Chi Sono</title>  
+</head>
+
+<body>
+  <!--Schermata Caricamento-->
+  <div id = "preloader">
+    <svg class="contenitoreCaricamento"><desc>cerchio di caricamento</desc> <!--Contenitore immagini sovrapposte-->
+      <image class="ImmagineCaricamentoNotte" href="img/caricamento-cerchio-blu.png"></image>
+      <image class="ImmagineCaricamentoGiorno" href="img/caricamento-cerchio-azzurro.png"></image>                                
+    </svg>
+  </div>
+  <!--Sfondo-->
+  <img src="img/sfondo-sabbia-notte.png" class="sfondoNotte" alt="sfondo sabbia notte">
+  <img src="img/sfondo-sabbia-giorno.png" class="sfondoGiorno" alt="sfondo sabbia giorno">
+
+  <nav class="navbar navbar-expand-xl">
+    <div class="container-fluid justify-content-center bordo">
+      <a class="navbar-brand" href="Classe IFTS Software Developer/index.html">
+        <svg class="contenitoreIconaNavBrand"><desc>icona galdus logo</desc> <!--Contenitore immagini sovrapposte-->
+          <image class="IconaNavBrandNotte" href="img/icona-galdus-logo-bianco.png"></image>
+          <image class="IconaNavBrandGiorno" href="img/icona-galdus-logo-nero.png"></image>                                 
+        </svg>
+        Classe IFTS Software Developer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
+        <span class="navbar-toggler-icon"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path class="pathClass" d='M4 7h22M4 15h22M4 23h22'/></svg></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">
+            <svg class="contenitoreHome"><desc>icona home</desc> <!--Contenitore immagini sovrapposte-->
+              <image class="IconaHomeNotte" href="img/icona-home-notte.png"></image>
+              <image class="IconaHomeGiorno" href="img/icona-home-giorno.png"></image>                                
+            </svg> Home </a></li>
+          <li class="nav-item"><a class="nav-link" href="chiSono.html">               
+            <svg class="contenitoreProfilo"><desc>icona profilo</desc> <!--Contenitore immagini sovrapposte-->
+                <image class="IconaProfiloNotte" href="img/icona-profilo-notte.png"></image>
+                <image class="IconaProfiloGiorno" href="img/icona-profilo-giorno.png"></image>                                
+            </svg> Chi sono </a></li>
+          <li class="nav-item"><a class="nav-link" href="cloud.html"><img src="img/icona-google-cloud.png" class="IconaCloud" alt="icona google cloud"> Cloud </a></li>
+          <li class="nav-item"><a class="nav-link" href="database.html"><img src="img/icona-database.png" class="IconaDatabase" alt="icona database"> Database </a></li>
+          <li class="nav-item"><a class="nav-link" href="htmlCssJs.html"><img src="img/icona-html-css-js.png" class="IconaHTML-CSS-JS" alt="icona html css js"> HTML-CSS-JS </a></li>
+          <li class="nav-item"><a class="nav-link" href="java.html"><img src="img/icona-java.png" class="IconaJava" alt="icona java"> Java </a></li>
+          <li class="nav-item"><a class="nav-link" href="python.html"><img src="img/icona-python.png" class="IconaPython" alt="icona python"> Python </a></li>
+          <li class="nav-item">
+            <div class="form-check form-switch switch">
+              <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+                onchange="luminosita()">
+              <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+                <svg class="contenitoreLuminosita"><desc>icona luminosità</desc> <!--Contenitore immagini sovrapposte-->
+                  <image class="luminositaNotte" href="img/icona-luna.png"></image>
+                  <image class="luminositaGiorno" href="img/icona-sole.png"></image>                                
+                </svg>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="titolo">Chi sono</h1>
+
+  <div class="tabellaProfilo container text-center">
+    <div class="immagineProfilo"><img src="img/lorenzo-quatela-profilo.png" class="profilo" alt="lorenzo quatela profilo"></div>   
+    <div class="descrizioneProfilo"> 
+      <div class="contenitoreDescrizione">
+      <h2 class="text-start">Ciao, sono Lorenzo</h2>
+      <p class="descrizione text-start">
+        Sono un ragazzo appassionato di programmazione.<br>
+        Sto perseguendo la mia passione per la programmazione nel corso IFTS Software Developer. <br>
+        Nel mio tempo libero mi piace il gaming su Computer e sviluppare applicazioni di tipo videoludico per PC. <br>
+        Spero un giorno di diventare un esperto sviluppatore software e contribuire a creare soluzioni innovative.
+      </p>        
+      </div> 
+    </div>   
+  </div>
+<!--
+  <h2 class="titoloContatti">Contatti</h2>
+  <div class="contenitoreContatti">
+  <p class="testoContatti testo">Se desideri contattarmi per domande, collaborazioni o consulenza, puoi a farlo utilizzando il modulo di contatto qui sotto.</p>
+  </div>
+
+  <h2 class="titoloModulo">Modulo di contatto:</h2>
+  <div class="contenitoreModulo" id="contenitoreModuloId">-->
+
+  <!--<form method="post" enctype="text/plain">
+    <table class="tabellaContatti">
+      <td class="colonne">
+        <label for="nome" class="testo">Nome:</label><br>
+        <input type="text" id="nome" name="nome"><br>        
+        <label for="email" class="testo">Email:</label><br>
+        <input type="email" id="email" name="email"><br>      
+      </td>
+      <td class="colonne">
+        <label for="Cognome" class="testo">Cognome:</label><br>
+        <input type="text" id="Cognome" name="Cognome"><br>    
+        <label for="numeroTelefono" class="testo">Numero di Telefono:</label><br>
+        <input type="numeroTelefono" id="numeroTelefono" name="numeroTelefono"><br>          
+      </td>
+    </table>
+    <table class="tabellaContatti">
+      <td>
+      <label for="messaggio" class="testo">Messaggio:</label><br>
+      <textarea id="messaggio" name="messaggio" rows="4" cols="50" class="messaggio"></textarea><br>
+      <input type="submit" value="Invia" class="pulsanteInvia" onclick="moduloCompilato()">            
+      </td>
+    </table>
+  </form>-->
+  <!--</div>-->
+
+  <!--Messaggio inviato con Successo
+  <div class="MessaggioInviato" id="MessaggioInviatoId">
+    Messaggio Inviato! <br>
+    Non appena possibile ti contattero'
+  </div>
+
+  <footer>
+    <table class="table tabellaFooter">
+        <tr>
+          <td class="footerLink">Chi sono</td>
+          <td class="footerLink">Cloud</td>
+          <td class="footerLink">Database</td>
+          <td class="footerLink">HTML-CSS-JS</td>
+          <td class="footerLink">Java</td>
+          <td class="footerLink">Python</td>
+        </tr>
+    </table>
+  </footer>-->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="javascript/eventiPagina.js"></script>
+  <script>
+    var loader = document.getElementById("preloader");
+    window.addEventListener("load", function(){loader.style.display = "none";})
+  </script>
+</body>
+
+</html>

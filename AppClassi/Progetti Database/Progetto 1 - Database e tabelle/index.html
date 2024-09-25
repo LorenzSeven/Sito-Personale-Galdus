@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-database.png">
+  <meta charset="UTF-8">
+  <title>Creazione Database e Tabelle</title>  
+</head>
+
+<body>
+  <a href="../../database.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>                               
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo">Creazione Database e Tabelle</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                   
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                          
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+create database Collezione;/*creare un database*/
+use Collezione/*scegliere il database*/;
+CREATE TABLE Albums ( /*creazione tabella*/
+    idAlbum int,
+    titolo varchar(255),
+    artista varchar(255),
+    genere varchar(255),
+    anno int
+);
+desc Albums; /*per vedere la struttura della tabella Albums*/
+INSERT INTO Albums (idAlbum, titolo, artista, genere, anno ) VALUES ('01', 'Vietato morire','Ermal Meta', 'pop', '2017');/*inserimento dati*/
+INSERT INTO Albums (idAlbum, titolo, artista, genere, anno ) VALUES ('02', 'Pace','Fabrizio Moro', 'pop', '2016');
+INSERT INTO Albums (idAlbum, titolo, artista, genere, anno ) VALUES ('03', 'Wonder','Shawn Mendes', 'pop', '2020');
+CREATE TABLE Brani (
+    idAlbum int,
+    nome varchar(255),
+    durata float
+);
+INSERT INTO Brani (idAlbum, nome, durata) VALUES ('01', 'a parte te', '3.12');
+INSERT INTO Brani (idAlbum, nome, durata) VALUES ('02', 'schegge', '3.20');
+INSERT INTO Brani (idAlbum, nome, durata) VALUES ('03', 'semplice', '2.56');
+INSERT INTO Brani (idAlbum, nome, durata) VALUES ('04', 'dream', '3.34');
+INSERT INTO Brani (idAlbum, nome, durata) VALUES ('05', 'intro', '1.20');
+select * from Albums;/*per vedere tutte le colonne della tabella*/
+select * from Brani;
+  </pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

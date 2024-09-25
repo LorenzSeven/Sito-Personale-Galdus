@@ -1,0 +1,758 @@
+[data-theme="light"] /*giorno*/
+{
+    --opacitaGiorno: 1;
+    --opacitaNotte: 0;
+    --coloreTesto:#000000;
+    --cardBox: #ffffff;
+    --coloreBordo: #000000;
+    --contenitoreSfondo: #ffffff;
+    --ombraTesto: -3px 3px 4px rgba(0, 0, 0, 0.5);
+    --ombraRiquadro: -10px 10px 20px -10px #000000;
+    --ombraImmagine: drop-shadow(-3px 3px 1.5px rgb(0, 0, 0, 0.3));
+    --sfondoPreloader: #ffecb5;
+
+    --sfondoLink: rgb(0, 123, 216);
+    --navBarSfondo:#00bfff;
+    --hoverLink: rgb(0, 123, 216);
+    --navLink: #000000;
+    --navBarBrand: #000000;
+    --hoverNavBarBrand: rgb(0, 123, 216);
+    --navBarToggler: #000000;
+    --pathClass: #000000;
+    
+    --sfondoSwitch: #ffffff;
+    --coloreBordoSwicth: #ffffff;
+    --posizioneCerchioSwtch: left center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,1.0)'/></svg>");
+
+}
+ 
+[data-theme="dark"] /*notte*/
+{
+    --opacitaGiorno: 0;
+    --opacitaNotte: 1;
+    --coloreTesto:#ffffff;
+    --cardBox: #000000;
+    --coloreBordo: #ffffff;
+    --contenitoreSfondo: #000000;
+    --ombraTesto: -10px -30px 4px rgba(0, 0, 0, 0);
+    --ombraRiquadro: -20px -50px 20px -10px #00000000;
+    --ombraImmagine: drop-shadow(-7px -18px 2px rgba(0, 0, 0, 0));
+    --sfondoPreloader: #000923;
+    
+    --sfondoLink: rgb(0, 68, 123);
+    --navBarSfondo: #001b64;
+    --hoverLink: rgb(0, 68, 123);
+    --navLink: #ffffff;
+    --navBarBrand: #ffffff;
+    --hoverNavBarBrand: rgb(0, 68, 123);
+    --navBarToggler: #ffffff;
+    --pathClass: #ffffff;
+    
+    --sfondoSwitch: #000000;
+    --coloreBordoSwicth: #000000;
+    --posizioneCerchioSwtch: right center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>"); 
+}
+
+/*Preloader*/
+#preloader
+{
+    background: var(--sfondoPreloader) no-repeat center center;
+    background-size: 15%;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes rotateAnimation 
+{
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+
+.contenitoreCaricamento
+{
+    width: 100px;
+    height: 100px;
+    animation: rotateAnimation 3s linear infinite;
+}
+
+.ImmagineCaricamentoNotte
+{
+    width: 100px;
+    height: 100px;
+    opacity: var(--opacitaNotte);    
+}
+
+.ImmagineCaricamentoGiorno
+{
+    width: 100px;
+    height: 100px;
+    opacity: var(--opacitaGiorno);    
+}
+
+/*Sfondo*/
+.sfondoNotte
+{
+    position: fixed;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+
+    /*opacity: var(--opacitaNotte);   */  
+    transition: all 1s;
+}
+.sfondoGiorno
+{
+    position: fixed;    
+    z-index: -1;     
+    width: 100%;
+    height: 100%;
+
+    opacity: var(--opacitaGiorno);    
+    transition: all 1s;
+}
+
+/*NavBar*/
+.navbar
+{
+    background-color: var(--navBarSfondo);
+    box-shadow: 0px 0px 10px 0px var(--coloreOmbra);
+    transition: all 1s;
+}
+.navbar-brand 
+{
+    color: var(--navBarBrand);
+    text-decoration: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    transition: all 1s;    
+}
+.navbar-brand:hover
+{
+    background-color: var(--hoverNavBarBrand);
+    color: var(--navBarBrand);
+    transition: all 1s;
+}
+.contenitoreIconaNavBrand
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 20px;
+}
+.IconaNavBrandNotte
+{
+    opacity: var(--opacitaNotte);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+.IconaNavBrandGiorno
+{
+    opacity: var(--opacitaGiorno);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+.nav-item
+{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 20px;
+}
+.nav-link
+{
+    color: var(--navLink);
+    border-radius: 20px;
+    transition: all 1s;
+}
+.nav-link:hover
+{
+    background-color: var(--hoverLink);
+    color: var(--navLink);
+    transition: all 1s;
+}
+.navbar-collapse
+{
+    justify-content: start;
+}
+
+
+/*Switch: misure e posizioni*/
+.form-check 
+{
+    font-size: 15px;
+}
+.form-check-input 
+{
+    height: 2em;
+    width: 4em;
+}
+.form-switch .form-check-input 
+{
+    width: 4em;
+    transition: 0.8s all;
+}
+.form-check .form-check-input 
+{
+    float:none;
+}
+.form-check-label
+{
+    margin-top: 9px;
+    margin-left: 10px;
+}
+
+/*Cambio stato switch*/
+.form-switch .form-check-input /*giorno*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--sfondoSwitch); /*colore di sfondo*/
+    border-color: var(--coloreBordoSwicth); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+.form-switch .form-check-input:checked /*notte*/
+{
+    background-position: var(--posizioneCerchioSwtch); /*posizione cerchio*/
+    background-color: var(--sfondoSwitch); /*colore di sfondo*/
+    border-color: var(--coloreBordoSwicth); /*colore del bordo*/
+    background-image: var(--coloreCerchio); /*colore del cerchio*/
+}
+
+.contenitoreLuminosita
+{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    top: -5px;
+}
+.luminositaNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 30px;
+    height: 30px;
+    transition: all 1s;
+}
+.luminositaGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 30px;
+    height: 30px;
+    transition: all 1s;
+}
+
+/*Home*/
+.contenitoreHome
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 20px;
+}
+.IconaHomeNotte
+{
+    opacity: var(--opacitaNotte);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+.IconaHomeGiorno
+{
+    opacity: var(--opacitaGiorno);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+
+.contenitoreGenerale
+{
+  height: auto;
+  margin-top:20px;
+  display: flex;
+  justify-content: center;
+}
+
+.contenitoreRiquadri
+{
+  width: 1100px;
+  height: 700px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.linkPaginaProgetti
+{
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: var(--ombraRiquadro);
+    transition: all 1s;
+    text-align: center;
+    height: 300px;
+    width: 300px;
+    border-radius: 20px;
+}
+
+.riquadriLinkProgetti
+{
+    height: 300px;
+    width: 300px;
+    border: var(--coloreBordo) solid 3px;
+    background-color: var(--navBarSfondo);
+    color: var(--coloreTesto);
+    transition: all 1s;
+    border-radius: 20px;
+    overflow: hidden;
+    line-height: 40px;
+}
+
+.riquadroImmagine
+{
+    height: 250px;
+    width: 300px;
+    background-color: white;
+    overflow: hidden;
+}
+
+.immagineIcona
+{
+    position: relative;
+    top: -20px;    
+    height: 300px;
+    width: 300px;
+    background-color: var(--cardBox);
+    transition: all 1s;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+
+}
+.immagineIcona:hover
+{
+  transform: scale(1.3); 
+  transition: transform 0.2s;
+}
+
+/*Profilo*/
+.contenitoreProfilo
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 20px;
+}
+.IconaProfiloNotte
+{
+    opacity: var(--opacitaNotte);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+.IconaProfiloGiorno
+{
+    opacity: var(--opacitaGiorno);
+    height: 20px;
+    width: 20px;
+    transition: all 1s;
+}
+.tabellaProfilo
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+.contenitoreDescrizione
+{
+    padding: 20px;
+    
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    background-color: var(--contenitoreSfondo);    
+    box-shadow: var(--ombraRiquadro);
+    transition: all 1s;
+}
+.immagineProfilo
+{
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px;
+}
+.descrizioneProfilo
+{
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px;
+
+    color:var(--coloreTesto);
+    position: relative;
+    top: 60px;
+}
+.descrizione
+{
+    color:var(--coloreTesto);
+    transition: all 1s;
+}
+.profilo
+{
+
+    border-radius: 150px;    
+
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    height: 270px;
+    width: 270px;
+    transition: all 1s;
+
+    box-shadow: var(--ombraRiquadro);
+}
+
+
+/*Google Cloud Console*/
+.IconaCloud
+{
+    position: relative;
+    top:-3px;
+    height: 21px;
+    width: 21px;
+}
+.contenitoreAmbienteDiLavoro2
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70px;
+    width: 400px;
+}
+.ambienteDiLavoroGiorno2
+{
+    opacity: var(--opacitaGiorno);
+    filter: var(--ombraImmagine);
+    height: 70px;
+    width: 400px;
+    transition: all 1s;
+}
+.ambienteDiLavoroNotte2
+{
+    opacity: var(--opacitaNotte);
+    height: 70px;
+    width: 400px;
+    transition: all 1s;
+}
+
+/*Database*/
+.IconaDatabase
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 20px;
+}
+.contenitoreAmbienteDiLavoro3
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 400px;
+}
+.tabellaAmbienti
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+.immagineAmbiente
+{
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px;
+}
+.ambienteDiLavoroGiorno3
+{
+    opacity: var(--opacitaGiorno);
+    filter: var(--ombraImmagine);
+    height: 50px;
+    width: 400px;
+    transition: all 1s;
+}
+.ambienteDiLavoroNotte3
+{
+    opacity: var(--opacitaNotte);
+    height: 50px;
+    width: 400px;
+    transition: all 1s;
+}
+.contenitoreAmbienteDiLavoro31
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 400px;
+}
+.ambienteDiLavoroGiorno31
+{
+    opacity: var(--opacitaGiorno);
+    filter: var(--ombraImmagine);
+    height: 40px;
+    width: 400px;
+    transition: all 1s;
+}
+.ambienteDiLavoroNotte31
+{
+    opacity: var(--opacitaNotte);
+    height: 40px;
+    width: 400px;
+    transition: all 1s;
+}
+.ContenitoreAmbienteScelto
+{
+    margin-top: 20px;
+    margin-left: 20px;   
+    height: 60px;
+    width: 60px;
+}
+.AmbienteGiorno
+{
+    height: 60px;
+    width: 60px;
+    opacity: var(--opacitaGiorno);    
+    transition: all 1s;
+}
+.AmbienteNotte
+{
+    height: 60px;
+    width: 60px;
+    opacity: var(--opacitaNotte);
+    transition: all 1s;    
+}
+
+/*HTML & CSS & JS*/
+.IconaHTML-CSS-JS
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 50px;
+}
+.contenitoreAmbienteDiLavoro4
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90px;
+    width: 400px;
+    filter: var(--ombraImmagine);
+    transition: 1s all;
+}
+
+/*Java*/
+.IconaJava
+{
+    position: relative;
+    top:-3px;
+    height: 21px;
+    width: 21px;
+}
+.contenitoreAmbienteDiLavoro5
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70px;
+    width: 400px;
+}
+.ambienteDiLavoroGiorno5
+{
+    opacity: var(--opacitaGiorno);
+    filter: var(--ombraImmagine);
+    height: 70px;
+    width: 400px;
+    transition: all 1s;
+}
+.ambienteDiLavoroNotte5
+{
+    opacity: var(--opacitaNotte);
+    height: 70px;
+    width: 400px;
+    transition: all 1s;
+}
+
+/*Python*/
+.IconaPython
+{
+    position: relative;
+    top:-3px;
+    height: 21px;
+    width: 21px;
+}
+.contenitoreAmbienteDiLavoro6
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    filter: var(--ombraImmagine);
+    height: 70px;
+    width: 300px;
+    transition: 1s all;
+}
+.ambienteDiLavoroGiorno6
+{
+    opacity: var(--opacitaGiorno);
+    filter: var(--ombraImmagine);
+    height: 70px;
+    width: 300px;
+    transition: all 1s;
+}
+.ambienteDiLavoroNotte6
+{
+    opacity: var(--opacitaNotte);
+    height: 70px;
+    width: 300px;
+    transition: all 1s;
+}
+
+
+/*Stile Elementi*/
+.titolo
+{
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+    text-shadow: var(--ombraTesto);
+    color: var(--coloreTesto);    
+    transition: all 1s;
+}
+h2
+{
+    color:var(--coloreTesto);
+    transition: all 1s;
+}
+.testo
+{
+    color:var(--coloreTesto);
+    transition: all 1s;
+}
+
+h4
+{
+    color:var(--coloreTesto);
+    transition: all 1s;
+}
+.content
+{
+    margin-top: 50px;
+}
+.card-box 
+{
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: var(--cardBox);
+
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    box-shadow: var(--ombraRiquadro);
+    transition: all 1s;
+}
+.btn-primary
+{
+    margin-top: 30px;
+}
+.linkProgetto
+{
+    text-decoration: none;
+    color: var(--coloreTesto);
+    background-color: var(--navBarSfondo);
+    border-color: rgba(0, 0, 0, 0);
+
+    transition: all 1s; 
+}
+
+.linkProgetto:hover
+{
+    background-color: var(--sfondoLink);
+    border-color: rgba(0, 0, 0, 0);
+    color: var(--coloreTesto);
+    transition: 0.2s;
+}
+
+
+.table
+{
+
+    --bs-table-bg: var(--navBarSfondo); /*colore sfondo tabella*/
+    --bs-table-color: var(--coloreTesto); /*colore tabella*/
+    border-color: var(--navBarSfondo); /*colore bordo della tabella*/
+    text-align: center; /*testo al centro*/
+    /*padding: 0.5rem 0.5rem 0.5rem 0.5rem;*/
+    position: relative;
+    top: 20px;
+}
+
+.footerLink
+{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/*NavBar larghezza da 1200px in giù*/
+@media screen and (max-width: 1200px)
+{
+    .navbar-collapse 
+    {
+        justify-content: center;
+        transition: all 1s;
+    }
+    .navbar-brand 
+    {
+        /*margin: sopra destra sotto sinistra*/
+        margin: 0px 5px 0px 5px;
+    }
+    .navbar-toggler:focus 
+    {
+        box-shadow: 0 0 0 0; /*Tolgo il box shadow dal button nav-toggle*/
+    }
+    .navbar-nav 
+    {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-item 
+    {
+        margin-bottom: 10px;
+    }
+
+    .navbar-toggler 
+    {
+        order: -1;
+        border-style: solid;
+        border-color: var(--navBarToggler);
+        transition: all 1s;
+    }
+    .pathClass
+    {
+        stroke: var(--pathClass);
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2;
+        transition: all 1s;
+    }
+}

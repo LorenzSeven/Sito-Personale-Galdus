@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-database.png">
+  <meta charset="UTF-8">
+  <title>Relazioni tra Tabelle</title>  
+</head>
+
+<body>
+  <a href="../../database.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>                                
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Relazioni tra Tabelle</h1>
+
+  <div class="contenitoreIndice">
+    <h5 class="titoloIndice">Indice Pagina</h5>
+    <li><a class="indici" href="#GenereMusica"> Genere-Musica </a></li>
+    <li><a class="indici" href="#RuoliUtenti"> Ruoli-Utenti </a></li>
+    <li><a class="indici" href="#StudentiIndirizzi"> Studenti-Indirizzi </a></li>
+  </div>     
+
+    <a href="#titoloPagina" class="frecciaSopraLink" id="frecciaSopraId">
+        <svg class="contenitoreFrecciaSopra"><desc>Freccia Sopra</desc><!--Contenitore immagini sovrapposte-->
+            <image class="frecciaSopraNotte" href="../../img/imgProgetto/freccia-sopra-notte.png"></image>
+            <image class="frecciaSopraGiorno" href="../../img/imgProgetto/freccia-sopra-giorno.png"></image>
+        </svg>
+    </a>
+
+    <span id="GenereMusica"></span>
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                          
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                       
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+use Collezione; -- uso il database Collezione
+show tables; -- vedo tutte le tabelle del database Collezione
+drop table albums, brani, collezionecd; -- cancella tutte le tabelle del database Collezione
+
+-- Creazione tabella GenereMusica
+CREATE TABLE GenereMusica (
+    GenereID INT AUTO_INCREMENT PRIMARY KEY,
+    NomeGenere VARCHAR(50) NOT NULL
+);
+
+-- creazione tabella Album
+CREATE TABLE Album (
+    AlbumID INT AUTO_INCREMENT PRIMARY KEY,
+    Titolo VARCHAR(255) NOT NULL,
+    Artista VARCHAR(255) NOT NULL,
+    AnnoPubblicazione INT,
+    GenereID INT,
+    FOREIGN KEY (GenereID) REFERENCES GenereMusica(GenereID) -- collegamento con la tabella GeneraMusica
+);
+insert into GenereMusica(NomeGenere) values ("Rock");
+insert into GenereMusica(NomeGenere) values ("Pop");
+insert into GenereMusica(NomeGenere) values ("Hip Hop");
+insert into GenereMusica(NomeGenere) values ("Jazz");
+
+insert into Album(Titolo, Artista, AnnoPubblicazione, GenereID) values ("Abbey Road", "The Beatles", 1969, 1);
+insert into Album(Titolo, Artista, AnnoPubblicazione, GenereID) values ("Christmas (Deluxe Spec.Edt.)", "Michael Bublè", 2011, 2);
+insert into Album(Titolo, Artista, AnnoPubblicazione, GenereID) values ("The Slim Shady LP", "Eminem", 1999, 3);
+insert into Album(Titolo, Artista, AnnoPubblicazione, GenereID) values ("Life thru a Lens", "Robbie Williams", 1997, 4);
+
+-- seleziona le colonne AlbumId, Titolo, Artista, AnnoPubblicazione, Album.GenereID di Album e la colonna NomeGenere di GenereMusica
+-- cioè mette insieme le colonne di più tabelle attraverso la foreign key
+Select AlbumId, Titolo, Artista, AnnoPubblicazione, Album.GenereID, GenereMusica.NomeGenere
+from album 
+left join GenereMusica 
+on Album.AlbumID= GenereMusica.GenereID;
+    </pre>
+  </div>
+<!--------------------------------------------------------------------------------------------->
+<span id="RuoliUtenti"></span>
+<div class="testo">
+  <div id="contenitoreCopiaTesto2" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+    <button id="pulsanteCopia2" class="pulsanteCopia" onclick="copiaTesto2()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                        
+      </svg>Copia Testo
+    </button>    
+    <div id="divTestoCopiato2" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                          
+      </svg>testo Copiato!
+    </div>
+  </div>    
+    <pre id="testoDaCopiare2" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+create database ruoliUtenti;
+use ruoliUtenti;
+
+-- creazione tabella users
+create table users(
+userId int auto_increment primary key,
+username varchar(40),
+password varchar(255),
+email varchar(255)
+);
+
+-- creazione tabella roles
+create table roles(
+roleId int auto_increment primary key,
+role_name varchar(50)
+);
+
+-- creazione tabella user_roles
+create table user_roles(
+userId int,
+roleId int,
+primary key(userId, roleId),
+foreign key(userId) references users(userId),
+foreign key(roleId) references roles(roleId)
+);
+
+insert into users(username, password, email) values ('Gerry', '22kagen21', 'Gerry@Norway.com');
+insert into users(username, password, email) values ('Corey', '22kagen21', 'Corey@Norway.com');
+insert into users(username, password, email) values ('Max', '22kagen21', 'Max@Norway.com');
+insert into users(username, password, email) values ('malley', '22kagen21', 'Malley@Norway.com');
+
+-- inserisco le righe con una insert senza ripetere per tutte le righe
+insert into roles(role_name) values ('userguest'), ('ADMIN'), ('Power'), ('Root');
+
+insert into user_roles (userId, roleId) value ('1', '1'), ('2','2'), ('3','3'),('4','4');
+
+-- seleziono tutte le colonne di tutte le tabelle
+SELECT *
+FROM users 
+LEFT JOIN roles ON roles.roleId = users.userId 
+RIGHT JOIN user_roles ON user_roles.userId = users.userId;
+    </pre>
+  </div>
+<!--------------------------------------------------------------------------------------------->
+<span id="StudentiIndirizzi"></span>
+<div class="testo">
+  <div id="contenitoreCopiaTesto3" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+    <button id="pulsanteCopia3" class="pulsanteCopia" onclick="copiaTesto3()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                      
+      </svg>Copia Testo
+    </button>    
+    <div id="divTestoCopiato3" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                       
+      </svg>testo Copiato!
+    </div>
+  </div>    
+    <pre id="testoDaCopiare3" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+use Persone;
+
+create table studenti(
+idStudente int auto_increment primary key,
+nomeStudente varchar(50),
+cognomeStudente varchar(50)
+);
+
+create table indirizzi(
+idIndirizzo int auto_increment primary key,
+via varchar(50),
+città varchar(50),
+CAP varchar(50),
+FOREIGN KEY (idIndirizzo) REFERENCES studenti(idStudente)
+);
+
+insert into studenti(nomeStudente, cognomeStudente) values ('Martina', 'Esposito'),('Francesco','Rossi'),('Chiara','Bianchi'),('Andrea','Russo');
+insert into indirizzi(via, città, CAP) values ('Roma','Milano','20121'),('Garibaldi','Roma','00184'),('Verdi','Napoli','80132'),('Mazzini','Firenze','50122');
+
+select * 
+from studenti
+left join indirizzi
+on studenti.idStudente = indirizzi.idIndirizzo;
+
+-- modificato
+create table persone(
+idPersona int auto_increment primary key,
+nomePersona varchar(50),
+cognomePersona varchar(50)
+);
+insert into persone(nomePersona, cognomePersona) values ('Martina', 'Esposito');
+insert into persone(nomePersona, cognomePersona) values ('Francesco','Rossi');
+insert into persone(nomePersona, cognomePersona) values ('Chiara','Bianchi');
+insert into persone(nomePersona, cognomePersona) values ('Andrea','Russo');
+
+select * from persone;
+
+delete from persone where idPersona = 3;
+-- order by asc: ordina tutti i dati dal più piccolo al più grande
+  </pre>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+  <script src="../../javascript/eventiIndice.js"></script>
+</body>
+
+</html>

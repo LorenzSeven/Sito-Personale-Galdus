@@ -1,0 +1,268 @@
+[data-theme="light"] /*giorno*/
+{
+    --sfondo: #f4e3c1;
+    --sfondoSabbia: #f4e3c1;
+    --opacitaGiorno: 1;
+    --opacitaNotte: 0;
+    --coloreTesto:#000000;
+    --cardBox: #ffffff;
+    --coloreBordo: #000000;
+
+    --navBarSfondo:#00bfff;
+    --hoverLink: rgb(0, 123, 216);
+    --navLink: #000000;
+    --navBarBrand: #000000;
+    --hoverNavBarBrand: rgb(0, 123, 216);
+    --navBarToggler: #000000;
+    --pathClass: #000000;
+    
+    --sfondoSwitch: #ffffff;
+    --coloreBordoSwicth: #ffffff;
+    --posizioneCerchioSwtch: left center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(184,184,184,1.0)'/></svg>");
+
+}
+ 
+ [data-theme="dark"] /*notte*/
+ {
+    --sfondo: #030032;
+    --sfondoSabbia: #030032;
+    --opacitaGiorno: 0;
+    --opacitaNotte: 1;
+    --coloreTesto:#ffffff;
+    --cardBox: #000000;
+    --coloreBordo: #ffffff;
+    
+    --navBarSfondo: #001b64;
+    --hoverLink: rgb(0, 68, 123);
+    --navLink: #ffffff;
+    --navBarBrand: #ffffff;
+    --hoverNavBarBrand: rgb(0, 68, 123);
+    --navBarToggler: #ffffff;
+    --pathClass: #ffffff;
+    
+    --sfondoSwitch: #000000;
+    --coloreBordoSwicth: #000000;
+    --posizioneCerchioSwtch: right center;
+    --coloreCerchio: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(255,255,255,1.0)'/></svg>"); 
+ }
+
+.sfondo
+{
+    background-color: var(--sfondo);
+    background-image: var(--sfondoSabbia);
+}
+
+/*NavBar*/
+.navbar
+{
+    background-color: var(--navBarSfondo);
+    box-shadow: 0px 0px 10px 0px;
+}
+.navbar-brand 
+{
+    color: var(--navBarBrand);
+    text-decoration: none;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+.navbar-brand:hover
+{
+    background-color: var(--hoverNavBarBrand);
+    color: var(--navBarBrand);
+}
+.contenitoreIconaNavBrand
+{
+    position: relative;
+    top:-2px;
+    height: 20px;
+    width: 20px;
+}
+.IconaNavBrandNotte
+{
+    opacity: var(--opacitaNotte);
+    height: 20px;
+    width: 20px;
+}
+.IconaNavBrandGiorno
+{
+    opacity: var(--opacitaGiorno);
+    height: 20px;
+    width: 20px;
+}
+.nav-item
+{
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 20px;
+}
+.nav-link
+{
+    color: var(--navLink);
+    border-radius: 20px;
+}
+.nav-link:hover
+{
+    background-color: var(--hoverLink);
+    color: var(--navLink);
+}
+.navbar-collapse
+{
+    justify-content: end;
+}
+
+/*Luminosita'*/
+.contenitoreLuminosita
+{
+    width: 30px;
+    height: 30px;
+}
+.luminositaNotte
+{
+    opacity: var(--opacitaNotte);
+    width: 30px;
+    height: 30px;
+}
+.luminositaGiorno
+{
+    opacity: var(--opacitaGiorno);
+    width: 30px;
+    height: 30px;
+}
+.luminosita
+{
+    width: 30px;
+    height: 30px;
+}
+/*Dropdown Luminosita*/
+.btn-secondary
+{
+    background-color: #00000000; /*colore trasparente*/
+    border-color: #00000000;  /*colore trasparente*/
+
+    --bs-btn-active-bg: var(--hoverNavBarBrand);
+    --bs-btn-active-border-color: #00000000;
+}  
+.btn-secondary:hover
+{
+    background-color: var(--hoverNavBarBrand);
+    border-color: #00000000;
+}
+.dropdown-menu 
+{
+    min-width: 73.66px;
+    min-height: 86px;
+    background-color: var(--navBarSfondo);
+    border-color: var(--coloreTesto);
+}
+.dropdown-toggle.show
+{
+    background-color: var(--hoverNavBarBrand);
+    border-color: #00000000;
+}
+.dropdown-toggle.show:hover
+{
+    background-color: var(--hoverNavBarBrand);
+    border-color: #00000000;
+}
+.dropdown-item:hover
+{
+    background-color: var(--hoverNavBarBrand);
+    border-radius: 7px;
+}
+
+
+.titolo
+{
+    color: var(--coloreTesto);
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+/*Profilo*/
+.tabellaProfilo
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;    
+    height: auto;
+}
+
+.contenitoreDescrizione
+{
+
+    padding: 20px;
+
+    border-radius: 20px;
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    background-color: var(--contenitoreSfondo);    
+}
+.immagineProfilo
+{
+    padding: 0 10px;
+}
+.descrizioneProfilo
+{
+    padding: 0 10px;
+    color:var(--coloreTesto);
+}
+.descrizione
+{
+    color:var(--coloreTesto);
+}
+.profilo
+{
+    display: flex;
+
+    border-radius: 150px;    
+    border-style: double;
+    border-color: var(--coloreBordo);  
+    border-width: 2px;
+
+    height: 270px;
+    width: 270px;
+}
+
+
+
+
+@media screen and (max-width: 1200px)
+{
+    .navbar-collapse 
+    {
+        justify-content: center;
+    }
+
+    .navbar-nav 
+    {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav-item 
+    {
+        margin-bottom: 10px;
+    }
+
+    .navbar-toggler 
+    {
+        order: -1;
+        border-style: solid;
+        border-color: var(--navBarToggler);
+    }
+    .pathClass
+    {
+        stroke: var(--pathClass);
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 2;
+    }
+    .dropdown-menu 
+    {
+        min-width: 73.66px;
+    }
+}

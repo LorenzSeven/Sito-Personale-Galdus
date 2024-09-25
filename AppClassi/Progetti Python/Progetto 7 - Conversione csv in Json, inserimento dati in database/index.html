@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-python.png">
+  <meta charset="UTF-8">
+  <title>Conversione csv in Json, inserimento dati in database</title>
+</head>
+
+<body>
+  <a href="../../python.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>  
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Conversione csv in Json, inserimento dati in database</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+          <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+          <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                            
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                             
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+import csv, json, sqlite3
+
+def csv_to_json(csv_file, json_file):    # Apri il file CSV in modalità lettura
+    with open(csv_file, 'r') as file:    # Leggi il file CSV utilizzando il modulo csv
+        csv_reader = csv.DictReader(file, delimiter=';')   # Inizializza una lista vuota per memorizzare i record
+        data = []                        # Itera su ogni riga del file CSV
+        for row in csv_reader:           # Aggiungi ogni riga alla lista data
+            data.append(row)
+    
+    with open(json_file, 'w') as file:    # Scrivi i dati nel file JSON
+        json.dump(data, file, ensure_ascii=False, indent=4)# Utilizza il modulo json per scrivere i dati nel file JSON
+
+# Chiamata alla funzione per convertire il file CSV in JSON
+csv_to_json('File_csv_xlsx_json_database/elenco_imprese_aggiornato.csv', 'File_csv_xlsx_json_database/elenco_imprese_aggiornato.json')
+
+def insert_json_to_table(json_file, table_name):    # Leggi i dati dal file JSON
+    with open(json_file, 'r') as file:
+        data = json.load(file)
+    
+    conn = sqlite3.connect('File_csv_xlsx_json_database/database.sqlite')    # Connessione al database SQLite
+    cursor = conn.cursor()
+        # Creazione della tabella con i campi corrispondenti ai dati JSON
+    cursor.execute(f'''CREATE TABLE IF NOT EXISTS {table_name} (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome_impresa TEXT,
+            categoria_impresa TEXT,
+            indirizzo_impresa TEXT,
+            numero_impresa TEXT,
+            descrizione_impresa TEXT,
+            link_impresa TEXT)''')
+    for row in data:
+        cursor.execute(f'''
+            INSERT INTO {table_name} (nome_impresa, categoria_impresa, indirizzo_impresa, numero_impresa, descrizione_impresa, link_impresa)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (row['nome impresa'], row['categoria impresa'], row['indirizzo impresa'], row['numero impresa'], row['descrizione impresa'], row['link impresa']))
+    
+    # Commit delle modifiche e chiusura della connessione
+    conn.commit()
+    conn.close()
+
+# Chiamata alla funzione per inserire i dati dal file JSON nella tabella
+insert_json_to_table('File_csv_xlsx_json_database/elenco_imprese_aggiornato.json', 'aziende')
+        </pre>
+      </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

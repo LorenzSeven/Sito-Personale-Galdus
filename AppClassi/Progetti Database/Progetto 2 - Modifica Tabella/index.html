@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-database.png">
+  <meta charset="UTF-8">
+  <title>Modifica Tabella</title>  
+</head>
+
+<body>
+  <a href="../../database.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>                               
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo">Modifica Tabella</h1>
+  
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                        
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                           
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+/*creo la tabella CollezioneCD*/
+CREATE TABLE CollezioneCD (
+idCD int auto_increment, /*valore intero auto incrementante, posso anche non inserire il numero dell'IdCD nell'inserimento dati*/
+titolo varchar(50),
+genere varchar(20),
+casaDiscografica varchar(50),
+Descrizione varchar(255),
+costo decimal(5, 2), /*il prezzo non va oltre i 999,99 euro. 5 e' totale delle cifre e 2 e' il totale delle cifre decimali*/
+dataProduzione date, /*la data e' in formato americano, cioe' YYYY-MM-DD*/
+nuovo boolean, /*se true (1) e' acquistato nuovo, false (0) se e' acquistato usato*/
+primary key(idCD) /*serve per fare incrementare il valore idCD*/
+);
+desc CollezioneCD; /*vedo la struttura della tabella CollezioneCD*/
+drop table CollezioneCD; /*Elimino la tabella CollezioneCD*/
+select * from CollezioneCD; /*seleziono tutte le colonne dalla tabella CollezioneCD*/
+
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Legend', 'Epic','Two Steps from Hell', 'Legend is a demonstration album by the music production group Two Steps from Hell', 40.00, '2008-05-28', true);
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('BattleCry', 'Epic','Two Steps from Hell', 'Battlecry is the seventh studio album by the group Two Steps from Hell, released on 28 April 2015.[1] It consists of 26 tracks written by composers Thomas J. Bergersen and Nick Phoenix.', 61.38, '2015-04-28', true);
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Sun', 'Epic','Two Steps from Hell', 'Sun is the second studio album by Norwegian composer Thomas Bergersen, of Two Steps from Hell fame. It was released in September 2014.', 30.00, '2014-09-30', true);
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Pirates Of The Caribbean: At Worlds End', 'Epic','Walt Disney Records', 'Pirates of the Caribbean: At Worlds End is the soundtrack for the Disney movie of the same title. It is composed by Hans Zimmer, and features additional music', 51.00, '2007-05-22', true);
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Christmas (Deluxe Spec.Edt.)', 'Jazz, Pop','Warner Music', 'Christmas, con artista Michael Buble, debutta nella classifica Billboard 200 con 141 000 copie ed in Italia alla nona posizione.', 10.69, '2011-10-25', true);
+INSERT INTO CollezioneCD (titolo, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Beautiful Vocal Trance', 'Vocal, Trance','RazNitzanMusic', 'amsterdamtrancerecords Copyright © 2020 by Raz Nitzan Music (RNM). BEAUTIFUL VOCAL TRANCE [FULL ALBUM - OUT NOW] (RNM)', 20.50, '2018-10-07', false);
+
+/*manca l'artista, manca il not null (altrimenti possono esserci campi vuoti)*/
+ALTER TABLE CollezioneCD ADD artista VARCHAR(255) not null; /*aggiungi la colonna artista*/
+alter table CollezioneCD modify titolo varchar(255) not null; /*modifica la colonna modificandola in varchar(255) not null*/
+alter table CollezioneCD modify casaDiscografica varchar(255) not null; /*modifica la colonna modificandola in varchar(255) not null*/
+
+/*il campo artista pero' non deve stare alla fine della tabella, ma deve stare dopo la colonna titolo*/
+ALTER TABLE CollezioneCD DROP COLUMN artista;  /*elimino la colonna artista*/
+ALTER TABLE CollezioneCD ADD artista VARCHAR(255) not null AFTER titolo; /*aggiungo la colonna artista dopo la colonna titolo*/
+
+/*riempio tutti i campi della colonna artista con il comando update*/
+UPDATE CollezioneCD /*per modificare i dati all'interno della tabella*/
+SET artista = 'Thomas Bergersen' /*il dato da cambiare, in quale colonna*/
+WHERE idCD = 1; /*condizione, riga di riferimento*/
+UPDATE CollezioneCD SET artista = 'Thomas Bergersen' WHERE idCD = 2;
+UPDATE CollezioneCD SET artista = 'Thomas Bergersen' WHERE idCD = 3;
+UPDATE CollezioneCD SET artista = 'Hans Zimmer' WHERE idCD = 4;
+UPDATE CollezioneCD SET artista = 'Michael Buble' WHERE idCD = 5;
+UPDATE CollezioneCD SET artista = 'Raz Nitzan' WHERE idCD = 6;
+
+delete from CollezioneCD where idCD = 6; /*rimuovo la riga dove idCD = 6*/
+/*Ora reinserisco la riga 6 con il campo artista*/
+INSERT INTO CollezioneCD (titolo, artista, genere, casaDiscografica, Descrizione, costo, dataProduzione, nuovo) VALUES ('Beautiful Vocal Trance', 'Raz Nitzan', 'Vocal, Trance','RazNitzanMusic', 'amsterdamtrancerecords Copyright © 2020 by Raz Nitzan Music (RNM). BEAUTIFUL VOCAL TRANCE [FULL ALBUM - OUT NOW] (RNM)', 20.50, '2018-10-07', false);
+      </pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

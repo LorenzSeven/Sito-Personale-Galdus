@@ -1,0 +1,621 @@
+[data-theme = "light"]
+{
+  --sfondoCapitolo: #CCCCCC;
+  --coloreCapitolo: #000000;
+  --testoTema: "Giorno";
+  --sfondoBody: #ffffff;
+  --coloreIndice: #000000;
+  --coloreTesto: #000000;
+  --coloreBordo: #000000;
+  --coloreTestoFooter: #007bff;
+  --coloreAvvisoEliminazione: invert(0%);
+  --coloreTestoModal: #000000;
+  --coloreSfondoModal: #ffffff;
+  --coloreSfondoBackgroundModal: #0000007a;
+
+  --immagineEsci: url("../../img/imgProgetto/exit-giorno.png");
+  --immagineEsciHover: url("../../img/imgProgetto/exit-giorno-hover.png");
+  --sfondoExit: #ffffff;
+}
+
+[data-theme = "dark"]
+{
+  --sfondoCapitolo: #545454;
+  --coloreCapitolo: #CCCCCC;
+  --testoTema: "Notte";
+  --sfondoBody: #000000;
+  --coloreIndice: #ffffff;
+  --coloreTesto: #ffffff;
+  --coloreBordo: #ffffff;
+  --coloreTestoFooter: #003b79;
+  --coloreAvvisoEliminazione: invert(100%);
+  --coloreTestoModal: #ffffff;
+  --coloreSfondoModal: #000000;
+  --coloreSfondoBackgroundModal: #ffffff7a;
+
+  --immagineEsci: url("../../img/imgProgetto/exit-notte.png");
+  --immagineEsciHover: url("../../img/imgProgetto/exit-notte-hover.png");
+  --sfondoExit: #000000;
+}
+
+/*Esci dal Progetto*/
+.exit
+{
+  position: absolute;
+  display: inline-block; 
+  text-decoration: none;
+  background-color: var(--SfondoBody);
+  color:  var(--coloreTesto);
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  
+  background-image: var(--immagineEsci);
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: 13px 17px;
+  
+  transition: 1s all;
+}
+.exit:hover
+{
+  background-color: var(--sfondoTesto);
+  color:  var(--coloreTesto);
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-image: var(--immagineEsciHover);
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  background-position: 7px 17px;
+  transition: 0.5s all;
+}
+
+html, body, div, p 
+{
+  margin: 0px;
+  padding: 0px;
+}
+
+body 
+{
+  font-family: Verdana, Geneva, sans-serif;
+  background-color: var(--sfondoBody);
+  color: var(--coloreTesto);
+  transition: 1s all;
+}
+
+.titolo
+{
+  color: var(--coloreIndice);
+  transition: 1s all;
+}
+#contenitore 
+{
+  width: 1050px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+/*Modal*/
+.modal-title
+{
+  margin-left: 180px;
+}
+.modal-body
+{
+   text-align: center;
+}
+.modal-footer
+{
+  justify-content: space-around;
+}
+.confermaEliminaCapitolo
+{
+  width: 100px;
+}
+.confermaEliminaCapitolo:hover
+{
+  background-color: red;
+  transition: 1s all;
+}
+.EsciDalModal
+{
+  width: 100px;
+}
+.confermaEliminaParagrafo
+{
+  width: 100px;
+}
+.confermaEliminaParagrafo:hover
+{
+  background-color: red;
+  transition: 1s all;
+}
+.EsciDalModalParagrafo
+{
+  width: 100px;
+}
+.modal-open
+{
+  padding-right: 0px !important;
+  overflow: auto !important;
+  /*Questo per evitare che il modal aggiunga questa proprietà "padding-right: 15px" al body in automatico.
+  Si evita un fastidioso spostamento del body di 15px*/
+}
+.modal-content * 
+{
+  color: var(--coloreTestoModal);
+  background-color: var(--coloreSfondoModal);
+}
+.modal.show
+{
+  background-color: var(--coloreSfondoBackgroundModal);
+}
+
+
+
+.contenitoreOpzioni
+{
+  width: 884px;
+  display: flex;
+  justify-content: space-between; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*Cambio tema*/
+.contenitoreCambiaTema {
+  width: 200px;
+  height: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+#testocambiaTema {
+  width: 200px;
+  height: 40px;
+
+  border-style: double;
+  border-width: 1px;
+  border-radius: 5px;
+
+  font-size: 16px;
+  overflow: hidden; /*tutto ciò che sta fuori pulsanteprova diventa invisibile*/
+  display: flex;
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+#cambiaTemaid
+{
+  /* margin-right: 40px; */
+  transition: 1s all;
+}
+
+/*capitolo*/
+.contenitoreCapitolo {
+  display: flex; /* Utilizza un display flex per allineare gli elementi all'interno del contenitore */
+  justify-content: center;
+  align-items: center;
+  padding-left: 0px;
+  height: auto;
+  /* background-color: var(--sfondoCapitolo); */ 
+  margin-bottom: 10px;
+  transition: 1s all;
+}
+.contenitoreCapFatto
+{
+  background-color: var(--sfondoCapitolo);
+  width: 884px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  transition: 1s all;
+}
+
+
+/*Pulsante Editor, work in progress*/
+.editor
+{
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  position: relative;
+  /* overflow: hidden; */
+}
+/* .editor::before
+{
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, white 25%, red 25%, red 50%, white 50%, white 75%, red 75%, red);
+  background-size: 50px 50px; dimensione delle righe
+  z-index: 1;
+  animation: moveLines 5s infinite linear;
+} */
+
+/* @keyframes moveLines {
+  0% {
+    transform: translate(150%, 0);
+  }
+  100% {
+    transform: translate(-50%, 0);
+  }
+}
+.editor:after {
+  content: "Work in Progress";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: var(--sfondoBody);
+  z-index: 2;
+  transition: 1s all;
+} */
+
+p.capitolo 
+{
+  /* width: 884px; */
+  /* background-color: var(--sfondoCapitolo); */
+  color: var(--coloreCapitolo);
+  height: auto;
+  text-align: left;
+  padding: 8px;
+  transition: 1s all;
+  z-index: 0;
+}
+
+tr
+{
+  display: flex;
+  align-items: center;
+}
+
+
+/*toggle carattere spunta*/
+.fatto 
+{
+  color: #818181;
+}
+.fatto::after 
+{
+  content: "\0020\f058";  /*\0020 = carattere spazio vuoto, \f058 = carattere cerchio con spunta*/
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #41d67c;
+  /*letter-spacing: 10px;*/ /*se si vuole aggiungere spazio tra il carattere e il testo*/
+}
+
+/*pulsanti*/
+.btn, .btn-primary
+{
+  margin: 5px;
+  color: var(--coloreTesto);
+  background-color: var(--sfondoBody);
+
+  border-style: double;
+  border-width: 1px;
+  border-color: var(--coloreBordo);
+  transition: 1s all;
+}
+
+/*liste*/
+ul 
+{
+    list-style-type: none;
+}
+
+/*Indice*/
+
+/*Tabella Titolo*/
+table 
+{
+  width: 1050px; /* Larghezza totale della tabella */
+  border-collapse: collapse;
+}
+
+.colonna1 
+{
+  width: 84px;  
+  display: flex;
+  justify-content: flex-end;
+}
+
+.colonna2 
+{
+  width: 882px; /* Larghezza della seconda colonna */
+}
+
+.colonna3 
+{
+  width: 85px; /* Larghezza della terza colonna */
+}
+
+
+
+/*footer*/
+footer
+{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+
+  padding: 10px;
+  width:100%;
+  height: 40px;
+  background-color: var(--sfondoCapitolo);
+  transition: 1s all;
+}
+footer a
+{
+  color: var(--coloreTestoFooter);
+  transition: 1s all;
+}
+
+/*Pulsante aggiungi*/
+.segnoPiu
+{
+  width: 40px;
+  height: 40px;
+}
+
+/*Pulsante rimuovi*/
+.segnoMeno
+{
+  width: 40px;
+  height: 40px;
+}
+.pulsanteRimuoviCapitolo
+{
+  width: 65.5px;
+  height: 53.6px;
+
+  /* position: relative;
+  top: -11px; */
+}
+
+/*Pulsante modifica*/
+.matita
+{
+  width: 40px;
+  height: 40px;
+}
+
+.avviso
+{
+  width: 40px;
+  height: 40px;
+  filter: var(--coloreAvvisoEliminazione); /*filtro cambio colore*/
+  transition: 1s all;
+}
+.avviso2
+{
+  width: 20px;
+  filter: var(--coloreAvvisoEliminazione); /*filtro cambio colore*/
+  transition: 1s all;
+}
+/* .pulsanteModifica
+{
+
+} */
+
+/*Pulsante Conferma modifica*/
+.conferma
+{
+  width: 40px;
+  height: 40px;
+}
+
+/*Pulsante Modifica Capitolo*/
+.pulsanteModificaCapitolo
+{
+  width: 65.5px;
+  height: 53.6px;
+
+  /* position: relative;
+  top: -11px; */
+}
+
+/*Pulsante Aggiungi Capitolo*/
+.pulsanteAggiungiCapitolo
+{
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputCapitolo
+{
+  width: 884px;
+  height: auto;
+}
+
+/*Paragrafo*/
+.contenitoreParagrafo
+{
+  display: flex; /* Utilizza un display flex per allineare gli elementi all'interno del contenitore */
+  justify-content: center;
+  align-items: center;
+}
+.contenitoreParagrafo *  /*Applico a tutti i figli dell'elemento contenitoreParagrafo queste proprietà CSS*/
+{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.paragrafo
+{
+  width: 844px;
+}
+
+.pulsanteAggiungiParagrafo
+{
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.paragrafoPiu
+{
+  width: 20px;
+}
+.pulsanteModificaParagrafo
+{
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.paragrafoMatita
+{
+  width: 20px;
+}
+.pulsanteConfermaModificaParagrafo
+{
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.paragrafoConferma
+{
+  width: 20px;
+}
+.pulsanteRimuoviParagrafo
+{
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.paragrafoMeno
+{
+  width: 20px;
+}
+.pulsanteAvvisoEliminaParagrafo
+{
+  width: 40px;
+  height: 40px;
+}
+ul
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.inputParagrafo
+{
+  width: 844px;
+  height: auto;
+}
+
+
+
+
+
+
+
+/*---------------------------------------------Animazione Spunta---------------------------------------------------*/
+
+.check-container 
+{
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.check-container .check-background 
+{
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(to bottom right, #5de593, #41d67c);
+  box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  transform: scale(0.84);
+  border-radius: 50%;
+  animation: animateContainer 0.75s ease-out forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+.check-container .check-background svg 
+{
+  width: 65%;
+  transform: translateY(0.25rem);
+  stroke-dasharray: 80;
+  stroke-dashoffset: 80;
+  animation: animateCheck 0.35s forwards 0.5s ease-out;
+}
+  
+@keyframes animateContainer 
+{
+  0% 
+  {
+    opacity: 0;
+    transform: scale(0);
+    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  }
+  25% 
+  {
+    opacity: 1;
+    transform: scale(0.9);
+    box-shadow: 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  }
+  43.75% 
+  {
+    transform: scale(1.15);
+    box-shadow: 0px 0px 0px 43.334px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 65px rgba(255, 255, 255, 0.25) inset;
+  }
+  62.5% 
+  {
+    transform: scale(1);
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 21.667px rgba(255, 255, 255, 0.25) inset;
+  }
+  81.25% 
+  {
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
+  }
+  100% 
+  {
+    opacity: 1;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset, 0px 0px 0px 0px rgba(255, 255, 255, 0.25) inset;
+  }
+}
+@keyframes animateCheck 
+{
+  from 
+  {
+    stroke-dashoffset: 80;
+  }
+  to 
+  {
+    stroke-dashoffset: 0;
+  }
+}

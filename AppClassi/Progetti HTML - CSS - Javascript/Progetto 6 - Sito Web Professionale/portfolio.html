@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+
+<head>
+    <script>const theme = localStorage.getItem('theme');
+        if (theme != null){document.documentElement.setAttribute('data-theme', theme);}     
+        else if (theme == null){localStorage.setItem('theme', "light");}   
+    </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/stilePagina.css">
+  <title>Lorenzo Quatela</title>  
+</head>
+
+<body class="sfondo">
+  <nav class="navbar navbar-expand-xl">
+    <div class="container-fluid justify-content-center bordo">
+      <a class="navbar-brand" href="index.html">Lorenzo Quatela</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
+        <span class="navbar-toggler-icon"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path class="pathClass" d='M4 7h22M4 15h22M4 23h22'/></svg></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="portfolio.html"> Portfolio </a></li>
+          <li class="nav-item"><a class="nav-link" href="chiSono.html"> Chi sono </a></li>
+          <li class="nav-item"><a class="nav-link" href="contatti.html"> Contatti </a></li>
+          <li class="nav-item">
+              <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg class="contenitoreLuminosita"><desc>luminosità</desc><!--Contenitore immagini sovrapposte-->
+                      <image class="luminositaNotte" href="img/icona-luna.png"></image>
+                      <image class="luminositaGiorno" href="img/icona-sole.png"></image>                                 
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href=""><img class="luminosita" src="img/icona-luna.png" alt="icona luna" onclick="notte()"></a></li>
+                    <li><a class="dropdown-item" href=""><img class="luminosita" src="img/icona-sole.png" alt="icona sole" onclick="giorno()"></a></li>
+                  </ul>
+                </div>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <h1 class="titolo">Portfolio</h1>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="javascript/eventiPagina.js"></script>
+</body>
+
+</html>

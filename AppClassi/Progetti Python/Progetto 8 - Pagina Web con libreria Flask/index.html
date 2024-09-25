@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-python.png">
+  <meta charset="UTF-8">
+  <title>Pagina Web con libreria Flask</title>
+</head>
+
+<body>
+  <a href="../../python.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>  
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Pagina Web con libreria Flask</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+          <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+          <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                            
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                             
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+from flask import Flask
+import HelloWorld_flask
+from markupsafe import escape
+
+
+app = Flask(__name__)
+
+"""
+string: (default) accepts any text without a slash
+int: accepts positive integers
+float: accepts positive floating point values
+path: like string but also accepts slashes
+uuid: accepts UUID strings
+"""
+
+#inizio pagina
+@app.route('/')
+def index():
+    return 'Index Page'
+
+#url: http://127.0.0.1:5000/hello
+@app.route('/hello')
+def hello():
+    return 'Hello, World'
+
+#url: http://127.0.0.1:5000/HelloWorld
+@app.route("/HelloWorld")
+def hello_world():
+    titolo = "<h1>Ciao a tutti!</h1>"
+    testo = "<p>Evviva ce l'ho fatta!</p>"
+    testo2 = "<p>Hello, World!</p>"
+    paginaWeb = titolo + testo + testo2
+    return paginaWeb
+
+#url: http://127.0.0.1:5000/user/lorenzo
+@app.route('/user/<username>')
+def show_user_profile(username):
+    # show the user profile for that user
+    return f'User {escape(username)}'
+
+#url: http://127.0.0.1:5000/post/1
+@app.route('/post/<int:post_id>')
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return f'Post {post_id}'
+
+#url: http://127.0.0.1:5000/path/C:cartella/sottocartella/sottocartella
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    # show the subpath after /path/
+    return f'Subpath {escape(subpath)}'
+
+#url: http://127.0.0.1:5000/projects
+@app.route('/projects/')
+def projects():
+    return 'The project page'
+
+#url: http://127.0.0.1:5000/about
+@app.route('/about')
+def about():
+    return 'The about page'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        return do_the_login()
+    else:
+        return show_the_login_form() 
+    #mi esegue la funzione show_the_login_form, perchè sceglie il metodo GET, al momento non possiamo ancora fare la POST
+
+
+from flask import url_for
+
+with app.test_request_context():
+    print(url_for('index'))
+    print(url_for('login'))
+    print(url_for('login', next='/'))
+    print(url_for('profile', username='John Doe'))
+
+from flask import request
+
+def do_the_login():
+    return 'prova1'
+
+def show_the_login_form():
+    return 'prova2'
+
+HelloWorld_flask.app.run() 
+      </pre>
+    </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

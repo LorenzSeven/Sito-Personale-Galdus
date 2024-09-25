@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-java.png">
+  <title>Tic Tac Toe</title>
+</head>
+
+<body>
+  <a href="../../java.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+		<svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+			<image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+			<image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>  
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo">Esercizi ArrayList</h1>
+  
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+		<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        	<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        	<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                           
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+		<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+			<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+			<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                         
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package classi;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ArrayListEsercizi 
+{
+	private static void esercizio1()
+	{
+		System.out.println("Somma degli elementi di una lista");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo valore da sommare");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		int somma = 0;
+		for (int i = 0; i < vettore.size()-1;i++)
+		{
+			somma = somma + (Integer)vettore.get(i);
+		}
+		System.out.println("La somma dell'array è: " + somma);
+	}
+	private static void esercizio2()
+	{
+		System.out.println("Trovare il valore massimo in una lista di numeri interi");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		int massimo = vettore.get(0);
+		for (int i = 0;i < vettore.size(); i++)
+		{
+			if (vettore.get(i) > massimo)
+			{
+				massimo = vettore.get(i);
+			}
+		}
+		System.out.println("Valore massimo della lista è: " + massimo);
+	}
+	private static void esercizio3()
+	{
+		System.out.println("Trovare il valore minimo in un array di numeri interi");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0, altrimenti mi calcola lo 0 come minimo
+		vettore.remove(vettore.size()-1);
+		
+		int minimo = vettore.get(0);
+		for (int i = 0;i < vettore.size(); i++)
+		{
+			if (vettore.get(i) < minimo)
+			{
+				minimo = vettore.get(i);
+			}
+		}
+		System.out.println("Valore minimo della lista è: " + minimo);
+	}
+	private static void esercizio4()
+	{
+		System.out.println("Calcolare la media degli elementi di una lista di numeri float");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Float > vettore = new ArrayList< Float >();
+		float valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextFloat();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		float somma = 0;
+		for (int i = 0; i < vettore.size(); i++)
+		{
+			somma += vettore.get(i);
+		}
+		float media = somma/vettore.size();
+		System.out.println("La media dei numeri float di una Arraylist è: " + media);
+	}
+	private static void esercizio5()
+	{
+		System.out.println("Contare il numero di occorrenze di un elemento in una lista di stringhe");
+		Scanner input = new Scanner (System.in);
+		ArrayList< String > vettore = new ArrayList< String >();
+		String stringa;
+		do 
+		{
+			System.out.println("Inserisci la nuova stringa nella lista");
+			stringa = input.next();
+			vettore.add(stringa);
+		}
+		while(!stringa.equals("0"));
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		
+		System.out.println("Scrivi l'indice da 0 a " + (vettore.size()-1) + " dell'elemento da contare");
+		int indice = input.nextInt();
+		int occorrenza = 0;
+		for (int i = 0; i < vettore.size(); i++)
+		{
+			if (vettore.get(i).equals(vettore.get(indice)))
+			{
+				occorrenza++;
+			}
+		}
+		System.out.println("Occorrenza dell'elemento con indice " + indice + " è: " + occorrenza);
+	}
+	private static void esercizio6()
+	{
+		System.out.println("Copiare gli elementi di una lista in un nuova lista");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		ArrayList< Integer > vettore2 = new ArrayList< Integer >(vettore); //copio la lista vettore
+		System.out.println("Lista originale: " + vettore);
+		System.out.println("Lista copiata: " + vettore2);
+	}
+	private static void esercizio7()
+	{
+		System.out.println("Verificare se una lista contiene un elemento specifico");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		System.out.println("inserisci un numero da cercare nella lista");
+		int numero = input.nextInt();
+		boolean trovatoNumero = false;
+		for (int i = 0; i < vettore.size(); i++)
+		{
+			if (vettore.get(i) == numero)
+			{
+				trovatoNumero = true;
+				break;
+			}
+		}
+		if (trovatoNumero == true)
+		{
+			System.out.println("Il numero " + numero + " è presente nella lista");
+		}
+		else if (trovatoNumero == false)
+		{
+			System.out.println("Il numero " + numero + " non è presente nella lista");
+		}
+	}
+	private static void esercizio8()
+	{
+		System.out.println("Invertire l'ordine degli elementi in un array");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		ArrayList< Integer > vettore2 = new ArrayList< Integer >();
+		for (int i = vettore.size()-1;i>=0;i--) //inserisci i numeri al contrario nella nuova lista
+		{
+			vettore2.add(vettore.get(i));
+		}
+		System.out.println("Lista originale: " + vettore);
+		System.out.println("Lista rovesciata: " + vettore2);
+	}
+	private static void esercizio9()
+	{
+		System.out.println("Calcolare la somma di due array elemento per elemento");
+		Scanner input = new Scanner (System.in);
+		//Lista 1
+		System.out.println("Lista 1");
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		
+		//Lista 2
+		System.out.println("Lista 2");
+		ArrayList< Integer > vettore2 = new ArrayList< Integer >();
+		int valore2;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore2 = input.nextInt();
+			vettore2.add(valore2);
+		}
+		while(valore2!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore2.remove(vettore2.size()-1);
+		
+		//Lista somma
+		ArrayList< Integer > vettoreSomme = new ArrayList< Integer >();
+		int somma = 0;
+		for (int i = 0; i < vettore.size(); i++)
+		{
+			somma = vettore.get(i) + vettore2.get(i);
+			vettoreSomme.add(somma);
+		}
+		System.out.println("Lista 1: " + vettore);
+		System.out.println("Lista 2: " + vettore2);
+		System.out.println("Lista somme: " + vettoreSomme);
+	}
+	private static void esercizio10()
+	{
+		System.out.println("Trovare la posizione di un elemento in una lista");
+		Scanner input = new Scanner (System.in);
+		ArrayList< Integer > vettore = new ArrayList< Integer >();
+		int valore;
+		do 
+		{
+			System.out.println("Inserisci il nuovo numero nella lista");
+			valore = input.nextInt();
+			vettore.add(valore);
+		}
+		while(valore!=0);
+		//tolgo l'ultimo valore che è 0
+		vettore.remove(vettore.size()-1);
+		
+		System.out.println("Inserisci il numero");
+		int numero = input.nextInt();
+		int indiceNumero = 0;
+		for (int i = 0; i < vettore.size(); i++)
+		{
+			if (vettore.get(i) == numero)
+			{
+				indiceNumero = i;
+				break;
+			}
+		}
+		System.out.println("L'indice del numero " + numero + " è: " + indiceNumero);
+	}
+	private static void esercizio11()
+	{
+		System.out.println("Trovare tutte le occorrenze di tutte le parole");
+		Scanner input = new Scanner (System.in);
+		ArrayList< String > vettoreParole = new ArrayList< String >();
+		ArrayList< String > vettoreParoleNoDuplicati = new ArrayList< String >();
+		ArrayList< Integer > vettoreOccorrenzeNoDuplicati = new ArrayList< Integer >();
+		String parola;
+		boolean parolaPresente= false;
+		
+		do 
+		{
+			System.out.println("Inserisci una parola nella lista");
+			parola = input.next();
+			//per i che va da 0 a lunghezza vettoreParole
+			for (int i=0;i < vettoreParole.size();i++)
+			{
+				//se c'è la parola nella listaParole
+				if (parola.equals(vettoreParole.get(i)))
+				{
+					parolaPresente = true;
+				}
+			} 
+			//se la parola non è presente nella lista e non è uguale alla stringa "0"
+			//ATTENZIONE che "0" non è lo 0 numero intero. "0" è una stringa.
+			if (parolaPresente == false && (!parola.equals("0")))
+			{
+				System.out.println("Hai inserito una parola nuova");
+				vettoreParole.add(parola); //aggiungi la parola alla listaParole
+				vettoreParoleNoDuplicati.add(parola); //aggiungo la parola al vettoreParoleNoDuplicati
+				vettoreOccorrenzeNoDuplicati.add(1); //aggiungo 1 al vettoreOccorrenzeNoDuplicati
+				//ho messo 1 ma poteva essere anche 0 o un altro numero, l'importante è che
+				//inserisca un elemento nel vettoreOccorrenzeNoDuplicati, servirà dopo per l'occorrenza
+			}
+			//se la parola è presente nella listaParole
+			if (parolaPresente == true)
+			{
+				//aggiungi la parola alla listaParole
+				vettoreParole.add(parola); 
+				
+				//calcolo dell'occorrenza della parola nella listaParole
+				int occorrenza = 0;
+				for (int i=0;i< vettoreParole.size();i++) 
+				{								
+					//se la parola c'è nella listaParole allora
+					if (parola.equals(vettoreParole.get(i))) 
+					{
+						occorrenza += 1; //aggiungi +1 all'occorrenza
+					}
+				}	
+				System.out.println("La parola inserita è già presente nella lista");
+				System.out.println("Ed ha occorrenza: " + occorrenza);
+				System.out.println("");		
+				
+				//cerco l'indice della parola nella lista vettoreParoleNoDuplicati
+				int indiceParola = 0;
+				for (int i=0;i< vettoreParoleNoDuplicati.size();i++) //uso la j perchè la i è già utilizzata
+				{	
+					if (parola.equals(vettoreParoleNoDuplicati.get(i)))
+					{
+						indiceParola = i;
+					}
+				}
+				//stampa dell'indice della parola nella lista vettoreParoleNoDuplicati
+				//System.out.println("Indice parola nella lista vettoreParoleNoDuplicati: " + indiceParola);
+				
+				//sostituisci la vecchia occorrenza della parola con quella nuova
+				vettoreOccorrenzeNoDuplicati.set(indiceParola, occorrenza);
+				//resetto la parolaPresente
+				parolaPresente = false;
+			}
+		}
+		while(!parola.equals("0"));
+		
+		//stampo la lista senza duplicati
+		System.out.println("Lista parole: " + vettoreParoleNoDuplicati);
+		System.out.println("Lista occorrenze: " + vettoreOccorrenzeNoDuplicati);
+	}
+	public static void main(String[] args)
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.println("Dimmi l'esercizio da eseguire");
+		int numEsercizio = input.nextInt();
+		
+		switch(numEsercizio)
+		{
+			case 1:
+				esercizio1();
+				break;
+			case 2:
+				esercizio2();
+				break;
+			case 3:
+				esercizio3();
+				break;
+			case 4:
+				esercizio4();
+				break;
+			case 5:
+				esercizio5();
+				break;
+			case 6:
+				esercizio6();
+				break;
+			case 7:
+				esercizio7();
+				break;
+			case 8:
+				esercizio8();
+				break;
+			case 9:
+				esercizio9();
+				break;
+			case 10:
+				esercizio10();
+				break;
+			case 11:
+				esercizio11();
+				break;
+		}
+	}
+}
+
+</pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>

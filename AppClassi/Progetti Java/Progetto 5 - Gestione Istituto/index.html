@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+	<script>const theme = localStorage.getItem('theme'); document.documentElement.setAttribute('data-theme', theme);</script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+	<link rel="stylesheet" href="schemaClassi.css">
+	<link rel="icon" type="image/x-icon" href="../../img/icona-java.png">
+	<title>Gestione Istituto</title>
+</head>
+
+<body>
+	<a href="../../java.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+	<div class="form-check form-switch switch">
+		<input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+			onchange="luminosita()">
+		<label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+			<svg class="contenitoreLuminosita">
+				<desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+				<image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+				<image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>
+			</svg>
+		</label>
+	</div>
+	<h1 class="titolo" id="titoloPagina">Gestione Istituto</h1>
+
+	<div class="contenitoreIndice">
+		<h5 class="titoloIndice">Indice Pagina</h5>
+		<li><a class="indici" href="#schemaClassi"> Schema delle Classi </a></li>
+		<li><a class="indici" href="#classeEssereVivente"> Classe Essere Vivente </a></li>
+		<li><a class="indici" href="#classeEssereUmano"> Classe Essere Umano </a></li>
+		<li><a class="indici" href="#classeCittadino"> Classe Cittadino </a></li>
+		<li><a class="indici" href="#classeStudente"> Classe Studente </a></li>
+		<li><a class="indici" href="#classeDipendente"> Classe Dipendente </a></li>
+		<li><a class="indici" href="#classeDirettoreGenerale"> Classe Direttore Generale </a></li>
+		<li><a class="indici" href="#classeDocente"> Classe Docente </a></li>
+		<li><a class="indici" href="#classeTutor"> Classe Tutor </a></li>
+		<li><a class="indici" href="#classeClasse"> Classe Classe </a></li>
+		<li><a class="indici" href="#classeCorso"> Classe Corso </a></li>
+		<li><a class="indici" href="#classeEsame"> Classe Esame </a></li>
+		<li><a class="indici" href="#classeImpegno"> Classe Impegno </a></li>
+		<li><a class="indici" href="#classeIstituto"> Classe Istituto </a></li>
+		<li><a class="indici" href="#classeMateria"> Classe Materia </a></li>
+		<li><a class="indici" href="#classeMain"> Classe Main </a></li>
+	</div>
+
+	<a href="#titoloPagina" class="frecciaSopraLink" id="frecciaSopraId">
+        <svg class="contenitoreFrecciaSopra"><desc>Freccia Sopra</desc><!--Contenitore immagini sovrapposte-->
+            <image class="frecciaSopraNotte" href="../../img/imgProgetto/freccia-sopra-notte.png"></image>
+            <image class="frecciaSopraGiorno" href="../../img/imgProgetto/freccia-sopra-giorno.png"></image>
+        </svg>
+	</a>
+
+	<span id="schemaClassi"></span>
+
+	<div class="divImmagine">
+		<h5 class="titoloImmagine">Schema delle classi</h5>
+		<table>
+			<td>
+				<h5 class="ClassiEstese">Classi Estese</h5>
+				<svg class="contenitoreClassiEstese"><!--Contenitore immagini sovrapposte-->
+					<image class="classiEsteseNotte" href="img/Classi estese notte.png"></image>
+					<image class="classiEsteseGiorno" href="img/Classi estese giorno.png"></image>
+				</svg>
+			</td>
+			<td>
+				<h5 class="ClassiNonEstese">Classi Non Estese</h5>
+				<svg class="contenitoreClassiNonEstese"><!--Contenitore immagini sovrapposte-->
+					<image class="classiNonEsteseNotte" href="img/Classi non estese notte.png"></image>
+					<image class="classiNonEsteseGiorno" href="img/Classi non estese giorno.png"></image>
+				</svg>
+			</td>
+		</table>
+
+
+	</div>
+
+	<span id="classeEssereVivente"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia" class="pulsanteCopia"
+				onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class EssereVivente 
+{
+	public double mangia(double quantita)
+	{
+		System.out.println("EssereVivente mangia");
+		return quantita;
+	}
+	public double beve(double quantita)
+	{
+		System.out.println("EssereVivente beve");
+		return quantita;
+	}
+	public void dorme()
+	{
+		System.out.println("EssereVivente dorme");
+	}
+}
+	    </pre>
+	</div>
+
+	<span id="classeEssereUmano"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto2" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia2" class="pulsanteCopia"
+				onclick="copiaTesto2()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato2" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare2" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class EssereUmano extends EssereVivente
+{
+	private enum Etnia
+	{
+		EUROPA,
+		AMERICANA,
+		ASIATICA,
+		AFRICANA,
+		OCEANIA
+	}
+	
+	private final int N_OCCHI = 2;
+	private String nome;
+	private String etnia;	
+	
+	public String dormire(String dormire)
+	{
+		System.out.println("Essere_Umano dorme");
+		return dormire;
+	}
+	public String sprecare(String cibo)
+	{
+		System.out.println("Essere_Umano spreca");
+		return cibo;
+	}
+	public String guidare(String cibo)
+	{
+		System.out.println("Essere_Umano guida");
+		return cibo;
+	}
+	public String cucina(String cibo)
+	{
+		System.out.println("Essere_Umano cucina");
+		return cibo;
+	}
+	public String lava(String superficie)
+	{
+		System.out.println("Essere_Umano lava");
+		return superficie;
+	}
+}
+	</pre>
+	</div>
+
+	<span id="classeCittadino"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto3" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia3" class="pulsanteCopia"
+				onclick="copiaTesto3()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato3" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare3" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class Cittadino extends EssereUmano
+{
+	public static double debitoAllaNascita;
+	
+	//si sarebbe potuto usare enum
+	private String nazionalità;
+	private String cognome;
+	private String codiceFiscale;
+	
+	public void pagareTasse()
+	{
+		
+	}
+	public void votare()
+	{
+		
+	}
+	public void associazionismo()
+	{
+		
+	}
+	public void impegnoQuotidiano()
+	{
+		
+	}
+	
+	public String getNazionalità() 
+	{
+		return nazionalità;
+	}
+	public void setNazionalità(String nazionalità) 
+	{
+		this.nazionalità = nazionalità;
+	}
+	public String getCognome() 
+	{
+		return cognome;
+	}
+	public void setCognome(String cognome) 
+	{
+		this.cognome = cognome;
+	}
+	public String getCodiceFiscale() 
+	{
+		return codiceFiscale;
+	}
+	public void setCodiceFiscale(String codiceFiscale) 
+	{
+		this.codiceFiscale = codiceFiscale;
+	}
+}
+	</pre>
+	</div>
+
+	<span id="classeStudente"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto4" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia4" class="pulsanteCopia"
+				onclick="copiaTesto4()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato4" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare4" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Studente
+{
+	private String matricola;
+	private ArrayList< Esame > listaEsami;
+	
+	//usato per impostare nel mio sistema uno studente all'esterno
+	public void setListaEsami(ArrayList< Esame > listaEsami)
+	{
+		this.listaEsami = listaEsami;
+	}
+	
+	//usato per fare un resoconto degli esami di uno studente
+	public ArrayList< Esame > getListaEsami()
+	{
+		return listaEsami;
+	}
+	
+	public void dareEsame()
+	{
+		
+	}
+	
+	public void passareEsame(Esame esame)
+	{
+		System.out.println("Studente studia");
+		listaEsami.add(esame);
+	}
+	
+	public void calcoloCrediti()
+	{
+
+	}
+	
+	public void caffè()
+	{
+		
+	}
+	
+	public String studia(String materia)
+	{
+		System.out.println("Studente studia");
+		return materia;
+	}
+
+	public String getMatricola() 
+	{
+		return matricola;
+	}
+
+	public void setMatricola(String matricola) 
+	{
+		this.matricola = matricola;
+	}	
+}
+	</pre>
+	</div>
+
+	<span id="classeDipendente"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto5" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia5" class="pulsanteCopia"
+				onclick="copiaTesto5()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato5" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare5" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class Dipendente extends Cittadino
+{
+	private String id;
+	private long nCassaPrev;
+	private double stipendio;
+	
+	
+	public String getId() 
+	{
+		return id;
+	}
+	public void setId(String id) 
+	{
+		this.id = id;
+	}
+	public long getnCassaPrev() 
+	{
+		return nCassaPrev;
+	}
+	public void setnCassaPrev(long nCassaPrev) 
+	{
+		this.nCassaPrev = nCassaPrev;
+	}
+	public double getStipendio() 
+	{
+		return stipendio;
+	}
+	public void setStipendio(double stipendio) 
+	{
+		this.stipendio = stipendio;
+	}	
+}
+  </pre>
+	</div>
+
+	<span id="classeDirettoreGenerale"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto6" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia6" class="pulsanteCopia"
+				onclick="copiaTesto6()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato6" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare6" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class DirettoreGenerale extends Dipendente
+{
+	private String nome;
+	private ArrayList< Dipendente > listaDipendenti;
+	
+	public void assume_personale(Dipendente dipendente)
+	{
+		System.out.println("Direttore_Generale assume personale");
+		listaDipendenti.add(dipendente);
+	}
+	
+	
+	public String getNome() 
+	{
+		return nome;
+	}
+
+	public void setNome(String nome) 
+	{
+		this.nome = nome;
+	}
+
+	public ArrayList< Dipendente > getListaDipendenti() 
+	{
+		return listaDipendenti;
+	}
+
+	public void setListaDipendenti(ArrayList< Dipendente > listaDipendenti) 
+	{
+		this.listaDipendenti = listaDipendenti;
+	}
+}
+  </pre>
+	</div>
+
+	<span id="classeDocente"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto7" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia7" class="pulsanteCopia"
+				onclick="copiaTesto7()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato7" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare7" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Docente extends Dipendente
+{
+	private ArrayList< String > competenza;
+	private ArrayList< String > listaMaterie;
+	private ArrayList< String > laurea;
+	
+	public String insegna(String materia)
+	{
+		System.out.println("Docente insegna");
+		return materia;
+	}
+	
+	
+	public ArrayList< String > getCompetenza() 
+	{
+		return competenza;
+	}
+	public void setCompetenza(ArrayList< String > competenza) 
+	{
+		this.competenza = competenza;
+	}
+	public ArrayList< String > getListaMaterie() 
+	{
+		return listaMaterie;
+	}
+	public void setListaMaterie(ArrayList< String > listaMaterie) 
+	{
+		this.listaMaterie = listaMaterie;
+	}
+	public ArrayList< String > getLaurea() 
+	{
+		return laurea;
+	}
+	public void setLaurea(ArrayList< String > laurea) 
+	{
+		this.laurea = laurea;
+	}
+	public void preparazioneLezione()
+	{
+		
+	}
+	public void interrogazione()
+	{
+
+	}
+}
+  </pre>
+	</div>
+
+	<span id="classeTutor"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto8" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia8" class="pulsanteCopia"
+				onclick="copiaTesto8()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato8" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare8" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class Tutor extends Docente
+{
+	private String certificazione;
+	//private ArrayList< Documento > listDocumenti;
+	
+	public void burocrazia()
+	{
+		
+	}
+	
+	public void accompagnamento()
+	{
+		
+	}
+
+	public String getCertificazione() 
+	{
+		return certificazione;
+	}
+
+	public void setCertificazione(String certificazione) 
+	{
+		this.certificazione = certificazione;
+	}	
+}
+  </pre>
+	</div>
+
+	<span id="classeClasse"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto9" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia9" class="pulsanteCopia"
+				onclick="copiaTesto9()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato9" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare9" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Classe 
+{
+    private ArrayList< Studente > listaStudenti;
+    
+    //Costruttori (Overload)
+    public Classe(ArrayList< Studente > listaStudenti)
+    {
+    	this.listaStudenti = listaStudenti;
+    }
+    public Classe()
+    {
+    	this.listaStudenti = new ArrayList< Studente >();
+    }
+    
+    
+	public void setListaStudenti(ArrayList< Studente > listaStudenti)
+	{
+		this.listaStudenti = listaStudenti;
+	}
+	public ArrayList< Studente > getListaStudenti()
+	{
+		return listaStudenti;
+	}
+	
+	public boolean aggiungiListaStudenti(ArrayList< Studente > aggiungiListaStudenti)
+	{
+		return this.listaStudenti.addAll(aggiungiListaStudenti);
+	}
+	public boolean aggiungiStudente(Studente studente)
+	{
+		System.out.println("Alla classe si aggiunge lo studente");
+		return listaStudenti.add(studente);
+	}
+	public boolean rimuoviStudente(Studente studente)
+	{
+		System.out.println("Alla classe si rimuove lo studente");
+		return listaStudenti.remove(studente);
+	}
+}
+  </pre>
+	</div>
+
+	<span id="classeCorso"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto10" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia10" class="pulsanteCopia"
+				onclick="copiaTesto10()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato10" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare10" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Corso 
+{
+    private ArrayList< Materia > listaMaterie;
+    private Tutor tutor;
+    
+    
+	public Corso(ArrayList< Materia > listaMaterie, Tutor tutor) 
+	{
+		this.listaMaterie = listaMaterie;
+		this.tutor = tutor;
+	}
+	public Corso() //se non è una classe estesa allora si mette la classe Object
+	{
+		super();
+	}
+	/*
+	public Corso() //oppure
+	{
+		listaMaterie = null;
+		tutor = null;
+	}
+	*/
+	public Corso(ArrayList< Materia > listaMat)
+	{
+		listaMaterie = listaMat;
+	}
+	
+	public ArrayList< Materia > getListaMaterie() 
+	{
+		return listaMaterie;
+	}
+	
+	public void setListaMaterie(ArrayList< Materia > listaMaterie) 
+	{
+		this.listaMaterie = listaMaterie;
+	}
+	public Tutor getTutor() 
+	{
+		return tutor;
+	}
+	public void setTutor(Tutor tutor) 
+	{
+		this.tutor = tutor;
+	}
+  public boolean aggiungiMateria(Materia nuovaMateria)
+  {
+    return listaMaterie.add(nuovaMateria);
+  }
+}
+  </pre>
+	</div>
+
+	<span id="classeEsame"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto11" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia11" class="pulsanteCopia"
+				onclick="copiaTesto11()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato11" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare11" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.time.LocalDate;
+import java.util.Date;
+
+public class Esame 
+{
+	private String materia;
+	private LocalDate data;
+	private byte voto;
+	
+	
+	public String getMateria() 
+	{
+		return materia;
+	}
+	public void setMateria(String materia) 
+	{
+		this.materia = materia;
+	}
+	public LocalDate getData() 
+	{
+		return data;
+	}
+	public void setData(LocalDate data) 
+	{
+		this.data = data;
+	}
+	public byte getVoto() 
+	{
+		return voto;
+	}
+	public void setVoto(byte voto) 
+	{
+		this.voto = voto;
+	}	
+}
+  </pre>
+	</div>
+
+	<span id="classeImpegno"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto12" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia12" class="pulsanteCopia"
+				onclick="copiaTesto12()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato12" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare12" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Impegno 
+{
+	private Date data;
+	private String impegno; //una lista di impegni = agenda
+	private ArrayList< EssereUmano > persone;
+	
+	
+	public Date getData() 
+	{
+		return data;
+	}
+	public void setData(Date data) 
+	{
+		this.data = data;
+	}
+	public String getImpegno() 
+	{
+		return impegno;
+	}
+	public void setImpegno(String impegno) 
+	{
+		this.impegno = impegno;
+	}
+	public ArrayList< EssereUmano > getPersone() 
+	{
+		return persone;
+	}
+	public void setPersone(ArrayList< EssereUmano > persone) 
+	{
+		this.persone = persone;
+	}	
+}
+  </pre>
+	</div>
+
+	<span id="classeIstituto"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto13" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia13" class="pulsanteCopia"
+				onclick="copiaTesto13()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato13" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare13" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Istituto
+{
+	private String nome;
+	private String indirizzo;
+	private ArrayList< DirettoreGenerale > listaDirigenti;
+	private ArrayList< Docente > listaDocenti;
+	
+	
+	public String getNome() 
+	{
+		return nome;
+	}
+	public void setNome(String nome) 
+	{
+		this.nome = nome;
+	}
+	public String getIndirizzo() 
+	{
+		return indirizzo;
+	}
+	public void setIndirizzo(String indirizzo) 
+	{
+		this.indirizzo = indirizzo;
+	}
+	public ArrayList< DirettoreGenerale > getListaDirigenti() 
+	{
+		return listaDirigenti;
+	}
+	public void setListaDirigenti(ArrayList< DirettoreGenerale > listaDirigenti) 
+	{
+		this.listaDirigenti = listaDirigenti;
+	}
+	public ArrayList< Docente > getListaDocenti() 
+	{
+		return listaDocenti;
+	}
+	public void setListaDocenti(ArrayList< Docente > listaDocenti) 
+	{
+		this.listaDocenti = listaDocenti;
+	}	
+}
+  </pre>
+	</div>
+
+	<span id="classeMateria"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto14" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia14" class="pulsanteCopia"
+				onclick="copiaTesto14()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato14" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare14" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+import java.util.ArrayList;
+
+public class Materia 
+{
+	private long IDMateria;
+	private String Titolo;
+	private byte cfu;
+	private ArrayList< Docente > listaDocenti;
+	
+	public long getIDMateria() 
+	{
+		return IDMateria;
+	}
+	public void setIDMateria(long iDMateria) 
+	{
+		IDMateria = iDMateria;
+	}
+	public String getTitolo() 
+	{
+		return Titolo;
+	}
+	public void setTitolo(String titolo) 
+	{
+		Titolo = titolo;
+	}
+	public byte getCfu() 
+	{
+		return cfu;
+	}
+	public void setCfu(byte cfu) 
+	{
+		this.cfu = cfu;
+	}
+	
+	public ArrayList< Docente > getListaDocenti() 
+	{
+		return listaDocenti;
+	}
+	public void setListaDocenti(ArrayList< Docente > listaDocenti) 
+	{
+		this.listaDocenti = listaDocenti;
+	}
+	public boolean aggiungiDocente(Docente docente)
+	{
+		return listaDocenti.add(docente); 
+	}
+	public boolean rimuoviDocente(Docente docente)
+	{
+		return listaDocenti.remove(docente); 
+	}
+	public void aggiungiTuttiIProf(ArrayList< Docente > Docenti)
+	{
+		listaDocenti =  Docenti;
+	}
+}
+  </pre>
+	</div>
+
+	<span id="classeMain"></span>
+	<div class="testo">
+		<div id="contenitoreCopiaTesto15" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+			<button id="pulsanteCopia15" class="pulsanteCopia"
+				onclick="copiaTesto15()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>
+				</svg>Copia Testo
+			</button>
+			<div id="divTestoCopiato15" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona">
+					<desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>
+				</svg>testo Copiato!
+			</div>
+		</div>
+		<pre id="testoDaCopiare15" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+package Esercizi_Classi;
+
+public class Main 
+{
+	public static void main(String[] args)
+	{
+		Classe classe1 = new Classe();
+	}
+}
+  </pre>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+	<script src="../../javascript/eventiPaginaProgetto.js"></script>
+	<script src="../../javascript/eventiIndice.js"></script>
+</body>
+
+</html>

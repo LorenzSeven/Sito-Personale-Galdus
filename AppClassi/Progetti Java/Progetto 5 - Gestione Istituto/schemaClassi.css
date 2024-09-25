@@ -1,0 +1,89 @@
+[data-theme="light"] /*giorno*/
+{
+    --coloreTesto: #000000;
+    --sfondoTesto: rgb(227, 227, 227);
+    --bordoTesto: #00eeff;
+    --opacitaGiorno: 1;
+    --opacitaNotte: 0;
+}
+
+[data-theme="dark"] /*notte*/
+{
+    --coloreTesto: #ffffff;
+    --sfondoTesto: rgb(39, 39, 39);
+    --bordoTesto: #00265c;
+    --opacitaGiorno: 0;
+    --opacitaNotte: 1;
+}
+.titoloImmagine
+{
+    text-align: center;
+    color: var(--coloreTesto);
+    padding: 10px;
+    transition: all 1s;
+}
+.ClassiEstese
+{
+    text-align: center;
+    color: var(--coloreTesto);
+    padding: 10px;
+    transition: all 1s;
+}
+.ClassiNonEstese
+{
+    text-align: center;
+    color: var(--coloreTesto);
+    padding: 10px;
+    transition: all 1s;
+}
+
+.divImmagine
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 900px;
+    height: 700px;
+
+    background-color: var(--sfondoTesto);
+    border-style: double;
+    border-width: 1px;
+    border-color: var(--bordoTesto);
+    transition: all 1s;
+}
+
+.contenitoreClassiEstese
+{
+    position: relative;
+    left: 10px;
+    width: 442px;
+    height: 590px;    
+}
+.classiEsteseGiorno
+{
+    opacity: var(--opacitaGiorno);
+    transition: all 1s;
+}
+.classiEsteseNotte
+{
+    opacity: var(--opacitaNotte);
+    transition: all 1s;
+}
+
+.contenitoreClassiNonEstese
+{
+    position: relative;
+    left: 30px;
+    width: 442px;
+    height: 590px;    
+}
+.classiNonEsteseGiorno
+{
+    opacity: var(--opacitaGiorno);
+    transition: all 1s;
+}
+.classiNonEsteseNotte
+{
+    opacity: var(--opacitaNotte);
+    transition: all 1s;
+}

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"  data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-database.png">
+  <meta charset="UTF-8">
+  <title>Esercizi Relazioni tra Tabelle</title>  
+</head>
+
+<body>
+  <a href="../../database.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>                               
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo" id="titoloPagina">Esercizi Relazioni tra Tabelle</h1>
+
+  <div class="contenitoreIndice">
+    <h5 class="titoloIndice">Indice Pagina</h5>
+    <li><a class="indici" href="#AutoreLibro"> Autore-Libro </a></li>
+    <li><a class="indici" href="#ProdottiFornitori"> Prodotti-Fornitori </a></li>
+    <li><a class="indici" href="#GestioneUniversita"> Gestione Universita' </a></li>
+  </div>     
+
+    <a href="#titoloPagina" class="frecciaSopraLink" id="frecciaSopraId">
+      <svg class="contenitoreFrecciaSopra"><desc>Freccia Sopra</desc><!--Contenitore immagini sovrapposte-->
+        <image class="frecciaSopraNotte" href="../../img/imgProgetto/freccia-sopra-notte.png"></image>
+        <image class="frecciaSopraGiorno" href="../../img/imgProgetto/freccia-sopra-giorno.png"></image>
+      </svg>
+    </a>
+    
+<span id="AutoreLibro"></span>
+    <div class="testo">
+      <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+        <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+          <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+            <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+            <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                           
+          </svg>Copia Testo
+        </button>    
+        <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+          <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+            <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+            <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                          
+          </svg>testo Copiato!
+        </div>
+      </div> 
+        <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+/*
+AUTORE- LIBRO 
+Si sviluppi uno schema entita' - relazione per il caso di una casa editrice.
+Le case editrici ABC lavorano con diversi autori che scrivono diversi libri che poi vengono pubblicati. 
+Qualche autore ha scritto solo un libro, altri invece ne scrivono parecchi; 
+inoltre qualche libro e' stato scritto da piu' autori assieme. 
+ABC lavora anche con piu' di una tipografia; ogni libro pero' e' stampato da una sola tipografia. 
+Un curatore lavora presso ABC con diversi autori alla volta per correggere il testo e produrre
+alla fine i libri in progetto. 
+e' compito proprio del curatore inviare alla tipografia la copia camera-ready finale quando il manoscritto e' stato corretto e ben organizzato.
+*/
+create database pubbicazioneLibri;
+use pubbicazioneLibri;
+
+-- Crezione della tabella Genere
+create table Genere (
+  ID_Genere INT PRIMARY KEY AUTO_INCREMENT,
+  Genere VARCHAR(50)
+);
+
+-- Creazione della tabella Libro
+CREATE TABLE Libri (
+    ID_Libro INT PRIMARY KEY AUTO_INCREMENT,
+    Titolo VARCHAR(100),
+    Anno_pubblicazione INT,
+    idgenere int,
+    foreign key(idgenere) references Genere(ID_genere)
+);
+
+-- Creazione della tabella Autore
+CREATE TABLE Autori (
+    ID_Autore INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(50),
+    Cognome VARCHAR(50),
+    Email VARCHAR(255),
+    IDlibro int,
+    foreign key(IDlibro) references Libri(ID_Libro)
+);
+/*
+insert into Autori (ID_Autore, Nome, Cognome, Email, IDlibro) values (1, 'Abbey', 'Gerry', 'gerry@gmail.com', 1);
+insert into Libri (ID_LIbro, Titolo, IdGenere) values (1, 'Road', 'Beatles', 'Narrativa', 1);
+insert into Genere (ID_Genere, Titolo, Genere) values (1, 'Road', 'Beatles', 'Narrativa', 1);
+*/
+-- Creazione della Tabella Curatore 
+CREATE TABLE Curatori (
+  Id_Curatore int,
+    Camera_Ready int,
+    ID_Libri int,
+    PRIMARY KEY(Id_Libri, Id_Curatore),
+    foreign key(Libri) references users(user_id),
+    foreign key(role_id) references roles(role_id)
+);
+    </pre>
+  </div>
+<!--------------------------------------------------------------------------------------------->
+<span id="ProdottiFornitori"></span>
+<div class="testo">
+  <div id="contenitoreCopiaTesto2" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+    <button id="pulsanteCopia2" class="pulsanteCopia" onclick="copiaTesto2()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                          
+      </svg>Copia Testo
+    </button>    
+    <div id="divTestoCopiato2" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                        
+      </svg>testo Copiato!
+    </div>
+  </div> 
+    <pre id="testoDaCopiare2" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+/*
+Produrre uno schema entita' – relazione di un’impresa che acquista componenti da fornitori e assembla
+queste componenti in una varieta' di prodotti. Le informazioni mantenute sui prodotti includono un
+codice prodotto, una descrizione e un prezzo. Per i componenti si mantiene invece un codice e una
+descrizione.
+Ogni prodotto e' assemblato a partire da componenti diverse. Qualche componente e' utilizzato piu' di
+una volta nello stesso prodotto. Bisogna quindi mantenere, per ciascun prodotto, l’informazione della
+quantita' di ogni componente coinvolto.
+I fornitori forniscono i componenti. Dei fornitori si mantengono informazioni su codice fornitore, nome,
+indirizzo e numero di telefono. 
+Un fornitore puo' fornire piu' di un tipo di componente all’impresa.
+NB: si considera che lo stesso componente possa essere utilizzato in piu' di un prodotto; si assume che ogni
+componente e' fornito da un solo fornitore.
+*/
+create database Fornitori_Componenti;
+use Fornitori_Componenti;
+
+-- Creazione della tabella Prodotti
+CREATE TABLE Prodotti (
+    IDProdotto INT PRIMARY KEY AUTO_INCREMENT,
+    Codice_Prodotto VARCHAR(50),
+    Descrizione VARCHAR(255),
+    Prezzo DECIMAL(10, 2)
+);
+
+-- Creazione della tabella Componenti
+CREATE TABLE Componenti (
+    IDComponente INT PRIMARY KEY AUTO_INCREMENT,
+    Codice_Componente VARCHAR(50),
+    Descrizione VARCHAR(255)
+);
+
+-- Creazione della tabella Fornitori
+CREATE TABLE Fornitori (
+    IDFornitore INT PRIMARY KEY AUTO_INCREMENT,
+    Codice_Fornitore VARCHAR(50),
+    Nome VARCHAR(100),
+    Indirizzo VARCHAR(255),
+    Numero_di_Telefono VARCHAR(20)
+);
+
+-- Creazione della tabella di relazione Prodotti_Componenti
+CREATE TABLE Componenti_Prodotti (
+    ID_Prodotto_Componente INT PRIMARY KEY AUTO_INCREMENT,
+    ID_Prodotto INT,
+    ID_Componente INT,
+    Quantita_Componente INT,
+    FOREIGN KEY (ID_Prodotto) REFERENCES Prodotti(IDProdotto),
+    FOREIGN KEY (ID_Componente) REFERENCES Componenti(IDComponente)
+);
+
+-- Creazione della tabella di relazione Fornitori_Componenti
+CREATE TABLE Fornitori_Componenti (
+    ID_Fornitore_Componente INT PRIMARY KEY AUTO_INCREMENT,
+    ID_Fornitore INT,
+    ID_Componente INT,
+    FOREIGN KEY (ID_Fornitore) REFERENCES Fornitori(IDFornitore),
+    FOREIGN KEY (ID_Componente) REFERENCES Componenti(IDComponente)
+);
+
+INSERT INTO Prodotti (Codice_Prodotto, Descrizione, Prezzo) VALUES
+('PROD001', 'Laptop HP Pavilion', 899.99),
+('PROD002', 'Smartphone Samsung Galaxy S20', 999.99),
+('PROD003', 'Tablet Apple iPad Air', 649.99),
+('PROD004', 'Smart TV LG 55 pollici', 1299.99),
+('PROD005', 'Fotocamera Canon EOS Rebel T7', 599.99);
+
+INSERT INTO Componenti (Codice_Componente, Descrizione) VALUES
+('COMP001', 'Processore Intel Core i7'),
+('COMP002', 'Scheda Madre ASUS ROG Strix Z490-E'),
+('COMP003', 'Memoria RAM Kingston HyperX 16GB'),
+('COMP004', 'SSD Samsung 1TB'),
+('COMP005', 'Scheda Grafica NVIDIA GeForce RTX 3080');
+
+INSERT INTO Fornitori (Codice_Fornitore, Nome, Indirizzo, Numero_di_Telefono) VALUES
+('FORN001', 'ABC Electronics', 'Via Roma 123, Milano', '+39 02 1234567'),
+('FORN002', 'XYZ Components', 'Via Verdi 456, Roma', '+39 06 9876543'),
+('FORN003', 'GHI Tech', 'Corso Vittorio Emanuele 789, Torino', '+39 011 5554321'),
+('FORN004', 'LMN Supplies', 'Piazza Garibaldi 101, Napoli', '+39 081 3334445'),
+('FORN005', 'OPQ Parts', 'Viale Kennedy 202, Firenze', '+39 055 6789123');
+
+INSERT INTO Componenti_Prodotti (ID_Prodotto, ID_Componente, Quantita_Componente) VALUES
+(1, 1, 1), (1, 2, 1),(1, 3, 2), (1, 4, 1), (2, 1, 1), (2, 3, 1),(2, 4, 1),(3, 1, 1), (3, 3, 1), (3, 4, 1), (4, 2, 1), (4, 5, 1),(5, 5, 1);
+
+INSERT INTO Fornitori_Componenti (ID_Fornitore, ID_Componente) VALUES
+(1, 1), (2, 2),(3, 3), (4, 4),(5, 5);
+
+select * from Prodotti;
+select * from Componenti;
+select * from Fornitori;
+select * from Componenti_Prodotti;
+select * from Fornitori_Componenti;
+    </pre>
+  </div>
+<!--------------------------------------------------------------------------------------------->
+<span id="GestioneUniversita"></span>
+<div class="testo">
+  <div id="contenitoreCopiaTesto3" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+    <button id="pulsanteCopia3" class="pulsanteCopia" onclick="copiaTesto3()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                        
+      </svg>Copia Testo
+    </button>    
+    <div id="divTestoCopiato3" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+        <image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+        <image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                             
+      </svg>testo Copiato!
+    </div>
+  </div>    <span id="GestioneUniversita"></span>
+    <pre id="testoDaCopiare3" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+/*
+Esercizio 2: Un’applicazione informatica dell’universita'
+Produrre lo schema ER corrispondente ad un'applicazione riguardante una universita', facendo
+riferimento alla seguenti specifiche:
+
+• Di ogni studente interessano: numero di matricola, data, citta' e regione di nascita, facolta' in cui e'
+iscritto (con l'anno di iscrizione), ed esami superati (con il corso relativo, il professore che ha
+verbalizzato l'esame, ed il voto).
+
+• Dei professori interessano: nome, data e citta' di nascita, qualifica.
+• Delle facolta' interessano: nome, tipo (scientifica, letteraria, ecc.), e professore che ne e' preside.
+• Dei corsi interessano: codice, numero di ore di lezione e facolta' di appartenenza
+
+NB.1: per semplicita' si considera che anche per il professore interessa sapere la regione di nascita.
+NB.2: Nella risoluzione di questo esercizio e' stato utilizzato il concetto di attributo composto. Un attributo
+composto costituisce un’aggregazione di attributi che presentano affinita' di natura concettuale. In questo
+esercizio l’attributo composto e' la data (composta da giorno, mese e anno).
+*/
+create database Applicazione_Universita;
+use Applicazione_Universita;
+
+-- Creazione della tabella Facolta'
+CREATE TABLE Facolta (
+    Nome VARCHAR(100) PRIMARY KEY,
+    Tipo VARCHAR(100),
+    Professore_Preside VARCHAR(100)
+);
+
+-- Creazione della tabella Corsi
+CREATE TABLE Corsi (
+    Codice_Corso VARCHAR(100) PRIMARY KEY,
+    Numero_Ore_Lezione INT,
+    Facolta_Appartenenza VARCHAR(100)
+);
+
+-- Creazione della tabella Professori
+CREATE TABLE Professori (
+	Nome VARCHAR(100) PRIMARY KEY,
+	Data_Nascita DATE,
+    Citta_Nascita VARCHAR(100),
+    Qualifica VARCHAR(100),
+    Facolta_preside VARCHAR(100)
+);
+
+-- Creazione della tabella Studenti
+CREATE TABLE Studenti (
+    Numero_Matricola INT PRIMARY KEY,
+	Data_Nascita DATE,
+    Citta_Nascita VARCHAR(100),
+    Regione_Nascita VARCHAR(100),
+    Anno_Iscrizione_Facolta int,
+    Facolta VARCHAR(100),    
+    Quantita_esami_superati int
+);
+
+-- Creazione della tabella Esami
+CREATE TABLE Esami (
+    ID_Esame INT PRIMARY KEY AUTO_INCREMENT,
+    Corso VARCHAR(100),
+    Professore VARCHAR(100),
+    Voto DECIMAL(3, 1)
+);
+
+-- Creazione della tabella Studente_Esame
+CREATE TABLE Studenti_Esami (
+    ID_Studente_Esame INT PRIMARY KEY AUTO_INCREMENT,
+    Studente_Matricola INT,
+    Esame_ID INT,
+    FOREIGN KEY (Studente_Matricola) REFERENCES Studenti(Numero_Matricola),
+    FOREIGN KEY (Esame_ID) REFERENCES Esami(ID_Esame)    
+);
+
+-- Inserimento dati nella tabella Facolta'
+INSERT INTO Facolta (Nome, Tipo, Professore_Preside) VALUES
+('Ingegneria', 'Scientifica', 'Mario Rossi'),
+('Lettere', 'Umanistica', 'Laura Bianchi'),
+('Medicina', 'Scientifica', 'Luigi Verdi'),
+('Scienze Politiche', 'Giuridica', 'Anna Esposito'),
+('Economia', 'Economica', 'Giuseppe Mancini');
+
+-- Inserimento dati nella tabella Corsi
+INSERT INTO Corsi (Codice_Corso, Numero_Ore_Lezione, Facolta_Appartenenza) VALUES
+('CORSO001', 60, 'Ingegneria'),
+('CORSO002', 45, 'Lettere'),
+('CORSO003', 70, 'Medicina'),
+('CORSO004', 50, 'Scienze Politiche'),
+('CORSO005', 55, 'Economia');
+
+-- Inserimento dati nella tabella Professori
+INSERT INTO Professori (Nome, Data_Nascita, Citta_Nascita, Qualifica, Facolta_preside) VALUES
+('Mario Rossi', '1975-03-18', 'Roma', 'Professore Associato', 'Ingegneria'),
+('Laura Bianchi', '1980-06-25', 'Milano', 'Professoressa Ordinaria', 'Lettere'),
+('Luigi Verdi', '1970-12-10', 'Napoli', 'Professore Ordinario', 'Medicina'),
+('Anna Esposito', '1965-08-03', 'Torino', 'Professoressa Associata', 'Scienze Politiche'),
+('Giuseppe Mancini', '1978-11-20', 'Firenze', 'Professore Straordinario', 'Economia');
+
+-- Inserimento dati nella tabella Studenti
+INSERT INTO Studenti (Numero_Matricola, Data_Nascita, Citta_Nascita, Regione_Nascita, Anno_Iscrizione_Facolta, Facolta, Quantita_esami_superati) VALUES
+(1001, '1998-05-10', 'Roma', 'Lazio', 2019, 'Ingegneria', 3),
+(1002, '1997-09-15', 'Milano', 'Lombardia', 2018, 'Lettere', 4),
+(1003, '2000-03-22', 'Napoli', 'Campania', 2020, 'Medicina', 5),
+(1004, '1999-11-30', 'Torino', 'Piemonte', 2017, 'Scienze Politiche', 2),
+(1005, '1996-07-05', 'Firenze', 'Toscana', 2016, 'Economia', 6);
+
+-- Inserimento dati nella tabella Esami
+INSERT INTO Esami (Corso, Professore, Voto) VALUES
+('CORSO001', 'Mario Rossi', 28.5),
+('CORSO002', 'Laura Bianchi', 27.8),
+('CORSO003', 'Luigi Verdi', 30.0),
+('CORSO004', 'Anna Esposito', 25.9),
+('CORSO005', 'Giuseppe Mancini', 29.2);
+
+-- Inserimento dati nella tabella Studenti_Esami
+INSERT INTO Studenti_Esami (Studente_Matricola, Esame_ID) VALUES (1001, 1),(1002, 2),(1003, 3),(1004, 4),(1005, 5);
+
+SELECT * FROM Facolta;
+SELECT * FROM Corsi;
+SELECT * FROM Professori;
+SELECT * FROM Studenti;
+SELECT * FROM Esami;
+SELECT * FROM Studenti_Esami;
+  </pre>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+  <script src="../../javascript/eventiIndice.js"></script>
+</body>
+
+</html>

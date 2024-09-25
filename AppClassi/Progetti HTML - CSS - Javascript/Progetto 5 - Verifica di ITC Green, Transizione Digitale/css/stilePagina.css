@@ -1,0 +1,57 @@
+body
+{
+    background-image: url("../img/campo-erba.png");
+}
+
+h1
+{
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    -webkit-text-stroke-color: rgb(0, 142, 50);
+    -webkit-text-stroke-width: 1px;
+}
+
+.accordion
+{
+    margin-top: 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+    --bs-accordion-active-bg: rgba(0, 255, 0, 0.5);
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0)
+}
+
+.accordion-collapse
+{
+    transition: 0.5s all;
+}
+
+.accordion-button:not(.collapsed)
+{
+    color: black;
+}
+.accordion-button:hover
+{
+    background-color: rgba(0, 255, 0, 0.5);;
+}
+
+h1
+{
+    color: white;
+}
+
+.row 
+{
+    --bs-gutter-x: 0rem;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+/*
+.background-container {
+    background-image: url('../img/TavoloLegno.png');
+    background-size: 1170px 357px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+*/

@@ -1,0 +1,149 @@
+<html lang="en"> <!--Per l'intestazione automatica di HTML scrivere "doc" sulla tastiera e premere invio-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="stylesheet" href="../../css/exit.css">
+    <link rel="icon" type="image/x-icon" href="../../img/icona-html-css-js.png">
+    <meta charset="UTF-8">
+    <title>Intro Web</title>
+</head>
+
+<body>
+    <a href="../../htmlCssJs.html" class="exitGiorno" style="background-color: rgb(255, 229, 57);;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+    <h1>Guarda i magazine</h1>
+    <div class="topnav">
+        <a href="pagina2.html">Vai nella pagina 2</a>
+        <a href="pagina3.html">Vai nella pagina 3</a>
+        <a href="shop/shop.html">Vai nello shop</a>
+    </div>
+    <iframe src="https://www.corriere.it/" name="magazine"> </iframe>
+    <hr>
+    <button class="bottone">Salva</button>
+
+
+
+    <div class="text-center">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        BootStrap
+    </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Che cos'è BootStrap?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bootstrap è una libreria di componenti front end e un toolkit open source. 
+                    Viene usato per creare pagine web reattive e mobile-first con HTML, CSS e JavaScript. 
+                    Bootstrap usa tecnologie SASS, flexbox (sistema di griglie flessibili) 
+                    e mixin (classi che contengono metodi utilizzabili da altre classi, 
+                    senza che esista un rapporto genitore-figlio tra queste due classi). 
+                    Bootstrap è un toolkit estremamente diffuso, creato da programmatori Twitter - 
+                    prima di essere open-source, era infatti conosciuto come Twitter Blueprint. 
+                    Dal suo rilascio nel 2011, Bootstrap si è evoluto attraverso numerose versioni, 
+                    con alcune riscritture importanti - con le versioni 2 e 3.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" class="text-center" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        JQuery
+    </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Che cos'è Jquery?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    jQuery è una libreria JavaScript cross-browser rilasciata nel 2006. 
+                    Veloce, versatile ed estensibile, l'API di jQuery consente di gestire con semplicità delle attività 
+                    che risulterebbero lunghe o complesse in JavaScript. 
+                    Infatti jQuery racchiude in metodi richiamabili con una sola riga di codice delle attività 
+                    che in JavaScript avrebbero bisogno invece una lunga programmazione. 
+                    Inoltre jQuery semplifica eventi come le chiamate AJAX e la manipolazione del DOM 
+                    che in JavaScript sono di gestione complessa.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <hr>
+    <h2>Lista di vari magazine</h2>
+    <ul>
+        <li class="frase"><a href="https://www.wired.it/" target="magazine">Wired</a></li>
+        <li class="frase"><a href="https://www.corriere.it/" target="magazine">Corriere</a></li>
+        <li class="frase"><a href="https://www.focus.it/" target="magazine">Focus</a></li>
+        <li class="frase">Per google invece si apre una pagina in un'altra scheda, google non funziona all'interno del
+            iframe</li>
+    </ul>
+    <h2>Vai in altre pagine</h2>
+    <ul>
+        <li class="frase"><a href="pagina2.html" target="_blank">Vai nella pagina 2</a></li>
+        <li class="frase"><a href="pagina3.html" target="_blank">Vai nella pagina 3</a></li>
+        <li class="frase"><a href="shop/shop.html" target="_blank">Vai nello shop</a></li>
+    </ul>
+    <!--Per inserire delle frasi esempio in latino a caso scrivere "lorem"-->
+    <!--Per mettere delle parole in grassetto aggiungere il tag strong-->
+
+    <h2>Testo personalizzato</h2>
+    <!--sfondo nero testo bianco-->
+    <p class="pNero2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <!--sfondo bianco testo nero-->
+    <p class="pBianco2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <p class="pNero2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <p class="pBianco2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <p class="pNero2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <p class="pBianco2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <p class="pNero2">Lorem ipsum <strong>dolor</strong> dolor sit, amet consectetur adipisicing elit. Exercitationem
+        temporibus,
+        veniam consequatur distinctio natus numquam <strong>officiis omnis</strong> ut dolores eaque laboriosam,
+        sequi hic nihil delectus recusandae, maiores in quaerat voluptates?</p>
+    <script src="javascript/introWeb.js"></script>
+</body>
+
+</html>

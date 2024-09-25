@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <script>const theme = localStorage.getItem('theme');
+    if (theme != null){document.documentElement.setAttribute('data-theme', theme);}     
+    else if (theme == null){localStorage.setItem('theme', "light");}   
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../img/favicon-galdus-giorno.png">
+    <meta charset="UTF-8">
+    <title>Galdus IFTS Software Developer</title>
+</head>
+
+<body>
+  <!--Schermata Caricamento-->
+  <div id = "preloader">
+    <svg class="contenitoreCaricamento"><!--Contenitore immagini sovrapposte-->
+      <image class="ImmagineCaricamentoNotte" href="../img/caricamento-cerchio-blu.png"></image>
+      <image class="ImmagineCaricamentoGiorno" href="../img/caricamento-cerchio-azzurro.png"></image>                                
+    </svg>
+  </div>
+    <div class="BarraDiNavigazione">
+        <svg class="contenitoreLogoGaldus"><desc>logo galdus</desc> <!--Contenitore immagini sovrapposte-->
+            <image class="logoGaldusNotte" href="img/logo-galdus-notte.png"></image>
+            <image class="logoGaldusGiorno" href="img/logo-galdus-giorno.png"></image>
+        </svg>
+        <h1 class="titoloCorso">IFTS Software Developer</h1>
+        <div class="form-check form-switch"><!-- d-flex justify-content-center -->
+            <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+                onclick = "luminosita()">
+            <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+                <svg class="contenitoreLuminosita"><desc>icona luminosità</desc> <!--Contenitore immagini sovrapposte-->
+                    <image class="luminositaNotte" href="../img/icona-luna.png"></image>
+                    <image class="luminositaGiorno" href="../img/icona-sole.png"></image>
+                </svg> 
+            </label>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Mattia Argentino con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Mattia Argentino</h4>
+                            <ul>
+                                <li>Formazione: Diploma di Ragioneria indirizzo programmatore</li>
+                                <li>Aspirazione: da vedere</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Argentino.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Simone Candela con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Simone Candela</h4>
+                            <ul>
+                                <li>Formazione: Alberghiero IPSAR Amerigo Vespucci</li>
+                                <li>Aspirazione: da definire</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Candela.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Gabriele Casanova con sfondo.png"
+                                class="img-thumbnail fotoProfilo" alt="profile-image">
+                            <h4 class="text-center">Gabriele Casanova</h4>
+                            <ul>
+                                <li>Formazione: Galdus alta formazione professionale</li>
+                                <li>Aspirazione: Programmatore</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Casanova.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Jhonny Gustavo Cruz Sotomayor con sfondo.png"
+                                class="img-thumbnail fotoProfilo" alt="profile-image">
+                            <h4 class="text-center">Jhonny Gustavo Cruz SotoMayor</h4>
+                            <ul>
+                                <li>Formazione: Scuola professionale CIOFS-FP "Panetteria e Pasticceria"</li>
+                                <li>Aspirazione: Programmatore</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Cruz.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Andrea Di Mauro con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Andrea Di Mauro</h4>
+                            <ul>
+                                <li>Formazione: galdus professionale informatica/robotica </li>
+                                <li>Aspirazione: programmatore web</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://DiMauro.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Daniel Galbiati con sfondo 2.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Daniel Galbiati</h4>
+                            <ul>
+                                <li>Formazione: Galdus alta formazione professionale</li>
+                                <li>Aspirazione: programmatore WEB</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Galbiati.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Lorenzo Galletti con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Lorenzo Galletti</h4>
+                            <ul>
+                                <li>Formazione: Grafico Pubblicitario</li>
+                                <li>Aspirazione: Software developer full stack</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Galletti.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Gabriel Jumbo con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Gabriel Jumbo</h4>
+                            <ul>
+                                <li>Formazione: Servizio commerciale</li>
+                                <li>Aspirazione: Programmatore back-end</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Jumbo.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Bruno Mejia con sfondo.png"
+                                class="img-thumbnail fotoProfilo" alt="profile-image">
+                            <h4 class="text-center">Bruno Mejia</h4>
+                            <ul>
+                                <li>Formazione: Galdus professionale informatica/robotica</li>
+                                <li>Aspirazione: programmatore back-end</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Mejia.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Rehobot Pagana con sfondo.png"
+                                class="img-thumbnail fotoProfilo" alt="profile-image">
+                            <h4 class="text-center">Rehobot Pagana</h4>
+                            <ul>
+                                <li>Formazione: Galdus alta formazione professionale</li>
+                                <li>Aspirazione: da definire</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Pagana.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Diego Quaranta con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Diego Quaranta</h4>
+                            <ul>
+                                <li>Formazione: galdus professionale pasticceria/panificazione</li>
+                                <li>Aspirazione: da definire</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://quaranta.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Lorenzo Quatela con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Lorenzo Quatela</h4>
+                            <ul>
+                                <li>Formazione: Diploma in Ragioneria</li>
+                                <li>Aspirazione: Programmatore Front-end/Back-end</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://quatela.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+                                class="img-thumbnail fotoProfilo" alt="profile-image">
+                            <h4 class="text-center">Gissela Fernanda Ramos Martinez</h4>
+                            <ul>
+                                <li>Formazione: Tecnico commerciale dei servizi turistici </li>
+                                <li>Aspirazione: Coming-soon</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Ramos.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Giulia Saciotti con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Giulia Saciotti</h4>
+                            <ul>
+                                <li>Formazione: Liceo Linguistico</li>
+                                <li>Aspirazione: da definire</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Saciotti.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Loris Scarafile con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Loris Scarafile</h4>
+                            <ul>
+                                <li>Formazione: IIS G.Galilei</li>
+                                <li>Aspirazione: Programmatore</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Scarafile.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Simranjit Singh con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Simranjit Singh</h4>
+                            <ul>
+                                <li>Formazione: Elettrotecnica e sistemi logici programmabili PLC presso Fermo Corni di
+                                    Modena</li>
+                                <li>Aspirazione: Full-stack software Developer</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Singh.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Fabrizio Terlizzi con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Fabrizio Terlizzi</h4>
+                            <ul>
+                                <li>Formazione: Galdus Alta formazione professionale</li>
+                                <li>Aspirazione: da definire</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Terlizzi.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Samuele Usai con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Samuele Usai</h4>
+                            <ul>
+                                <li>Formazione: Liceo Scientifico Scienze Applicate</li>
+                                <li>Aspirazione: programmatore back-end</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Usai.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card-box">
+                        <div class="member-card pt-2 pb-2">
+                            <img src="img/Danilo Vegetti con sfondo.png" class="img-thumbnail fotoProfilo"
+                                alt="profile-image">
+                            <h4 class="text-center">Danilo Vegetti</h4>
+                            <ul>
+                                <li>Formazione: diploma di perito informatico</li>
+                                <li>Aspirazione: sviluppatore front end/back end</li>
+                            </ul>
+                            <div class="text-center">
+                                <a class="linkProgetto btn btn-primary" target="_blank" href = "https://Vegetti.labgaldus.it/">Progetti</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- container -->
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="javascrpit/modalitaColore.js"></script>
+    <script>
+        var loader = document.getElementById("preloader");
+        window.addEventListener("load", function(){loader.style.display = "none";})
+      </script>
+</body>
+
+</html>

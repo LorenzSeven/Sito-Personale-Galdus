@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script>const theme = localStorage.getItem('theme');document.documentElement.setAttribute('data-theme', theme);</script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="../../css/stilePaginaProgetto.css">
+  <link rel="icon" type="image/x-icon" href="../../img/icona-database.png">
+  <meta charset="UTF-8">
+  <title>Creazione Tabella, Riempimento e Query Select 2</title>  
+</head>
+
+<body>
+  <a href="../../database.html" class="exit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Esci dal Progetto</a>
+  <div class="form-check form-switch switch">
+    <input class="form-check-input" name="toggleChk" type="checkbox" role="switch" id="flexSwitchCheckChecked"
+      onchange="luminosita()">
+    <label class="form-check-label" id="Etichetta" for="flexSwitchCheckChecked">
+      <svg class="contenitoreLuminosita"><desc>Sole e Luna</desc><!--Contenitore immagini sovrapposte-->
+        <image class="luminositaNotte" href="../../img/imgProgetto/luna-bianca.png"></image>
+        <image class="luminositaGiorno" href="../../img/imgProgetto/sole-nero.png"></image>                            
+      </svg>
+    </label>
+  </div>
+  <h1 class="titolo">Creazione Tabella, Riempimento e Query Select 2</h1>
+
+  <div class="testo">
+    <div id="contenitoreCopiaTesto" class="contenitoreCopiaTesto"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+      <button id="pulsanteCopia" class="pulsanteCopia" onclick="copiaTesto()"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Clipboard</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/clipboard-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/clipboard-nera.png"></image>                      
+        </svg>Copia Testo
+      </button>    
+      <div id="divTestoCopiato" class="divTestoCopiato"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+				<svg class="contenitoreIcona"><desc>Spunta</desc> <!--Contenitore immagini sovrapposte-->
+					<image class="iconaNotte" href="../../img/imgProgetto/spunta-bianca.png"></image>
+					<image class="iconaGiorno" href="../../img/imgProgetto/spunta-nera.png"></image>                           
+        </svg>testo Copiato!
+      </div>
+    </div>    
+      <pre id="testoDaCopiare" class="testoDaCopiare"><!--DA CAMBIARE IN CASO CE NE SONO MOLTI-->
+--creazione tabella Utente
+create table Utente(
+ID_UTENTE int not null,
+NOME      VARCHAR2(20),
+COGNOME   VARCHAR2(20),
+DATA_NASCITA   date,
+PRIMARY KEY(ID_UTENTE)
+);
+
+create table Studente(
+NUM_MATRICOLA int not null,
+STUDENTE int,
+CLASSE VARCHAR2(10),
+PRIMARY KEY(NUM_MATRICOLA),
+FOREIGN KEY(STUDENTE) REFERENCES Utente(ID_UTENTE)
+);
+
+create table Professore(
+CODICE_PROFESSORE int not null,
+DOCENTE int,
+TITOLO_STUDIO VARCHAR2(50),
+PRIMARY KEY(CODICE_PROFESSORE),
+FOREIGN KEY(DOCENTE) REFERENCES Utente(ID_UTENTE)
+);
+
+
+--non c'è bisogno di inserire una primary key, perchè 
+create table Insegna(
+DOCENTE int,
+MATERIA VARCHAR2(20),
+CLASSE  VARCHAR2 (10),
+FOREIGN KEY(DOCENTE) REFERENCES Professore(CODICE_PROFESSORE)
+);
+
+create table Voto(
+ID_VOTO int not null,
+MATRICOLA int,
+DATA_VOTO date,
+MATERIA VARCHAR2 (20),
+ARGOMENTO VARCHAR2 (50),
+VOTO int,
+PRIMARY KEY(ID_VOTO),
+FOREIGN KEY(MATRICOLA) REFERENCES Studente(NUM_MATRICOLA)
+);
+
+-- IMPORTANTISSIMO IL SET NLS_FORMAT! altrimenti le date sarebbero da creare nel formato: DD-MON-YY   es: 27-FEB-23
+alter session set nls_date_format='DD-MM-YYYY';	
+
+--Crea la sequenza nell'inserimento valori di tutte le tabelle
+create sequence Incrementa_ID minvalue 0 start with 1 increment by 1;
+create sequence Incrementa_VOTO minvalue 1000 start with 0 increment by 10;
+
+select * from Utente;
+select * from Studente;
+select * from Professore;
+select * from Insegna;
+select * from Voto;
+
+drop table Studente;
+drop table Utente;
+drop table Professore;
+drop table Insegna;
+drop table Voto;
+
+drop sequence Incrementa_ID;
+drop sequence Incrementa_VOTO;
+
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Marco'	,'Bisceglia','01-04-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Luigi'		,'Procopio'		,'04-03-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Franco'	,'Chiavelli'	,'23-03-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Daniele'	,'Di Nunzio'	,'16-10-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Marco'		,'Tivelli'		,'30-06-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Davide'	,'Garimoldi'	,'21-08-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Alessio'	,'Mugnaini'		,'15-11-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Francesco'	,'Oppristi'		,'07-03-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Marco'		,'Hermand'		,'09-02-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Fabio'		,'Tivelli'		,'13-06-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Michele'	,'Desole'		,'14-09-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Luca'		,'Brizzante'	,'22-12-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Tommaso'	,'Damore'		,'12-05-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Dylan'		,'Henk'			,'31-05-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Raffaele'	,'Diogniso'		,'23-04-1970');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Victor'	,'Fumagalli'	,'19-12-1985');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Edward'	,'Eldric'		,'27-03-1976');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Francesco'	,'Luna'			,'05-01-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Marco'		,'Sarracino'	,'12-07-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Serena'	,'Ferrara'		,'06-07-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Francesca'	,'Ferrara'		,'18-09-1997');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Lucrezia'	,'Mugnaini'		,'19-10-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Chiara'	,'Di Luigi'		,'10-08-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Sara'		,'Iannizzotto'	,'02-02-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Marisa'	,'Pecorari'		,'15-09-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Antonella'	,'Psaquale'		,'20-11-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Camilla'	,'Giraldengo'	,'26-03-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Giulia'	,'Pastori'		,'31-01-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Sara'		,'Solisti'		,'27-06-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Sharon'	,'Knee'			,'09-05-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Daniela'	,'Fiondi'		,'11-02-1998');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Viola'		,'Sorbello'		,'12-12-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Valentina'	,'Zurli'		,'03-08-1978');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Anya'		,'Forger'		,'08-05-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Giovanna'	,'Bongiorno'	,'10-07-1987');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Carmela'	,'Raspanti'		,'08-05-1999');   
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Erika'		,'Brando'		,'08-05-1999');   
+
+
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (1, 800001,'1^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (2, 800002,'2^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (3, 800003,'3^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (4, 800004,'1^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (5, 800005,'2^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (6, 800006,'3^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (7, 800007,'1^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (8, 800008,'2^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (9, 800009,'3^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (10,800010,'1^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (11,800011,'2^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (12,800012,'3^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (13,800013,'1^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (14,800014,'2^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (18,800018,'3^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (19,800019,'1^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (20,800020,'2^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (21,800021,'3^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (22,800022,'1^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (23,800023,'2^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (24,800024,'3^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (25,800025,'1^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (26,800026,'2^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (27,800027,'3^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (28,800028,'1^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (29,800029,'2^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (30,800030,'3^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (31,800031,'3^A');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (32,800032,'1^B');
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (34,800034,'2^B');
+
+
+
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (1,15,'Laurea In Lettere');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (2,17,'Dottorato in Fisica');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (3,16,'Laurea in Informatica');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (4,33,'Laurea in Lingue');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (5,35,'Laurea in archeologia');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (6,36,'Laurea in Scienze della terra');
+insert into Professore(CODICE_PROFESSORE,DOCENTE,TITOLO_STUDIO) VALUES (7,37,'Dottorato in Matematica');
+
+
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'1^A','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'1^A','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'1^A','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'1^A','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'1^A','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (3,'1^A','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'1^A','Inglese'		);
+								 
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'2^A','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'2^A','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'2^A','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'2^A','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'2^A','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (3,'2^A','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'2^A','Inglese'		);
+								
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (5,'3^A','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'3^A','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'3^A','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'3^A','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (6,'3^A','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (3,'3^A','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'3^A','Inglese'		);
+								 
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (5,'1^B','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'1^B','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'1^B','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'1^B','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'1^B','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'1^B','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'1^B','Inglese'		);
+								 
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (5,'2^B','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'2^B','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'2^B','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'2^B','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'2^B','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'2^B','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'2^B','Inglese'		);
+								 
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (5,'3^B','Storia'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (1,'3^B','Italiano'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'3^B','Matematica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'3^B','Fisica'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (2,'3^B','Scienze'		);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (7,'3^B','Informatica'	);
+Insert into Insegna(DOCENTE,CLASSE,MATERIA) VALUES (4,'3^B','Inglese'		);
+
+
+
+-- voti 1^A
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'03-10-2020','Storia','Sacro Romano Impero'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'15-02-2021','Storia','Guerra dei Cent Anni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'04-05-2021','Storia','Impero Indiano'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'08-11-2020','Italiano','Promessi Sposi'							,8);	
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'20-04-2021','Italiano','Tema secondo quadrimestre'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'20-10-2020','Matematica','polinomi e ed equazioni'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'04-02-2021','Matematica','Insiemi e relazioni'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'13-03-2021','Matematica','Interrogazione sulle disequazioni'		,6);		
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'25-01-2021','Fisica','Moto rettilineo uniforme'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'19-05-2021','Fisica','Moto su piani inclinati'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'14-11-2020','Scienze','Rocce e minerali'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'04-06-2021','Scienze','Interrogazione sullo spazio'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'10-12-2020','Informatica','verifica Programmazione lineare'		,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800001,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'03-10-2020','Storia','Sacro Romano Impero'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'15-02-2021','Storia','Guerra dei Cent Anni'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'04-05-2021','Storia','Impero Indiano'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'08-11-2020','Italiano','Promessi Sposi'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'10-01-2021','Italiano'	,'Tema primo quadrimestre'                  ,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'20-04-2021','Italiano','Tema secondo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'20-10-2020','Matematica','polinomi e ed equazioni'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'04-02-2021','Matematica','Insiemi e relazioni'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'03-03-2021','Matematica','Interrogazione sulle disequazioni'		,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'25-01-2021','Fisica','Moto rettilineo uniforme'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'19-05-2021','Fisica','Moto su piani inclinati'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'14-11-2020','Scienze','Rocce e minerali'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'18-02-2021','Scienze','Interrogazione sullo spazio'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'10-12-2020','Informatica','verifica Programmazione lineare'		,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800004,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'03-10-2020','Storia','Sacro Romano Impero'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'15-02-2021','Storia','Guerra dei Cent Anni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'04-05-2021','Storia','Impero Indiano'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'08-11-2020','Italiano','Promessi Sposi'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'20-04-2021','Italiano','Tema secondo quadrimestre'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'20-10-2020','Matematica','polinomi e ed equazioni'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'04-02-2021','Matematica','Insiemi e relazioni'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'23-01-2021','Matematica','Interrogazione sulle disequazioni'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'25-01-2021','Fisica','Moto rettilineo uniforme'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'19-05-2021','Fisica','Moto su piani inclinati'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'14-11-2020','Scienze','Rocce e minerali'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'09-05-2021','Scienze','Interrogazione sullo spazio'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'10-12-2020','Informatica','verifica Programmazione lineare'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800007,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'03-10-2020','Storia','Sacro Romano Impero'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'15-02-2021','Storia','Guerra dei Cent Anni'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'04-05-2021','Storia','Impero Indiano'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'08-11-2020','Italiano','Promessi Sposi'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'20-04-2021','Italiano','Tema secondo quadrimestre'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'20-10-2020','Matematica','polinomi e ed equazioni'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'04-02-2021','Matematica','Insiemi e relazioni'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'20-01-2021','Matematica','Interrogazione sulle disequazioni'		,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'25-01-2021','Fisica','Moto rettilineo uniforme'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'19-05-2021','Fisica','Moto su piani inclinati'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'14-11-2020','Scienze','Rocce e minerali'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'12-05-2021','Scienze','Interrogazione sullo spazio'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'10-12-2020','Informatica','verifica Programmazione lineare'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800010,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'03-10-2020','Storia','Sacro Romano Impero'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'15-02-2021','Storia','Guerra dei Cent Anni'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'04-05-2021','Storia','Impero Indiano'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'08-11-2020','Italiano','Promessi Sposi'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'20-04-2021','Italiano','Tema secondo quadrimestre'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'20-10-2020','Matematica','polinomi e ed equazioni'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'04-02-2021','Matematica','Insiemi e relazioni'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'14-04-2021','Matematica','Interrogazione sulle disequazioni'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'25-01-2021','Fisica','Moto rettilineo uniforme'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'19-05-2021','Fisica','Moto su piani inclinati'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'14-11-2020','Scienze','Rocce e minerali'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'30-05-2021','Scienze','Interrogazione sullo spazio'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'10-12-2020','Informatica','verifica Programmazione lineare'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800013,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,8);
+		
+
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'15-10-2020','Storia','Sacro Romano Impero'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'20-04-2021','Italiano','Tema secondo quadrimestre'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'04-02-2021','Matematica','Insiemi e relazioni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'19-05-2021','Fisica','Moto su piani inclinati'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'14-11-2020','Scienze','Rocce e minerali'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,5);
+
+
+-- voti 1^B		
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'15-10-2020','Storia','Sacro Romano Impero'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'15-02-2021','Storia','Guerra dei Cent Anni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'04-05-2021','Storia','Impero Indiano'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'08-11-2020','Italiano','Promessi Sposi'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'20-04-2021','Italiano','Tema secondo quadrimestre'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'20-10-2020','Matematica','polinomi e ed equazioni'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'04-02-2021','Matematica','Insiemi e relazioni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'13-03-2021','Matematica','Interrogazione sulle disequazioni'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'25-01-2021','Fisica','Moto rettilineo uniforme'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'19-05-2021','Fisica','Moto su piani inclinati'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'14-11-2020','Scienze','Rocce e minerali'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'04-06-2021','Scienze','Interrogazione sullo spazio'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'10-12-2020','Informatica','verifica Programmazione lineare'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800019,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'15-10-2020','Storia','Sacro Romano Impero'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'15-02-2021','Storia','Guerra dei Cent Anni'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'04-05-2021','Storia','Impero Indiano'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'08-11-2020','Italiano','Promessi Sposi'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'10-01-2021','Italiano'	,'Tema primo quadrimestre'                  ,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'20-04-2021','Italiano','Tema secondo quadrimestre'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'20-10-2020','Matematica','polinomi e ed equazioni'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'04-02-2021','Matematica','Insiemi e relazioni'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'03-03-2021','Matematica','Interrogazione sulle disequazioni'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'25-01-2021','Fisica','Moto rettilineo uniforme'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'19-05-2021','Fisica','Moto su piani inclinati'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'14-11-2020','Scienze','Rocce e minerali'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'18-02-2021','Scienze','Interrogazione sullo spazio'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'10-12-2020','Informatica','verifica Programmazione lineare'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800022,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'15-10-2020','Storia','Sacro Romano Impero'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'15-02-2021','Storia','Guerra dei Cent Anni'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'04-05-2021','Storia','Impero Indiano'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'08-11-2020','Italiano','Promessi Sposi'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'20-04-2021','Italiano','Tema secondo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'20-10-2020','Matematica','polinomi e ed equazioni'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'04-02-2021','Matematica','Insiemi e relazioni'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'23-01-2021','Matematica','Interrogazione sulle disequazioni'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'25-01-2021','Fisica','Moto rettilineo uniforme'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'19-05-2021','Fisica','Moto su piani inclinati'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'14-11-2020','Scienze','Rocce e minerali'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'09-05-2021','Scienze','Interrogazione sullo spazio'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'10-12-2020','Informatica','verifica Programmazione lineare'		,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800025,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'15-10-2020','Storia','Sacro Romano Impero'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'15-02-2021','Storia','Guerra dei Cent Anni'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'04-05-2021','Storia','Impero Indiano'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'08-11-2020','Italiano','Promessi Sposi'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'20-04-2021','Italiano','Tema secondo quadrimestre'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'20-10-2020','Matematica','polinomi e ed equazioni'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'04-02-2021','Matematica','Insiemi e relazioni'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'20-01-2021','Matematica','Interrogazione sulle disequazioni'		,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'25-01-2021','Fisica','Moto rettilineo uniforme'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'19-05-2021','Fisica','Moto su piani inclinati'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'14-11-2020','Scienze','Rocce e minerali'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'12-05-2021','Scienze','Interrogazione sullo spazio'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'10-12-2020','Informatica','verifica Programmazione lineare'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800028,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'15-10-2020','Storia','Sacro Romano Impero'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'15-02-2021','Storia','Guerra dei Cent Anni'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'04-05-2021','Storia','Impero Indiano'								,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'08-11-2020','Italiano','Promessi Sposi'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'10-01-2021','Italiano'	,'Tema primo quadrimestre'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'20-04-2021','Italiano','Tema secondo quadrimestre'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'20-10-2020','Matematica','polinomi e ed equazioni'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'04-02-2021','Matematica','Insiemi e relazioni'						,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'14-04-2021','Matematica','Interrogazione sulle disequazioni'		,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'30-10-2020','Fisica','Enumerazione e sistemi di misura'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'25-01-2021','Fisica','Moto rettilineo uniforme'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'19-05-2021','Fisica','Moto su piani inclinati'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'14-11-2020','Scienze','Rocce e minerali'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'30-05-2021','Scienze','Interrogazione sullo spazio'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'10-12-2020','Informatica','verifica Programmazione lineare'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'11-04-2021','Informatica','verifica Programmazione coi Metodi'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'20-11-2020','Inglese','verifica Verbi Essere e avere'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800032,'01-03-2021','Inglese',' verifica tempi verbali indefiniti'			,7);
+			
+
+
+
+--Voti 2^A			
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'14-10-2020','Storia','Impero Napoleonico'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'17-04-2021','Storia','Unità D Italia'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'10-03-2021','Storia','WW1'											,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'15-06-2021','Italiano','Dante-Inferno'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'20-09-2020','Italiano'	,'Dolce Stil Novo'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'07-06-2021','Italiano','Tema secondo quadrimestre'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'15-02-2021','Matematica','Disequazioni di secondo grado'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'15-06-2021','Matematica','Inizio studio di funzione'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'23-03-2021','Matematica','Geometria'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'06-11-2020','Fisica','L energia Cinetica e potenziale'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'24-05-2021','Fisica','elettricità e cariche elettriche'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'25-04-2021','Fisica','interrogazione su Tevenin'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'24-02-2021','Scienze','La flora terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'27-03-2021','Scienze','La fauna terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'25-01-2021','Informatica','Verifica Programmazione ad oggetti'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'15-04-2021','Informatica','Programmazione con creazione I/O e GUI'	,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'09-01-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800002,'18-02-2021','Inglese','verifica narrativa inglese'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'14-10-2020','Storia','Impero Napoleonico'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'17-04-2021','Storia','Unità D Italia'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'10-03-2021','Storia','WW1'											,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'15-06-2021','Italiano','Dante-Inferno'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'20-09-2020','Italiano'	,'Dolce Stil Novo'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'07-06-2021','Italiano','Tema secondo quadrimestre'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'15-02-2021','Matematica','Disequazioni di secondo grado'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'15-06-2021','Matematica','Inizio studio di funzione'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'23-03-2021','Matematica','Geometria'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'06-11-2020','Fisica','L energia Cinetica e potenziale'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'24-05-2021','Fisica','elettricità e cariche elettriche'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'10-05-2021','Fisica','interrogazione su Tevenin'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'24-02-2021','Scienze','La flora terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'27-03-2021','Scienze','La fauna terrestre'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'25-01-2021','Informatica','Verifica Programmazione ad oggetti'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'15-04-2021','Informatica','Programmazione con creazione I/O e GUI'	,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'09-01-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800005,'18-02-2021','Inglese','verifica narrativa inglese'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'14-10-2020','Storia','Impero Napoleonico'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'17-04-2021','Storia','Unità D Italia'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'10-03-2021','Storia','WW1'											,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'15-06-2021','Italiano','Dante-Inferno'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'20-09-2020','Italiano'	,'Dolce Stil Novo'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'07-06-2021','Italiano','Tema secondo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'15-02-2021','Matematica','Disequazioni di secondo grado'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'15-06-2021','Matematica','Inizio studio di funzione'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'23-03-2021','Matematica','Geometria'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'06-11-2020','Fisica','L energia Cinetica e potenziale'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'24-05-2021','Fisica','elettricità e cariche elettriche'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'01-06-2021','Fisica','interrogazione su Tevenin'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'24-02-2021','Scienze','La flora terrestre'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'27-03-2021','Scienze','La fauna terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'25-01-2021','Informatica','Verifica Programmazione ad oggetti'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'15-04-2021','Informatica','Programmazione con creazione I/O e GUI'	,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'09-01-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800008,'18-02-2021','Inglese','verifica narrativa inglese'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'14-10-2020','Storia','Impero Napoleonico'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'17-04-2021','Storia','Unità D Italia'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'10-03-2021','Storia','WW1'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'15-06-2021','Italiano','Dante-Inferno'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'20-09-2020','Italiano'	,'Dolce Stil Novo'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'07-06-2021','Italiano','Tema secondo quadrimestre'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'15-02-2021','Matematica','Disequazioni di secondo grado'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'15-06-2021','Matematica','Inizio studio di funzione'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'23-03-2021','Matematica','Geometria'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'06-11-2020','Fisica','L energia Cinetica e potenziale'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'24-05-2021','Fisica','elettricità e cariche elettriche'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'22-04-2021','Fisica','interrogazione su Tevenin'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'24-02-2021','Scienze','La flora terrestre'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'27-03-2021','Scienze','La fauna terrestre'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'25-01-2021','Informatica','Verifica Programmazione ad oggetti'		,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'15-04-2021','Informatica','Programmazione con creazione I/O e GUI'	,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'09-01-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800011,'18-02-2021','Inglese','verifica narrativa inglese'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'14-10-2020','Storia','Impero Napoleonico'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'17-04-2021','Storia','Unità D Italia'								,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'10-03-2021','Storia','WW1'											,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'15-06-2021','Italiano','Dante-Inferno'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'20-09-2020','Italiano'	,'Dolce Stil Novo'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'07-06-2021','Italiano','Tema secondo quadrimestre'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'15-02-2021','Matematica','Disequazioni di secondo grado'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'15-06-2021','Matematica','Inizio studio di funzione'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'23-03-2021','Matematica','Geometria'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'06-11-2020','Fisica','L energia Cinetica e potenziale'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'24-05-2021','Fisica','elettricità e cariche elettriche'			,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'12-02-2021','Fisica','interrogazione su Tevenin'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'24-02-2021','Scienze','La flora terrestre'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'27-03-2021','Scienze','La fauna terrestre'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'25-01-2021','Informatica','Verifica Programmazione ad oggetti'		,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'15-04-2021','Informatica','Programmazione con creazione I/O e GUI'	,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'09-01-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800014,'18-02-2021','Inglese','verifica narrativa inglese'					,4);
+                
+
+--Voti 2^B				
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'06-11-2020','Storia','Impero Napoleonico'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'24-05-2021','Storia','Unità D Italia'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'26-01-2021','Storia','WW1'											,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'24-02-2021','Italiano','Dante-Inferno'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'27-03-2021','Italiano'	,'Dolce Stil Novo'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'25-01-2021','Italiano','Tema secondo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'15-04-2021','Matematica','Disequazioni di secondo grado'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'09-01-2021','Matematica','Inizio studio di funzione'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'18-02-2021','Matematica','Geometria'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'15-06-2021','Fisica','L energia Cinetica e potenziale'				,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'23-05-2021','Fisica','elettricità e cariche elettriche'			,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'11-10-2020','Fisica','interrogazione su Tevenin'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'08-04-2021','Scienze','La flora terrestre'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'26-01-2021','Scienze','La fauna terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'02-06-2021','Informatica','Verifica Programmazione ad oggetti'		,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'22-10-2020','Informatica','Programmazione con creazione I/O e GUI'	,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'07-02-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800020,'06-02-2021','Inglese','verifica narrativa inglese'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'06-11-2020','Storia','Impero Napoleonico'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'24-05-2021','Storia','Unità D Italia'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'26-01-2021','Storia','WW1'											,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'24-02-2021','Italiano','Dante-Inferno'								,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'27-03-2021','Italiano'	,'Dolce Stil Novo'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'25-01-2021','Italiano','Tema secondo quadrimestre'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'15-04-2021','Matematica','Disequazioni di secondo grado'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'09-01-2021','Matematica','Inizio studio di funzione'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'18-02-2021','Matematica','Geometria'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'15-06-2021','Fisica','L energia Cinetica e potenziale'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'23-05-2021','Fisica','elettricità e cariche elettriche'			,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'12-12-2020','Fisica','interrogazione su Tevenin'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'08-04-2021','Scienze','La flora terrestre'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'26-01-2021','Scienze','La fauna terrestre'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'02-06-2021','Informatica','Verifica Programmazione ad oggetti'		,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'22-10-2020','Informatica','Programmazione con creazione I/O e GUI'	,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'07-02-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800023,'06-02-2021','Inglese','verifica narrativa inglese'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'06-11-2020','Storia','Impero Napoleonico'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'24-05-2021','Storia','Unità D Italia'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'26-01-2021','Storia','WW1'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'24-02-2021','Italiano','Dante-Inferno'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'27-03-2021','Italiano'	,'Dolce Stil Novo'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'25-01-2021','Italiano','Tema secondo quadrimestre'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'15-04-2021','Matematica','Disequazioni di secondo grado'			,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'09-01-2021','Matematica','Inizio studio di funzione'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'18-02-2021','Matematica','Geometria'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'15-06-2021','Fisica','L energia Cinetica e potenziale'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'23-05-2021','Fisica','elettricità e cariche elettriche'			,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'25-11-2020','Fisica','interrogazione su Tevenin'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'08-04-2021','Scienze','La flora terrestre'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'26-01-2021','Scienze','La fauna terrestre'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'02-06-2021','Informatica','Verifica Programmazione ad oggetti'		,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'22-10-2020','Informatica','Programmazione con creazione I/O e GUI'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'07-02-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800026,'06-02-2021','Inglese','verifica narrativa inglese'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'06-11-2020','Storia','Impero Napoleonico'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'24-05-2021','Storia','Unità D Italia'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'26-01-2021','Storia','WW1'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'24-02-2021','Italiano','Dante-Inferno'								,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'27-03-2021','Italiano'	,'Dolce Stil Novo'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'25-01-2021','Italiano','Tema secondo quadrimestre'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'15-04-2021','Matematica','Disequazioni di secondo grado'			,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'09-01-2021','Matematica','Inizio studio di funzione'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'18-02-2021','Matematica','Geometria'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'15-06-2021','Fisica','L energia Cinetica e potenziale'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'23-05-2021','Fisica','elettricità e cariche elettriche'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'31-10-2020','Fisica','interrogazione su Tevenin'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'08-04-2021','Scienze','La flora terrestre'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'26-01-2021','Scienze','La fauna terrestre'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'02-06-2021','Informatica','Verifica Programmazione ad oggetti'		,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'22-10-2020','Informatica','Programmazione con creazione I/O e GUI'	,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'07-02-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800029,'06-02-2021','Inglese','verifica narrativa inglese'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'06-11-2020','Storia','Impero Napoleonico'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'24-05-2021','Storia','Unità D Italia'								,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'26-01-2021','Storia','WW1'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'24-02-2021','Italiano','Dante-Inferno'								,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'27-03-2021','Italiano'	,'Dolce Stil Novo'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'25-01-2021','Italiano','Tema secondo quadrimestre'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'15-04-2021','Matematica','Disequazioni di secondo grado'			,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'09-01-2021','Matematica','Inizio studio di funzione'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'18-02-2021','Matematica','Geometria'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'15-06-2021','Fisica','L energia Cinetica e potenziale'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'23-05-2021','Fisica','elettricità e cariche elettriche'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'15-11-2020','Fisica','interrogazione su Tevenin'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'08-04-2021','Scienze','La flora terrestre'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'26-01-2021','Scienze','La fauna terrestre'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'02-06-2021','Informatica','Verifica Programmazione ad oggetti'		,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'22-10-2020','Informatica','Programmazione con creazione I/O e GUI'	,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'07-02-2021','Inglese','verifica Verbi transitivi ed intransitivi'	,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800034,'06-02-2021','Inglese','verifica narrativa inglese'					,9);
+
+
+
+--Voti 3^A				
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'14-09-2020','Storia','Europa del primo dopoguerra'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'01-05-2021','Storia','WW2'											,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'16-02-2021','Storia','Mondo dopo la WW2'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'04-09-2020','Italiano','Dante-Purgatorio'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'30-12-2020','Italiano'	,'Dante-Paradiso'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'27-09-2020','Italiano','Tema Prova D esame'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'06-06-2021','Matematica','Studio di funzione'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'01-06-2021','Matematica','Trigonometria'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'20-04-2021','Matematica','Integrali'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'30-10-2020','Fisica','Cirtuiti Elettrici'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'16-05-2021','Fisica','Fondamenti di chimica'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'03-11-2020','Fisica','Energia Nucleare'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'13-09-2020','Scienze','Il corpo umano pt1'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'30-09-2020','Scienze','Il corpo umano pt2'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'24-01-2021','Informatica','Database Relazionali'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'11-09-2020','Informatica','creazione sito web php e sql'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'19-11-2020','Inglese','Verifica generale per l esame'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800003,'01-12-2020','Inglese','Sistemi informatici in inglese'				,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'14-09-2020','Storia','Europa del primo dopoguerra'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'01-05-2021','Storia','WW2'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'16-02-2021','Storia','Mondo dopo la WW2'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'04-09-2020','Italiano','Dante-Purgatorio'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'30-12-2020','Italiano'	,'Dante-Paradiso'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'27-09-2020','Italiano','Tema Prova D esame'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'06-06-2021','Matematica','Studio di funzione'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'01-06-2021','Matematica','Trigonometria'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'20-04-2021','Matematica','Integrali'								,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'30-10-2020','Fisica','Cirtuiti Elettrici'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'16-05-2021','Fisica','Fondamenti di chimica'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'03-11-2020','Fisica','Energia Nucleare'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'13-09-2020','Scienze','Il corpo umano pt1'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'30-09-2020','Scienze','Il corpo umano pt2'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'24-01-2021','Informatica','Database Relazionali'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'11-09-2020','Informatica','creazione sito web php e sql'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'19-11-2020','Inglese','Verifica generale per l esame'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800006,'01-12-2020','Inglese','Sistemi informatici in inglese'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'14-09-2020','Storia','Europa del primo dopoguerra'					,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'01-05-2021','Storia','WW2'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'16-02-2021','Storia','Mondo dopo la WW2'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'04-09-2020','Italiano','Dante-Purgatorio'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'30-12-2020','Italiano'	,'Dante-Paradiso'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'27-09-2020','Italiano','Tema Prova D esame'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'06-06-2021','Matematica','Studio di funzione'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'01-06-2021','Matematica','Trigonometria'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'20-04-2021','Matematica','Integrali'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'30-10-2020','Fisica','Cirtuiti Elettrici'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'16-05-2021','Fisica','Fondamenti di chimica'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'03-11-2020','Fisica','Energia Nucleare'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'13-09-2020','Scienze','Il corpo umano pt1'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'30-09-2020','Scienze','Il corpo umano pt2'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'24-01-2021','Informatica','Database Relazionali'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'11-09-2020','Informatica','creazione sito web php e sql'			,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'19-11-2020','Inglese','Verifica generale per l esame'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800009,'01-12-2020','Inglese','Sistemi informatici in inglese'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'14-09-2020','Storia','Europa del primo dopoguerra'					,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'01-05-2021','Storia','WW2'											,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'16-02-2021','Storia','Mondo dopo la WW2'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'04-09-2020','Italiano','Dante-Purgatorio'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'30-12-2020','Italiano'	,'Dante-Paradiso'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'27-09-2020','Italiano','Tema Prova D esame'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'06-06-2021','Matematica','Studio di funzione'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'01-06-2021','Matematica','Trigonometria'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'20-04-2021','Matematica','Integrali'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'30-10-2020','Fisica','Cirtuiti Elettrici'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'16-05-2021','Fisica','Fondamenti di chimica'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'03-11-2020','Fisica','Energia Nucleare'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'13-09-2020','Scienze','Il corpo umano pt1'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'30-09-2020','Scienze','Il corpo umano pt2'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'24-01-2021','Informatica','Database Relazionali'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'11-09-2020','Informatica','creazione sito web php e sql'			,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'19-11-2020','Inglese','Verifica generale per l esame'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800012,'01-12-2020','Inglese','Sistemi informatici in inglese'				,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'14-09-2020','Storia','Europa del primo dopoguerra'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'01-05-2021','Storia','WW2'											,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'16-02-2021','Storia','Mondo dopo la WW2'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'04-09-2020','Italiano','Dante-Purgatorio'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'30-12-2020','Italiano'	,'Dante-Paradiso'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'27-09-2020','Italiano','Tema Prova D esame'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'06-06-2021','Matematica','Studio di funzione'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'01-06-2021','Matematica','Trigonometria'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'20-04-2021','Matematica','Integrali'								,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'30-10-2020','Fisica','Cirtuiti Elettrici'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'16-05-2021','Fisica','Fondamenti di chimica'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'03-11-2020','Fisica','Energia Nucleare'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'13-09-2020','Scienze','Il corpo umano pt1'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'30-09-2020','Scienze','Il corpo umano pt2'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'24-01-2021','Informatica','Database Relazionali'					,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'11-09-2020','Informatica','creazione sito web php e sql'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'19-11-2020','Inglese','Verifica generale per l esame'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800031,'01-12-2020','Inglese','Sistemi informatici in inglese'				,5);
+                                                                                                                                                                    
+																																									
+--Classe 3^B                                                                                                                                                        
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'05-10-2020','Storia','Europa del primo dopoguerra'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'15-06-2021','Storia','WW2'											,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'31-01-2021','Storia','Mondo dopo la WW2'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'30-05-2021','Italiano','Dante-Purgatorio'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'24-02-2021','Italiano'	,'Dante-Paradiso'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'01-09-2020','Italiano','Tema Prova D esame'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'16-10-2020','Matematica','Studio di funzione'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'29-09-2020','Matematica','Trigonometria'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'14-09-2020','Matematica','Integrali'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'15-06-2021','Fisica','Cirtuiti Elettrici'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'27-05-2021','Fisica','Fondamenti di chimica'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'07-04-2021','Fisica','Energia Nucleare'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'03-09-2020','Scienze','Il corpo umano pt1'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'15-01-2021','Scienze','Il corpo umano pt2'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'05-09-2020','Informatica','Database Relazionali'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'08-06-2021','Informatica','creazione sito web php e sql'			,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'18-04-2021','Inglese','Verifica generale per l esame'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800018,'26-01-2021','Inglese','Sistemi informatici in inglese'				,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'05-10-2020','Storia','Europa del primo dopoguerra'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'15-06-2021','Storia','WW2'											,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'31-01-2021','Storia','Mondo dopo la WW2'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'30-05-2021','Italiano','Dante-Purgatorio'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'24-02-2021','Italiano'	,'Dante-Paradiso'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'01-09-2020','Italiano','Tema Prova D esame'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'16-10-2020','Matematica','Studio di funzione'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'29-09-2020','Matematica','Trigonometria'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'14-09-2020','Matematica','Integrali'								,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'15-06-2021','Fisica','Cirtuiti Elettrici'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'27-05-2021','Fisica','Fondamenti di chimica'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'07-04-2021','Fisica','Energia Nucleare'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'03-09-2020','Scienze','Il corpo umano pt1'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'15-01-2021','Scienze','Il corpo umano pt2'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'05-09-2020','Informatica','Database Relazionali'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'08-06-2021','Informatica','creazione sito web php e sql'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'18-04-2021','Inglese','Verifica generale per l esame'				,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800021,'26-01-2021','Inglese','Sistemi informatici in inglese'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'05-10-2020','Storia','Europa del primo dopoguerra'					,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'15-06-2021','Storia','WW2'											,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'31-01-2021','Storia','Mondo dopo la WW2'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'30-05-2021','Italiano','Dante-Purgatorio'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'24-02-2021','Italiano'	,'Dante-Paradiso'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'01-09-2020','Italiano','Tema Prova D esame'						,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'16-10-2020','Matematica','Studio di funzione'						,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'29-09-2020','Matematica','Trigonometria'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'14-09-2020','Matematica','Integrali'								,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'15-06-2021','Fisica','Cirtuiti Elettrici'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'27-05-2021','Fisica','Fondamenti di chimica'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'07-04-2021','Fisica','Energia Nucleare'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'03-09-2020','Scienze','Il corpo umano pt1'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'15-01-2021','Scienze','Il corpo umano pt2'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'05-09-2020','Informatica','Database Relazionali'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'08-06-2021','Informatica','creazione sito web php e sql'			,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'18-04-2021','Inglese','Verifica generale per l esame'				,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800024,'26-01-2021','Inglese','Sistemi informatici in inglese'				,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'05-10-2020','Storia','Europa del primo dopoguerra'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'15-06-2021','Storia','WW2'											,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'31-01-2021','Storia','Mondo dopo la WW2'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'30-05-2021','Italiano','Dante-Purgatorio'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'24-02-2021','Italiano'	,'Dante-Paradiso'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'01-09-2020','Italiano','Tema Prova D esame'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'16-10-2020','Matematica','Studio di funzione'						,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'29-09-2020','Matematica','Trigonometria'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'14-09-2020','Matematica','Integrali'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'15-06-2021','Fisica','Cirtuiti Elettrici'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'27-05-2021','Fisica','Fondamenti di chimica'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'07-04-2021','Fisica','Energia Nucleare'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'03-09-2020','Scienze','Il corpo umano pt1'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'15-01-2021','Scienze','Il corpo umano pt2'							,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'05-09-2020','Informatica','Database Relazionali'					,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'08-06-2021','Informatica','creazione sito web php e sql'			,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'18-04-2021','Inglese','Verifica generale per l esame'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'26-01-2021','Inglese','Sistemi informatici in inglese'				,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800027,'05-10-2020','Storia','Europa del primo dopoguerra'					,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'15-06-2021','Storia','WW2'											,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'31-01-2021','Storia','Mondo dopo la WW2'							,4);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'30-05-2021','Italiano','Dante-Purgatorio'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'24-02-2021','Italiano'	,'Dante-Paradiso'							,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'01-09-2020','Italiano','Tema Prova D esame'						,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'16-10-2020','Matematica','Studio di funzione'						,6);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'29-09-2020','Matematica','Trigonometria'							,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'14-09-2020','Matematica','Integrali'								,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'15-06-2021','Fisica','Cirtuiti Elettrici'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'27-05-2021','Fisica','Fondamenti di chimica'						,8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'07-04-2021','Fisica','Energia Nucleare'							,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'03-09-2020','Scienze','Il corpo umano pt1'							,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'15-01-2021','Scienze','Il corpo umano pt2'							,9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'05-09-2020','Informatica','Database Relazionali'					,7);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'08-06-2021','Informatica','creazione sito web php e sql'			,5);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'18-04-2021','Inglese','Verifica generale per l esame'				,10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800030,'26-01-2021','Inglese','Sistemi informatici in inglese'				,7);
+
+--Possibile Errore con gli intervalli
+--se c'è un errore "chiave madre non trovata" vuol dire che l'intervallo non corrisponde al dato collegato di un'altra tabella
+--quindi cancellare la sequenza e farla ripartire dall'inizio
+
+--Query select
+--1- estrarre matricola,nome,cognome,classe di ogni studente, ordinati per classe partendo dalla 3^ a decrescere.
+Select Studente.NUM_MATRICOLA, Utente.NOME, Utente.COGNOME, Studente.CLASSE
+from Studente, Utente
+where Studente.STUDENTE = Utente.ID_UTENTE
+order by Studente.CLASSE desc;
+
+--2- estrarre materia, argomento e voto ricevuti dallo studente Francesco Oppristi.
+Select Voto.MATERIA, Voto.ARGOMENTO, Voto.VOTO, Utente.NOME, Utente.COGNOME
+from Voto, Utente, Studente
+where Voto.MATRICOLA = Studente.NUM_MATRICOLA and Utente.NOME = 'Francesco' and Utente.COGNOME = 'Oppristi';
+
+--3- estrarre tutte le materie e la classe insegnate dal professore Edward Eldric
+Select Insegna.MATERIA, Insegna.CLASSE, Utente.NOME, Utente.COGNOME
+from Insegna, Utente, Professore
+where Insegna.DOCENTE = Professore.CODICE_PROFESSORE and Utente.NOME = 'Edward' and Utente.COGNOME = 'Eldric';
+
+--4- estrarre il nome e cognome (usando il concat per metterli nella stessa colonna) di tutti i professori che insegnano nella classe 2^B in ordine crescente.
+Select distinct Utente.NOME||' '||Utente.COGNOME Nomenclatura, Insegna.CLASSE
+from Utente, Insegna, Professore --professor utente classe
+where Professore.DOCENTE = Utente.ID_UTENTE and Insegna.CLASSE = '2^B'
+order by Insegna.CLASSE asc;
+
+--5- estrarre la media di tutti i voti di Luca Brizzante.
+Select ROUND(avg(VOTO), 2) as media_voti_di_Luca_Brizzante
+from Voto, Utente
+where Utente.NOME = 'Luca' and Utente.COGNOME = 'Brizzante';
+
+--6- estrarre la somma di tutti gli alunni che ha il professore Raffaele Diogniso per ogni materia che insegna
+--quanti studenti ha in tutto il professore Raffaele Diogniso
+Select insegna.materia, count(*)
+from utente, professore, insegna, studente
+where professore.codice_professore = insegna.docente 
+and Professore.docente = utente.id_utente 
+and Utente.NOME = 'Raffaele' and Utente.COGNOME = 'Diogniso' 
+and studente.classe = insegna.classe
+group by insegna.materia;
+--dalla 2^A ci sono 5 studenti
+--salla 1^A ci sono 5 studenti
+--totale per la materia storia sono 10
+
+--7- estrarre per ogni classe la media di tutti i voti di inglese
+select round(avg(voto.voto), 2) as media_voti_inglese
+from voto
+where voto.materia = 'Inglese';
+
+--creazione vista materializzata
+create MATERIALIZED view Pagella_Luca_Brizzante as 
+select voto.materia, round(avg(voto.voto), 2) as media_voti_materia
+from voto, studente, utente
+where utente.nome = 'Luca' and utente.cognome = 'Brizzante' and studente.studente = utente.id_utente and voto.matricola = studente.num_matricola 
+group by voto.materia;
+
+select * from Pagella_Luca_Brizzante;
+
+--4) -Aggiungere un nuovo studente alla classe 1^B.
+--	 -Aggiungere almeno 1 voto per ogni materia per il nuovo studente.
+--	 -modificare dallo studente estratto dall'esericizio 3 un suo voto in informatica e metterlo a 5.
+--	 -refreshare la vista materializzata e estrarla
+
+insert into Utente (ID_UTENTE, NOME, COGNOME ,DATA_NASCITA) VALUES (Incrementa_ID.nextval,'Mattia'	,'Argentino','24-03-1980'); 
+insert into Studente(STUDENTE,NUM_MATRICOLA,CLASSE) VALUES (38, 800038,'1^B');
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'26-01-2021','Matematica','Ingegneria Nucleare',10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'13-04-2021','Informatica','Cyber Security',10);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'13-04-2021','Informatica','Hackeraggio',11);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'16-07-2021','Fisica','Fisica Quantistica',9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'27-11-2021','Inglese','Master Business English',8);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'24-09-2021','Italiano','Dizione e Pronuncia della lingua italiana',9);
+insert into Voto (ID_VOTO,MATRICOLA,DATA_VOTO,MATERIA,ARGOMENTO,VOTO) values (Incrementa_VOTO.nextval,800038,'20-08-2021','Scienze','Ingegneria Aereospaziale',8);
+
+--vedo i voti inseriti
+select * from voto where Voto.matricola = 800038;
+
+--select per selezionare la matricola avendo solo il nome e cognome dello studente Mattia Argentino
+select studente.NUM_MATRICOLA
+from studente, utente
+where utente.nome = 'Mattia' 
+and utente.cognome = 'Argentino' 
+and utente.ID_UTENTE = studente.STUDENTE;
+
+----vedo i voti inseriti
+select * from voto where Voto.matricola = 
+(
+select studente.NUM_MATRICOLA
+from studente, utente
+where utente.nome = 'Mattia' 
+and utente.cognome = 'Argentino' 
+and utente.ID_UTENTE = studente.STUDENTE
+);
+
+
+--modifico il voto in informatica in 5 dell'alunno che ho preso prima
+update voto SET voto.voto = 5 WHERE voto.id_voto = 5350;
+
+--select per selezionare l'id voto nella tabella voto con utente nome = Luca, cognome = Brizzante, materia = Informatica
+select voto.id_voto
+from voto, utente, studente
+where voto.matricola = studente.num_matricola 
+and studente.studente = utente.id_utente 
+and utente.NOME = 'Luca' 
+and utente.COGNOME = 'Brizzante' 
+and voto.MATERIA = 'Informatica'
+FETCH FIRST ROW ONLY;
+
+update voto SET voto.voto = 5 WHERE voto.id_voto = 
+(
+select voto.id_voto
+from voto, utente, studente
+where voto.matricola = studente.num_matricola 
+and studente.studente = utente.id_utente 
+and utente.NOME = 'Luca' 
+and utente.COGNOME = 'Brizzante' 
+and voto.MATERIA = 'Informatica'
+FETCH FIRST ROW ONLY
+);
+
+--aggiorno la vista materializzata
+BEGIN DBMS_MVIEW.REFRESH('Pagella_Luca_Brizzante'); END;
+      </pre>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../../javascript/eventiPaginaProgetto.js"></script>
+</body>
+
+</html>
